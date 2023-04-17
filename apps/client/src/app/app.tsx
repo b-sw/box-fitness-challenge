@@ -1,7 +1,11 @@
+import { TablesDashboard } from '@box-fc/ui-tables';
+import { theme } from '@box-fc/util-ui';
+import { ChakraProvider } from '@chakra-ui/react';
+
 export const App = () => {
-	  return (
-	<div>
-	  <h1>Welcome to app!</h1>
-	</div>
-  );
+    return (
+        <ChakraProvider theme={theme}>
+            <TablesDashboard />
+        </ChakraProvider>
+    );
 };
