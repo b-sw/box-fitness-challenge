@@ -1,6 +1,6 @@
 FROM node:16-alpine AS development
 
-WORKDIR .
+WORKDIR /usr/src/app
 
 COPY package*.json .
 
@@ -27,6 +27,6 @@ RUN yarn install --only=production
 
 COPY . .
 
-COPY --from=development /dist/apps/api ./dist
+COPY --from=development /usr/src/app/dist/apps/api .
 
-CMD ["node", "dist/apps/api/main"]
+CMD ["node", "main"]
