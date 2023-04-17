@@ -1,7 +1,7 @@
 import { HeaderPanel } from '@box-fc/ui-header';
 import { Page, TablePanel } from '@box-fc/util-ui';
 import { SimpleGrid } from '@chakra-ui/react';
-import { PersonalTable } from './personal-table/PersonalTable';
+import { PersonalTable } from './personal-standings/PersonalTable';
 
 export const TablesDashboard = () => {
     return (
@@ -10,7 +10,7 @@ export const TablesDashboard = () => {
             <SimpleGrid columns={[1, 1, 3]} flexGrow={1} overflowY={'hidden'} spacing={5}>
                 <PersonalTable />
                 <TablePanel headerTitle={'Teams standings'} headerButtons={false} />
-                <TablePanel headerTitle={'Category standings'} headerButtons={false} />
+                <TablePanel headerTitle={'Personal activities'} headerButtons={false} />
             </SimpleGrid>
         </Page>
     );

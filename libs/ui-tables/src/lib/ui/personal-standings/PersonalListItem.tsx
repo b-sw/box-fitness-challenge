@@ -1,17 +1,22 @@
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, HStack, IconButton, Spacer, Text, VStack } from '@chakra-ui/react';
+import { MdAssessment } from 'react-icons/md';
 
-export const PersonalListItem = () => {
+type PersonalListItemProps = {
+    personName: string;
+};
+
+export const PersonalListItem = ({ personName }: PersonalListItemProps) => {
     return (
         <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
-            <HStack>
+            <HStack width={'55%'}>
                 <Avatar size={'sm'} />
                 <VStack spacing={0} alignItems={'baseline'}>
                     <HStack>
                         <Badge colorScheme="whatsapp" fontSize={'xs'}>
                             Canvas
                         </Badge>
-                        <Text fontSize={'md'}>Jan Kowalski</Text>
+                        <Text fontSize={'md'}>{personName}</Text>
                     </HStack>
                     <VStack alignItems={'baseline'} spacing={0}>
                         <Text fontSize={'sm'} color={'gray.400'}>
@@ -22,7 +27,22 @@ export const PersonalListItem = () => {
             </HStack>
 
             <Spacer />
-            <IconButton aria-label="IconButton2" icon={<DeleteIcon />} variant={'ghost'} />
+
+            <Flex gap={1} alignItems={'center'} width={'30%'}>
+                <Text fontSize={'sm'} color={'gray.800'}>
+                    Total time:
+                </Text>
+                <Badge colorScheme={'facebook'} variant={'outline'}>
+                    123h45m
+                </Badge>
+            </Flex>
+
+            <Spacer />
+
+            <Flex width={'15%'}>
+                <IconButton aria-label="IconButton1" icon={<MdAssessment />} variant={'ghost'} />
+                <IconButton aria-label="IconButton2" icon={<DeleteIcon />} variant={'ghost'} />
+            </Flex>
         </Flex>
     );
 };
