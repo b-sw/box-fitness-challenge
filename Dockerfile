@@ -2,7 +2,7 @@ FROM node:16-alpine AS development
 
 WORKDIR .
 
-COPY package*.json ./
+COPY package*.json .
 
 RUN apk add --no-cache python3 g++ make
 
@@ -21,7 +21,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR .
 
-COPY package*.json ./
+COPY package*.json .
 
 RUN yarn install --only=production
 
