@@ -30,12 +30,21 @@
         "api": {
             "tags": ["backend"]
         },
+        "auth": {
+            "tags": []
+        },
         "client": {
             "tags": ["frontend"]
         },
         "client-e2e": {
             "tags": ["end-2-end-tests"],
             "implicitDependencies": ["client"]
+        },
+        "data-access-guards": {
+            "tags": []
+        },
+        "data-access-users": {
+            "tags": []
         },
         "types": {
             "tags": ["module"]
