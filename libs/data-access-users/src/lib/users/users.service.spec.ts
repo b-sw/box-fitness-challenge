@@ -1,8 +1,34 @@
-import { Role, User } from '@box-fc/types';
+import { Role, User as ActualUser, uuid } from '@box-fc/types';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Repository } from 'typeorm';
 import { UsersService } from './users.service';
+
+type TestUser = Omit<ActualUser, 'role'>;
+
+@Entity()
+export class User implements TestUser {
+    @PrimaryGeneratedColumn('uuid')
+    id: uuid;
+
+    @Column()
+    firstName: string;
+
+    @Column()
+    lastName: string;
+
+    @Column({ unique: true })
+    email: string;
+
+    @Column()
+    team: string;
+
+    @Column()
+    division: string;
+
+    @Column()
+    role: string;
+}
 
 describe('UsersService', () => {
     const emailStub = 'email@stub.com';
@@ -27,11 +53,11 @@ describe('UsersService', () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 TypeOrmModule.forRoot({
-                    type: 'mysql',
+                    type: 'sqlite',
                     database: ':memory:',
                     entities: [User],
                     dropSchema: true,
-                    synchronize: false,
+                    synchronize: true,
                     logging: false,
                 }),
                 TypeOrmModule.forFeature([User]),
