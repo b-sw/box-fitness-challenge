@@ -33,7 +33,7 @@ export const PersonalListItem = ({ personName }: PersonalListItemProps) => {
                     Total time:
                 </Text>
                 <Badge colorScheme={'facebook'} variant={'outline'}>
-                    123h45m
+                    123h 45m
                 </Badge>
             </Flex>
 

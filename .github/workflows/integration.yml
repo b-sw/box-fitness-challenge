@@ -18,10 +18,10 @@ jobs:
           restore-keys: ${{ runner.os }}-build-${{ env.cache-name }}-
 
       - name: Install Dependencies
-        run: npm i
+        run: yarn
 
       - name: Lint affected Files
-        run: npm run affected:lint
+        run: yarn run affected:lint
 
       - name: Test affected Files
-        run: npm run affected:test
+        run: yarn run affected:test
