@@ -1,4 +1,4 @@
-import { UserCredentials } from '@box-fc/types';
+import { UserCredentials } from '@box-fc/util-types';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';

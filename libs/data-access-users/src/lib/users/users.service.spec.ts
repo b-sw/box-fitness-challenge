@@ -1,4 +1,4 @@
-import { Role, User as ActualUser, uuid } from '@box-fc/types';
+import { Role, User as ActualUser, uuid } from '@box-fc/util-types';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { Column, Entity, PrimaryGeneratedColumn, Repository } from 'typeorm';
@@ -7,7 +7,7 @@ import { UsersService } from './users.service';
 type TestUser = Omit<ActualUser, 'role'>;
 
 @Entity()
-export class User implements TestUser {
+class User implements TestUser {
     @PrimaryGeneratedColumn('uuid')
     id: uuid;
 
@@ -70,7 +70,7 @@ describe('UsersService', () => {
     });
 
     it('should create user', async () => {
-        const user = await usersService.create(createUserDto);
+        const user = await usersService.createUser(createUserDto);
 
         expect(user).toEqual(expect.objectContaining({ ...createUserDto, id: user.id }));
         expect(await usersRepository.findOne({ where: { id: user.id } })).toEqual(user);
@@ -81,7 +81,7 @@ describe('UsersService', () => {
         const userStub = usersRepository.create(createUserDto);
         await usersRepository.save(userStub);
 
-        const updatedUser = await usersService.update({ userId: userStub.id }, { email: newEmailStub });
+        const updatedUser = await usersService.updateUser(userStub.id, { email: newEmailStub });
 
         expect(updatedUser).toEqual(expect.objectContaining({ ...createUserDto, email: newEmailStub }));
         expect(await usersRepository.findOne({ where: { id: userStub.id } })).toEqual(updatedUser);
@@ -89,7 +89,7 @@ describe('UsersService', () => {
 
     it('should not update non-existing user', async () => {
         const newEmailStub = 'new@emailStub.com';
-        const updatedUser = await usersService.update({ userId: 'non-existing-id' }, { email: newEmailStub });
+        const updatedUser = await usersService.updateUser('non-existing-id', { email: newEmailStub });
 
         expect(updatedUser).toBeNull();
     });
@@ -98,14 +98,14 @@ describe('UsersService', () => {
         const userStub = usersRepository.create(createUserDto);
         await usersRepository.save(userStub);
 
-        const deletedUser = await usersService.remove({ userId: userStub.id });
+        const deletedUser = await usersService.deleteUser(userStub.id);
 
         expect(deletedUser).toEqual(userStub);
         expect(await usersRepository.findOne({ where: { id: userStub.id } })).toBeNull();
     });
 
     it('should not delete non-existing user', async () => {
-        const removedUser = await usersService.remove({ userId: 'non-existing-id' });
+        const removedUser = await usersService.deleteUser('non-existing-id');
 
         expect(removedUser).toBeNull();
     });
@@ -116,7 +116,7 @@ describe('UsersService', () => {
         await usersRepository.save(user1Stub);
         await usersRepository.save(user2Stub);
 
-        const users = await usersService.getAll();
+        const users = await usersService.getAllUsers();
 
         expect(users).toEqual(expect.arrayContaining([user1Stub, user2Stub]));
     });
@@ -125,13 +125,13 @@ describe('UsersService', () => {
         const userStub = usersRepository.create(createUserDto);
         await usersRepository.save(userStub);
 
-        const user = await usersService.getById(userStub.id);
+        const user = await usersService.getUserById(userStub.id);
 
         expect(user).toEqual(userStub);
     });
 
     it('should not get user by non-existing id', async () => {
-        const user = await usersService.getById('non-existing-id');
+        const user = await usersService.getUserById('non-existing-id');
 
         expect(user).toBeNull();
     });
@@ -140,13 +140,13 @@ describe('UsersService', () => {
         const userStub = usersRepository.create(createUserDto);
         await usersRepository.save(userStub);
 
-        const user = await usersService.getByEmail(userStub.email);
+        const user = await usersService.getUserByEmail(userStub.email);
 
         expect(user).toEqual(userStub);
     });
 
     it('should not get user by non-existing email', async () => {
-        const user = await usersService.getByEmail('non-existing-email');
+        const user = await usersService.getUserByEmail('non-existing-email');
 
         expect(user).toBeNull();
     });
@@ -157,7 +157,7 @@ describe('UsersService', () => {
         await usersRepository.save(user1Stub);
         await usersRepository.save(user2Stub);
 
-        const admins = await usersService.getByRole(Role.Admin);
+        const admins = await usersService.getUsersByRole(Role.Admin);
 
         expect(admins).toEqual(expect.arrayContaining([user2Stub]));
     });

@@ -40,20 +40,23 @@
             "tags": ["end-2-end-tests"],
             "implicitDependencies": ["client"]
         },
-        "data-access-guards": {
+        "data-access-activities": {
             "tags": []
         },
         "data-access-users": {
             "tags": []
-        },
-        "types": {
-            "tags": ["module"]
         },
         "ui-header": {
             "tags": []
         },
         "ui-tables": {
             "tags": []
+        },
+        "util-guards": {
+            "tags": []
+        },
+        "util-types": {
+            "tags": ["module"]
         },
         "util-ui": {
             "tags": []

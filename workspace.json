@@ -171,22 +171,22 @@
                 }
             }
         },
-        "data-access-guards": {
-            "root": "libs/data-access-guards",
-            "sourceRoot": "libs/data-access-guards/src",
+        "data-access-activities": {
+            "root": "libs/data-access-activities",
+            "sourceRoot": "libs/data-access-activities/src",
             "projectType": "library",
             "targets": {
                 "lint": {
                     "executor": "@nrwl/linter:eslint",
                     "options": {
-                        "lintFilePatterns": ["libs/data-access-guards/**/*.{ts,tsx,js,jsx}"]
+                        "lintFilePatterns": ["libs/data-access-activities/**/*.{ts,tsx,js,jsx}"]
                     }
                 },
                 "test": {
                     "executor": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/data-access-guards"],
+                    "outputs": ["coverage/libs/data-access-activities"],
                     "options": {
-                        "jestConfig": "libs/data-access-guards/jest.config.js",
+                        "jestConfig": "libs/data-access-activities/jest.config.js",
                         "passWithNoTests": true
                     }
                 }
@@ -208,27 +208,6 @@
                     "outputs": ["coverage/libs/data-access-users"],
                     "options": {
                         "jestConfig": "libs/data-access-users/jest.config.js",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "types": {
-            "root": "libs/types",
-            "sourceRoot": "libs/types/src",
-            "projectType": "library",
-            "targets": {
-                "lint": {
-                    "executor": "@nrwl/linter:eslint",
-                    "options": {
-                        "lintFilePatterns": ["libs/types/**/*.ts"]
-                    }
-                },
-                "test": {
-                    "executor": "@nrwl/jest:jest",
-                    "outputs": ["coverage/libs/types"],
-                    "options": {
-                        "jestConfig": "libs/types/jest.config.js",
                         "passWithNoTests": true
                     }
                 }
@@ -271,6 +250,48 @@
                     "outputs": ["coverage/libs/ui-tables"],
                     "options": {
                         "jestConfig": "libs/ui-tables/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "util-guards": {
+            "root": "libs/util-guards",
+            "sourceRoot": "libs/util-guards/src",
+            "projectType": "library",
+            "targets": {
+                "lint": {
+                    "executor": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/util-guards/**/*.{ts,tsx,js,jsx}"]
+                    }
+                },
+                "test": {
+                    "executor": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/util-guards"],
+                    "options": {
+                        "jestConfig": "libs/util-guards/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "util-types": {
+            "root": "libs/util-types",
+            "sourceRoot": "libs/util-types/src",
+            "projectType": "library",
+            "targets": {
+                "lint": {
+                    "executor": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/util-types/**/*.ts"]
+                    }
+                },
+                "test": {
+                    "executor": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/util-types"],
+                    "options": {
+                        "jestConfig": "libs/util-types/jest.config.js",
                         "passWithNoTests": true
                     }
                 }

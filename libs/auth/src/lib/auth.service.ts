@@ -1,6 +1,6 @@
-import { UsersService } from '@box-fc/data-access-users';
-import { User, UserCredentials, uuid } from '@box-fc/types';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { GETS_USERS, GetsUsers } from '@box-fc/data-access-users';
+import { User, UserCredentials, uuid } from '@box-fc/util-types';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OAuth2Client } from 'google-auth-library';
 
@@ -8,7 +8,7 @@ import { OAuth2Client } from 'google-auth-library';
 export class AuthService {
     private static readonly USER_NOT_FOUND_MESSAGE = 'User not found';
 
-    constructor(private usersService: UsersService, private jwtService: JwtService) {}
+    constructor(@Inject(GETS_USERS) private readonly getsUsers: GetsUsers, private jwtService: JwtService) {}
 
     async googleLogin(googleToken: string): Promise<UserCredentials> {
         const client = new OAuth2Client();
@@ -35,7 +35,7 @@ export class AuthService {
     }
 
     private async _getValidUser(email: string): Promise<User> {
-        const user = await this.usersService.getByEmail(email);
+        const user = await this.getsUsers.getUserByEmail(email);
 
         if (!user) {
             throw new NotFoundException(AuthService.USER_NOT_FOUND_MESSAGE);

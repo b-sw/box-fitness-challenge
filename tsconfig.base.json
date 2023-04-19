@@ -22,11 +22,11 @@
 			"@box-fc/auth": [
 				"libs/auth/src/index.ts"
 			],
+			"@box-fc/data-access-activities": [
+				"libs/data-access-activities/src/index.ts"
+			],
 			"@box-fc/data-access-users": [
 				"libs/data-access-users/src/index.ts"
-			],
-			"@box-fc/types": [
-				"libs/types/src/index.ts"
 			],
 			"@box-fc/ui-header": [
 				"libs/ui-header/src/index.ts"
@@ -34,11 +34,14 @@
 			"@box-fc/ui-tables": [
 				"libs/ui-tables/src/index.ts"
 			],
+			"@box-fc/util-guards": [
+				"libs/util-guards/src/index.ts"
+			],
 			"@box-fc/util-ui": [
 				"libs/util-ui/src/index.ts"
 			],
-			"@box-fc/data-access-guards": [
-				"libs/data-access-guards/src/index.ts"
+			"@box-fc/util-types": [
+				"libs/util-types/src/index.ts"
 			]
 		}
 	},
