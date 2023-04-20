@@ -40,10 +40,19 @@
             "tags": ["end-2-end-tests"],
             "implicitDependencies": ["client"]
         },
+        "data-access": {
+            "tags": []
+        },
         "data-access-activities": {
             "tags": []
         },
         "data-access-users": {
+            "tags": []
+        },
+        "feature": {
+            "tags": []
+        },
+        "feature-header": {
             "tags": []
         },
         "ui-header": {

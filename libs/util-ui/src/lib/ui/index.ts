@@ -5,3 +5,4 @@ export * from './tab-panel/tab-panel';
 export * from './search/SearchInput';
 export * from './tabs/Tabs';
 export * from './tabs/TabPanels';
+export * from './toast/toast-error';

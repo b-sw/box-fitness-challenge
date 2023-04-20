@@ -12,10 +12,7 @@ export class AuthService {
 
     async googleLogin(googleToken: string): Promise<UserCredentials> {
         const client = new OAuth2Client();
-        const ticket = await client.verifyIdToken({
-            idToken: googleToken,
-        });
-        const { email } = ticket.getPayload() as { email: string };
+        const { email } = (await client.getTokenInfo(googleToken)) as { email: string };
         const user = await this._getValidUser(email);
         const jwt = this._getJwt(email, user.id);
 

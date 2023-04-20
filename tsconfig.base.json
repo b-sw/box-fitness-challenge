@@ -1,52 +1,58 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"rootDir": ".",
-		"sourceMap": true,
-		"declaration": false,
-		"moduleResolution": "node",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"importHelpers": true,
-		"target": "es2015",
-		"module": "esnext",
-		"lib": [
-			"es2017",
-			"dom"
-		],
-		"skipLibCheck": true,
-		"skipDefaultLibCheck": true,
-		"strictPropertyInitialization": false,
-		"baseUrl": ".",
-		"paths": {
-			"@box-fc/auth": [
-				"libs/auth/src/index.ts"
-			],
-			"@box-fc/data-access-activities": [
-				"libs/data-access-activities/src/index.ts"
-			],
-			"@box-fc/data-access-users": [
-				"libs/data-access-users/src/index.ts"
-			],
-			"@box-fc/ui-header": [
-				"libs/ui-header/src/index.ts"
-			],
-			"@box-fc/ui-tables": [
-				"libs/ui-tables/src/index.ts"
-			],
-			"@box-fc/util-guards": [
-				"libs/util-guards/src/index.ts"
-			],
-			"@box-fc/util-ui": [
-				"libs/util-ui/src/index.ts"
-			],
-			"@box-fc/util-types": [
-				"libs/util-types/src/index.ts"
-			]
-		}
-	},
-	"exclude": [
-		"node_modules",
-		"tmp"
-	]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "strictPropertyInitialization": false,
+        "baseUrl": ".",
+        "paths": {
+            "@box-fc/auth": [
+                "libs/auth/src/index.ts"
+            ],
+            "@box-fc/data-access": [
+                "libs/data-access/src/index.ts"
+            ],
+            "@box-fc/data-access-activities": [
+                "libs/data-access-activities/src/index.ts"
+            ],
+            "@box-fc/data-access-users": [
+                "libs/data-access-users/src/index.ts"
+            ],
+            "@box-fc/ui-header": [
+                "libs/ui-header/src/index.ts"
+            ],
+            "@box-fc/ui-tables": [
+                "libs/ui-tables/src/index.ts"
+            ],
+            "@box-fc/util-guards": [
+                "libs/util-guards/src/index.ts"
+            ],
+            "@box-fc/util-types": [
+                "libs/util-types/src/index.ts"
+            ],
+            "@box-fc/util-ui": [
+                "libs/util-ui/src/index.ts"
+            ],
+            "@box-fc/feature": [
+                "libs/feature/src/index.ts"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "tmp"
+    ]
 }
