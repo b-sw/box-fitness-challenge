@@ -40,4 +40,4 @@ jobs:
           script: |
             docker stop --quiet $(docker ps -a -q --filter ancestor=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}) 2>/dev/null || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}
-            docker run -e DB_HOST=${{ secrets.DB_HOST }} -e DB_USERNAME=${{ secrets.DB_USERNAME }} -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} -e DB_DATABASE=${{ secrets.DB_DATABASE }} -e DB_PORT=${{ secrets.DB_PORT }} -e JWT_SECRET=${{ secrets.JWT_SECRET }} -e DEV_AUTH_PASSWORD=${{ secrets.DEV_AUTH_PASSWORD }} -d -p 3333:3333 ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}
+            docker run -e DB_HOST='${{ secrets.DB_HOST }}' -e DB_USERNAME='${{ secrets.DB_USERNAME }}' -e DB_PASSWORD='${{ secrets.DB_PASSWORD }}' -e DB_DATABASE='${{ secrets.DB_DATABASE }}' -e DB_PORT=${{ secrets.DB_PORT }} -e JWT_SECRET='${{ secrets.JWT_SECRET }}' -e DEV_AUTH_PASSWORD='${{ secrets.DEV_AUTH_PASSWORD }}' -d -p 3333:3333 ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}
