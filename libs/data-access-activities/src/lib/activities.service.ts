@@ -1,4 +1,12 @@
-import { Activity, CreateActivityDto, UpdateActivityDto, User } from '@box-fc/util-types';
+import {
+    AccumulatedTeamActivity,
+    AccumulatedUserActivity,
+    Activity,
+    CreateActivityDto,
+    Optional,
+    UpdateActivityDto,
+    User,
+} from '@box-fc/util-types';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
@@ -7,8 +15,6 @@ import { CreatesActivity, DeletesActivity, GetsActivities, UpdatesActivity } fro
 type ActivityId = Activity['id'];
 type UserId = Activity['userId'];
 type Team = User['team'];
-type AccumulatedUserActivity = { userId: UserId; activeTime: number; activitiesCount: number };
-type AccumulatedTeamActivity = { team: Team; activeTime: number; activitiesCount: number };
 
 @Injectable()
 export class ActivitiesService implements CreatesActivity, GetsActivities, UpdatesActivity, DeletesActivity {
@@ -27,7 +33,7 @@ export class ActivitiesService implements CreatesActivity, GetsActivities, Updat
         return this.activityRepository.find();
     }
 
-    getActivityById(activityId: ActivityId): Promise<Activity | null> {
+    getActivityById(activityId: ActivityId): Promise<Optional<Activity>> {
         return this.activityRepository.findOne({ where: { id: activityId } });
     }
 
@@ -79,13 +85,13 @@ export class ActivitiesService implements CreatesActivity, GetsActivities, Updat
         return Array.from(accumulatedTeamsActivities.values());
     }
 
-    async updateActivity(activityId: ActivityId, updateActivityDto: UpdateActivityDto): Promise<Activity | null> {
+    async updateActivity(activityId: ActivityId, updateActivityDto: UpdateActivityDto): Promise<Optional<Activity>> {
         await this.activityRepository.update(activityId, updateActivityDto);
 
         return await this.getActivityById(activityId);
     }
 
-    async deleteActivity(activityId: ActivityId): Promise<Activity | null> {
+    async deleteActivity(activityId: ActivityId): Promise<Optional<Activity>> {
         const sportActivity = await this.getActivityById(activityId);
 
         await this.activityRepository.delete(activityId);

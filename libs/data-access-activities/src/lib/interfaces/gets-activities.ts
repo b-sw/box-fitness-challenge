@@ -1,14 +1,11 @@
-import { Activity, User } from '@box-fc/util-types';
+import { AccumulatedTeamActivity, AccumulatedUserActivity, Activity, Optional } from '@box-fc/util-types';
 
 type UserId = Activity['userId'];
-type Team = User['team'];
-export type AccumulatedUserActivity = { userId: UserId; activeTime: number; activitiesCount: number };
-export type AccumulatedTeamActivity = { team: Team; activeTime: number; activitiesCount: number };
 
 export interface GetsActivities {
     getAllActivities(): Promise<Activity[]>;
 
-    getActivityById(activityId: Activity['id']): Promise<Activity | null>;
+    getActivityById(activityId: Activity['id']): Promise<Optional<Activity>>;
 
     getUserActivities(userId: UserId): Promise<Activity[]>;
 
