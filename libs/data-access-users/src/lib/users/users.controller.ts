@@ -1,8 +1,7 @@
-import { JwtGuard } from '@box-fc/util-guards';
+import { AdminGuard, JwtGuard } from '@box-fc/util-guards';
 import { CreateUserDto, Role, UpdateUserDto, User, UserParams } from '@box-fc/util-types';
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AdminGuard } from './guards';
 import { UsersService } from './users.service';
 
 @ApiTags('users')

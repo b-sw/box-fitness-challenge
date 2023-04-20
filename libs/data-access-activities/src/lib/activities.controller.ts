@@ -1,4 +1,4 @@
-import { JwtGuard } from '@box-fc/util-guards';
+import { AdminGuard, JwtGuard } from '@box-fc/util-guards';
 import {
     AccumulatedActivityDto,
     AccumulatedTeamActivity,
@@ -12,6 +12,7 @@ import {
 } from '@box-fc/util-types';
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { SelfGuard } from 'libs/util-guards/src/lib/guards/self/self.guard';
 import { ActivitiesService } from './activities.service';
 
 @ApiTags('activities')
@@ -21,7 +22,7 @@ export class ActivitiesController {
     constructor(private readonly activitiesService: ActivitiesService) {}
 
     @Post('activities')
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, SelfGuard)
     @ApiOperation({ summary: 'Create an activity' })
     createActivity(@Body() createActivityDto: CreateActivityDto) {
         return this.activitiesService.createActivity(createActivityDto);
@@ -42,7 +43,7 @@ export class ActivitiesController {
     }
 
     @Post('activities/:activityId')
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, AdminGuard)
     @ApiOperation({ summary: 'Update an activity' })
     updateActivity(
         @Param() { activityId }: ActivityParams,
@@ -52,7 +53,7 @@ export class ActivitiesController {
     }
 
     @Delete('activities/:activityId')
-    @UseGuards(JwtGuard)
+    @UseGuards(JwtGuard, AdminGuard)
     @ApiOperation({ summary: 'Delete an activity' })
     deleteActivity(@Param() { activityId }: ActivityParams) {
         return this.activitiesService.deleteActivity(activityId);

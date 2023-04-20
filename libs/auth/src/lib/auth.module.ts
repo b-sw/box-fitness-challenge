@@ -1,19 +1,21 @@
 import { GETS_USERS, UsersService } from '@box-fc/data-access-users';
+import { User } from '@box-fc/util-types';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies';
 
 @Module({
-    imports: [JwtModule.register(AuthModule.JWT_OPTIONS)],
+    imports: [JwtModule.register(AuthModule.JWT_OPTIONS), TypeOrmModule.forFeature([User])],
     providers: [
-        AuthService,
         JwtStrategy,
         {
             provide: GETS_USERS,
             useClass: UsersService,
         },
+        AuthService,
     ],
     controllers: [AuthController],
     exports: [AuthService],

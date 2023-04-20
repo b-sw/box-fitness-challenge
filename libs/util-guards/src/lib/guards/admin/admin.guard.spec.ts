@@ -1,5 +1,5 @@
+import { AdminGuard } from '@box-fc/util-guards';
 import { HttpException } from '@nestjs/common';
-import { AdminGuard } from 'libs/data-access-users/src/lib/users/guards/admin.guard';
 
 describe('DevGuard', () => {
     const adminIdStub = 'adminId';
