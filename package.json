@@ -62,7 +62,8 @@
         "rxjs": "~7.4.0",
         "sqlite3": "^5.1.6",
         "tslib": "^2.0.0",
-        "typeorm": "^0.3.15"
+        "typeorm": "^0.3.15",
+        "yup": "^1.1.1"
     },
     "devDependencies": {
         "@nestjs/schematics": "^8.0.4",

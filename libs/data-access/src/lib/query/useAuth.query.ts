@@ -1,21 +1,24 @@
 import jwtDecode from 'jwt-decode';
 import { useQuery } from 'react-query';
-import { AUTH_QUERY_KEY } from '../query-keys/login.query-key';
+import { AUTH_QUERY_KEY } from '../query-keys';
+import { AuthQuery } from '../query-types';
 
 type Token = {
     exp: number;
 };
 
 export const useAuthQuery = () => {
-    const authQuery = useQuery(AUTH_QUERY_KEY, {
+    const authQuery = useQuery<AuthQuery>(AUTH_QUERY_KEY, {
         enabled: false,
         placeholderData: {
-            id: null,
-            accessToken: null,
-            firstName: null,
-            lastName: null,
-            email: null,
-            userImageSrc: null,
+            userId: '',
+            accessToken: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            team: '',
+            division: '',
+            userImageSrc: '',
         },
     });
 

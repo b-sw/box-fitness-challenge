@@ -6,3 +6,4 @@ export * from './search/SearchInput';
 export * from './tabs/Tabs';
 export * from './tabs/TabPanels';
 export * from './toast/toast-error';
+export * from './datetime/datetime.format';

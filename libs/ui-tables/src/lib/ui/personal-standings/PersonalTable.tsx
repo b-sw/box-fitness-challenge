@@ -20,23 +20,6 @@ export const PersonalTable = () => {
                 <TabPanels>
                     <TabPanel {...TabPanelDefaultProps}>
                         <PersonalListItem personName={'Jan Kowalski'} />
-                        <PersonalListItem personName={'Bartosz Świtalski'} />
-                        <PersonalListItem personName={'Jakub Wincewicz'} />
-                        <PersonalListItem personName={'Jan Kowalski'} />
-                        <PersonalListItem personName={'Bartosz Świtalski'} />
-                        <PersonalListItem personName={'Jakub Wincewicz'} />
-                        <PersonalListItem personName={'Jan Kowalski'} />
-                        <PersonalListItem personName={'Bartosz Świtalski'} />
-                        <PersonalListItem personName={'Jakub Wincewicz'} />
-                        <PersonalListItem personName={'Jan Kowalski'} />
-                        <PersonalListItem personName={'Bartosz Świtalski'} />
-                        <PersonalListItem personName={'Jakub Wincewicz'} />
-                        <PersonalListItem personName={'Jan Kowalski'} />
-                        <PersonalListItem personName={'Bartosz Świtalski'} />
-                        <PersonalListItem personName={'Jakub Wincewicz'} />
-                        <PersonalListItem personName={'Jan Kowalski'} />
-                        <PersonalListItem personName={'Bartosz Świtalski'} />
-                        <PersonalListItem personName={'Jakub Wincewicz'} />
                     </TabPanel>
 
                     <TabPanel {...TabPanelDefaultProps}></TabPanel>

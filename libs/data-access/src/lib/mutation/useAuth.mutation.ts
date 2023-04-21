@@ -22,8 +22,8 @@ export const useAuthMutation = () => {
         return { ...serverResponse.data, userImageSrc: googleResponse.data.picture };
     };
 
-    const logout = () => {
-        queryClient.clear();
+    const logout = async () => {
+        queryClient.setQueryData([AUTH_QUERY_KEY], () => ({}));
         delete axios.defaults.headers.common['Authorization'];
     };
 

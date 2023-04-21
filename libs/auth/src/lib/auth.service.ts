@@ -17,11 +17,13 @@ export class AuthService {
         const jwt = this._getJwt(email, user.id);
 
         return {
-            id: user.id,
+            userId: user.id,
             accessToken: jwt,
             firstName: user.firstName,
             lastName: user.lastName,
             email: email,
+            team: user.team,
+            division: user.division,
         };
     }
 

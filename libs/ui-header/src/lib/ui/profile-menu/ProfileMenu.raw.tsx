@@ -2,12 +2,25 @@ import { Avatar, Badge, Button, Flex, Menu, MenuButton, MenuDivider, MenuItem, M
 
 type ProfileMenuRawProps = {
     isEnabled: boolean;
+    firstName: string;
+    lastName: string;
+    email: string;
+    team: string;
+    division: string;
     profilePictureSrc: string;
+    handleLogout: () => void;
 };
 
-export const ProfileMenuRaw = ({ isEnabled, profilePictureSrc }: ProfileMenuRawProps) => {
-    console.log('src', profilePictureSrc);
-
+export const ProfileMenuRaw = ({
+    isEnabled,
+    firstName,
+    lastName,
+    email,
+    team,
+    division,
+    profilePictureSrc,
+    handleLogout,
+}: ProfileMenuRawProps) => {
     return (
         <Menu>
             <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0} disabled={!isEnabled}>
@@ -16,19 +29,26 @@ export const ProfileMenuRaw = ({ isEnabled, profilePictureSrc }: ProfileMenuRawP
             <MenuList alignItems={'center'}>
                 <Flex direction={'column'} align={'center'} p={2}>
                     <Avatar size={'xl'} mb={2} src={profilePictureSrc} />
-                    <Text fontWeight={'medium'}>Jan Kowalski</Text>
+                    <Text fontWeight={'medium'}>
+                        {firstName} {lastName}
+                    </Text>
                     <Text fontSize={'sm'} color={'gray.400'}>
-                        jkowalski@box.com
+                        {email}
                     </Text>
 
-                    <Badge mt={3} colorScheme={'green'} fontSize={'xs'}>
-                        Canvas
-                    </Badge>
+                    <Flex mt={3} gap={2}>
+                        <Badge colorScheme={'green'} fontSize={'xs'}>
+                            {team}
+                        </Badge>
+                        <Badge colorScheme={'gray'} fontSize={'xs'}>
+                            {division}
+                        </Badge>
+                    </Flex>
                 </Flex>
 
                 <MenuDivider />
 
-                <MenuItem>Settings</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </MenuList>
         </Menu>
     );
