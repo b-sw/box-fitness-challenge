@@ -1,4 +1,4 @@
-import { Activity, User } from '@box-fc/util-types';
+import { Activity, User } from '@box-fc/shared/types';
 import { config } from 'dotenv';
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 

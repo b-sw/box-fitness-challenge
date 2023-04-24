@@ -1,5 +1,4 @@
-import { TablesDashboard } from '@box-fc/ui-tables';
-import { theme } from '@box-fc/util-ui';
+import { Dashboard, theme } from '@box-fc/frontend/ui';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -13,7 +12,7 @@ export const App = () => {
             <ChakraProvider theme={theme}>
                 <QueryClientProvider client={queryClient}>
                     <ReactQueryDevtools initialIsOpen={false} />
-                    <TablesDashboard />
+                    <Dashboard />
                 </QueryClientProvider>
             </ChakraProvider>
         </GoogleOAuthProvider>

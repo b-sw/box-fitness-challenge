@@ -30,7 +30,16 @@
         "api": {
             "tags": ["backend"]
         },
-        "auth": {
+        "backend-activities": {
+            "tags": []
+        },
+        "backend-auth": {
+            "tags": []
+        },
+        "backend-guards": {
+            "tags": []
+        },
+        "backend-users": {
             "tags": []
         },
         "client": {
@@ -40,32 +49,23 @@
             "tags": ["end-2-end-tests"],
             "implicitDependencies": ["client"]
         },
-        "data-access": {
-            "tags": []
-        },
-        "data-access-activities": {
-            "tags": []
-        },
-        "data-access-users": {
-            "tags": []
-        },
         "feature": {
             "tags": []
         },
         "feature-header": {
             "tags": []
         },
+        "frontend-query": {
+            "tags": []
+        },
+        "frontend-ui": {
+            "tags": []
+        },
+        "shared-types": {
+            "tags": ["module"]
+        },
         "ui-header": {
             "tags": []
-        },
-        "ui-tables": {
-            "tags": []
-        },
-        "util-guards": {
-            "tags": []
-        },
-        "util-types": {
-            "tags": ["module"]
         },
         "util-ui": {
             "tags": []

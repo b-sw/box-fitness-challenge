@@ -44,6 +44,7 @@
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.0",
         "core-js": "^3.6.5",
+        "formik": "^2.2.9",
         "framer-motion": "4.1.17",
         "google-auth-library": "^8.7.0",
         "http-status-codes": "^2.2.0",
