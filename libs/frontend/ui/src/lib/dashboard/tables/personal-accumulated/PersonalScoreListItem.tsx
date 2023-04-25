@@ -1,4 +1,3 @@
-import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, HStack, IconButton, Spacer, Text, VStack } from '@chakra-ui/react';
 import { MdAssessment } from 'react-icons/md';
 
@@ -6,7 +5,7 @@ type PersonalListItemProps = {
     personName: string;
 };
 
-export const PersonalListItem = ({ personName }: PersonalListItemProps) => {
+export const PersonalScoreListItem = ({ personName }: PersonalListItemProps) => {
     return (
         <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
             <HStack width={'55%'}>
@@ -25,9 +24,7 @@ export const PersonalListItem = ({ personName }: PersonalListItemProps) => {
                     </VStack>
                 </VStack>
             </HStack>
-
             <Spacer />
-
             <Flex gap={1} alignItems={'center'} width={'30%'}>
                 <Text fontSize={'sm'} color={'gray.800'}>
                     Total time:
@@ -36,13 +33,8 @@ export const PersonalListItem = ({ personName }: PersonalListItemProps) => {
                     123h 45m
                 </Badge>
             </Flex>
-
             <Spacer />
-
-            <Flex width={'15%'}>
-                <IconButton aria-label="IconButton1" icon={<MdAssessment />} variant={'ghost'} />
-                <IconButton aria-label="IconButton2" icon={<DeleteIcon />} variant={'ghost'} />
-            </Flex>
+            <IconButton aria-label="IconButton1" icon={<MdAssessment />} variant={'ghost'} />
         </Flex>
     );
 };
