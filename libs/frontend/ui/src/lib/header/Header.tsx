@@ -1,7 +1,7 @@
-import { ActivityButton } from 'libs/frontend/ui/src/lib/header/ActivityButton';
-import { LoginButton } from 'libs/frontend/ui/src/lib/header/LoginButton';
-import { ProfileMenu } from 'libs/frontend/ui/src/lib/header/ProfileMenu';
+import { ActivityButton } from './ActivityButton';
 import { HeaderRaw } from './header/Header.raw';
+import { LoginButton } from './LoginButton';
+import { ProfileMenu } from './ProfileMenu';
 
 export const Header = () => {
     return (

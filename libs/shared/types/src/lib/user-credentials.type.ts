@@ -9,4 +9,5 @@ export type UserCredentials = {
     email: string;
     team: string;
     division: string;
+    role: string;
 };

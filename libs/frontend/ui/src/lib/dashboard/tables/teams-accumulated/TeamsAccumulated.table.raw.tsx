@@ -1,5 +1,6 @@
 import { AccumulatedTeamActivity, User } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel } from '@chakra-ui/react';
+import { useState } from 'react';
 import { SearchInput } from '../../../utils/search/SearchInput';
 import { TabPanelDefaultProps } from '../../../utils/tab-panel/tab-panel';
 import { TablePanel } from '../../../utils/table-panel/TablePanel';
@@ -13,11 +14,12 @@ type Props = {
 };
 
 export const TeamsAccumulatedTableRaw = ({ activities, users }: Props) => {
+    const [filter, setFilter] = useState<string>('');
     const TITLE = 'Teams standings';
 
     return (
         <TablePanel headerTitle={TITLE} headerButtons={false}>
-            <SearchInput />
+            <SearchInput handleChange={setFilter} />
 
             <Tabs>
                 <TabList>

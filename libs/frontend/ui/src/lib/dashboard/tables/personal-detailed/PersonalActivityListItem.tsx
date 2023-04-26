@@ -6,12 +6,35 @@ import { Avatar, Badge, Flex, HStack, IconButton, Spacer, Text, VStack } from '@
 type PersonalListItemProps = {
     activity: ActivityQueryType;
     user: User;
+    readonly: boolean;
+    handleDelete: (activity: ActivityQueryType) => void;
 };
 
-export const PersonalActivityListItem = ({ activity, user }: PersonalListItemProps) => {
+export const PersonalActivityListItem = ({ activity, user, readonly, handleDelete }: PersonalListItemProps) => {
     return (
         <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
-            <HStack width={'50%'}>
+            {personalActivityItem(user, activity)}
+
+            <Spacer />
+
+            {!readonly && (
+                <Flex>
+                    <IconButton
+                        aria-label="IconButton2"
+                        icon={<DeleteIcon />}
+                        variant={'ghost'}
+                        onClick={() => handleDelete(activity)}
+                    />
+                </Flex>
+            )}
+        </Flex>
+    );
+};
+
+export const personalActivityItem = (user: User, activity: ActivityQueryType) => {
+    return (
+        <>
+            <HStack w={'50%'}>
                 <Avatar size={'sm'} />
                 <VStack spacing={0} alignItems={'baseline'}>
                     <HStack>
@@ -43,20 +66,14 @@ export const PersonalActivityListItem = ({ activity, user }: PersonalListItemPro
                 </Flex>
 
                 <Flex direction={'column'} alignItems={'flex-start'} gap={1}>
-                    <Badge colorScheme={'facebook'} variant={'outline'}>
-                        {activity.duration / 60}h {activity.duration % 60}m
-                    </Badge>
+                    <Text fontSize={'sm'} fontWeight={'bold'}>
+                        {Math.floor(activity.duration / 60)}h {activity.duration % 60}m
+                    </Text>
                     <Badge colorScheme={'facebook'} variant={'outline'}>
                         {activity.type}
                     </Badge>
                 </Flex>
             </Flex>
-
-            <Spacer />
-
-            <Flex>
-                <IconButton aria-label="IconButton2" icon={<DeleteIcon />} variant={'ghost'} />
-            </Flex>
-        </Flex>
+        </>
     );
 };

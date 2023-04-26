@@ -1,22 +1,24 @@
 import { AccumulatedUserActivity } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel } from '@chakra-ui/react';
-import { PersonalScoreListItem } from 'libs/frontend/ui/src/lib/dashboard/tables/personal-accumulated/PersonalScoreListItem';
+import { useState } from 'react';
 import { SearchInput } from '../../../utils/search/SearchInput';
 import { TabPanelDefaultProps } from '../../../utils/tab-panel/tab-panel';
 import { TablePanel } from '../../../utils/table-panel/TablePanel';
 import { TabPanels } from '../../../utils/tabs/TabPanels';
 import { Tabs } from '../../../utils/tabs/Tabs';
+import { PersonalScoreListItem } from './PersonalScoreListItem';
 
 type Props = {
     activities: AccumulatedUserActivity[];
 };
 
 export const PersonalAccumulatedTableRaw = ({ activities }: Props) => {
+    const [filter, setFilter] = useState<string>('');
     const TITLE = 'Individual standings';
 
     return (
         <TablePanel headerTitle={TITLE} headerButtons={false}>
-            <SearchInput />
+            <SearchInput handleChange={setFilter} />
 
             <Tabs>
                 <TabList>

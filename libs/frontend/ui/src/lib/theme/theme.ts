@@ -1,5 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
-import { Input } from 'libs/frontend/ui/src/lib/theme/input';
+import { Input } from './input';
+import { Modal } from './modal';
 
 const config = {
     initialColorMode: 'light',
@@ -8,6 +9,7 @@ const config = {
 
 const components = {
     Input,
+    Modal,
 };
 
 export const theme = extendTheme({ config, components });

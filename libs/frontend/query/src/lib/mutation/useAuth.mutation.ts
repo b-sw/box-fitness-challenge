@@ -1,5 +1,4 @@
 import { UserCredentials } from '@box-fc/shared/types';
-import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { AUTH_QUERY_KEY } from '../query-keys/login.query-key';
@@ -7,8 +6,6 @@ import { AUTH_QUERY_KEY } from '../query-keys/login.query-key';
 export const useAuthMutation = () => {
     const SERVER_AUTH_ENDPOINT = 'google/auth';
     const GOOGLE_USER_INFO_ENDPOINT = 'https://www.googleapis.com/oauth2/v1/userinfo';
-
-    const toast = useToast();
     const queryClient = useQueryClient();
 
     const login = async (googleToken: string) => {

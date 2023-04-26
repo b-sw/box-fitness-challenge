@@ -24,6 +24,7 @@ export class AuthService {
             email: email,
             team: user.team,
             division: user.division,
+            role: user.role,
         };
     }
 

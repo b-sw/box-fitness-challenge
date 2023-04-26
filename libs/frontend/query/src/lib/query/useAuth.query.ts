@@ -18,6 +18,7 @@ export const useAuthQuery = () => {
             email: '',
             team: '',
             division: '',
+            role: '',
             userImageSrc: '',
         },
     });
@@ -33,5 +34,7 @@ export const useAuthQuery = () => {
     const isLoggedIn =
         Boolean(authQuery.data?.accessToken) && !tokenExpired(authQuery?.data?.accessToken as unknown as string);
 
-    return { authQuery, isLoggedIn };
+    const isAdmin = authQuery.data?.role === 'admin';
+
+    return { authQuery, isLoggedIn, isAdmin };
 };

@@ -1,1 +1,1 @@
-export * from 'libs/backend/guards/src/lib/admin/admin.guard';
+export * from './admin.guard';

@@ -1,8 +1,8 @@
 import { Activity, ActivityParams, User } from '@box-fc/shared/types';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AdminGuard } from 'libs/backend/guards/src/lib/admin';
 import { Repository } from 'typeorm';
+import { AdminGuard } from '../admin/admin.guard';
 
 @Injectable()
 export class SelfGuard extends AdminGuard implements CanActivate {

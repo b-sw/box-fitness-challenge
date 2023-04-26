@@ -1,7 +1,7 @@
 import { useAuthQuery } from '@box-fc/frontend/query';
 import { useDisclosure } from '@chakra-ui/react';
-import { ActivityCreateModal } from 'libs/frontend/ui/src/lib/header/ActivityCreateModal';
 import { ActivityButtonRaw } from './activity-button/ActivityButton.raw';
+import { ActivityCreateModal } from './ActivityCreateModal';
 
 export const ActivityButton = () => {
     const { isLoggedIn } = useAuthQuery();

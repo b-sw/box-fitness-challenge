@@ -1,13 +1,10 @@
 import { Activity, CreateActivityDto, UpdateActivityDto } from '@box-fc/shared/types';
-import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 import { ACTIVITIES_QUERY_KEY } from '../query-keys/activity.query-key';
 
 export const useActivityMutation = () => {
     const ACTIVITIES_ENDPOINT = 'activities';
-
-    const toast = useToast();
     const queryClient = useQueryClient();
 
     const createActivity = async (dto: CreateActivityDto): Promise<Activity> => {
