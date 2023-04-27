@@ -1,7 +1,7 @@
 import { useAuthMutation, useAuthQuery } from '@box-fc/frontend/query';
 import { useToast } from '@chakra-ui/react';
 import { useGoogleLogin } from '@react-oauth/google';
-import { defaultToastErrorOptions } from '../utils/toast/toast-error';
+import { defaultToastErrorOptions } from 'libs/frontend/ui/src/lib/utils/toast/toast-info';
 import { LoginButtonRaw } from './login-buton/LoginButton.raw';
 
 export const LoginButton = () => {

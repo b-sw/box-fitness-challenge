@@ -1,4 +1,5 @@
 import { useActivityMutation, useAuthQuery } from '@box-fc/frontend/query';
+import { toastError } from '@box-fc/frontend/ui';
 import {
     Button,
     FormControl,
@@ -16,6 +17,7 @@ import {
     NumberInput,
     NumberInputField,
     NumberInputStepper,
+    useToast,
 } from '@chakra-ui/react';
 import { Field, Formik } from 'formik';
 import { useEffect } from 'react';
@@ -28,14 +30,19 @@ type ActivityCreateModalProps = {
 export const ActivityCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
     const { authQuery } = useAuthQuery();
     const { createMutation } = useActivityMutation();
+    const toast = useToast();
 
     useEffect(() => {
         if (createMutation.isSuccess) {
             handleClose();
-            createMutation.reset();
+            toastError(toast, 'Activity created');
+        }
+
+        if (createMutation.isError) {
+            toastError(toast, 'Error creating activity');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [createMutation.isSuccess]);
+    }, [createMutation.status]);
 
     return (
         <Modal isOpen={isOpen} onClose={handleClose} isCentered>
@@ -47,7 +54,7 @@ export const ActivityCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
                 <Formik
                     initialValues={{
                         type: '',
-                        duration: 0,
+                        duration: 30,
                         trainingDate: new Date(),
                     }}
                     onSubmit={(values) => {

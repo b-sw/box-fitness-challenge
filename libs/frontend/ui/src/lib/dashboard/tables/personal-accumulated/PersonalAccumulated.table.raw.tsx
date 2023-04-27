@@ -26,7 +26,7 @@ export const PersonalAccumulatedTableRaw = ({ activities }: Props) => {
                     <Tab>Week II</Tab>
                     <Tab>Week III</Tab>
                     <Tab>Week IV</Tab>
-                    <Tab>Week V</Tab>
+                    <Tab>All</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel {...TabPanelDefaultProps}>

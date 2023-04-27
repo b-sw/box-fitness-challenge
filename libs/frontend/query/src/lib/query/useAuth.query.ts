@@ -1,4 +1,6 @@
+// import { Role } from '@box-fc/shared/types';
 import jwtDecode from 'jwt-decode';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { AUTH_QUERY_KEY } from '../query-keys/login.query-key';
 import { AuthQuery } from '../query-types';
@@ -22,6 +24,17 @@ export const useAuthQuery = () => {
             userImageSrc: '',
         },
     });
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        // todo: figure out why importing another domain is bad when importing react
+        setIsAdmin(authQuery.data?.role === 'Admin');
+        setIsLoggedIn(
+            Boolean(authQuery.data?.accessToken) && !tokenExpired(authQuery?.data?.accessToken as unknown as string),
+        );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [authQuery.data]);
 
     const tokenExpired = (token: string): boolean => {
         const currentTime = new Date().getTime() / 1000;
@@ -30,11 +43,6 @@ export const useAuthQuery = () => {
 
         return currentTime > expirationTime;
     };
-
-    const isLoggedIn =
-        Boolean(authQuery.data?.accessToken) && !tokenExpired(authQuery?.data?.accessToken as unknown as string);
-
-    const isAdmin = authQuery.data?.role === 'admin';
 
     return { authQuery, isLoggedIn, isAdmin };
 };

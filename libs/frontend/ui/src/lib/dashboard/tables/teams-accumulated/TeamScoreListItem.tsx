@@ -1,5 +1,4 @@
-import { Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
-import { BsPeopleFill } from 'react-icons/bs';
+import { Badge, Flex, Spacer, Text } from '@chakra-ui/react';
 
 type PersonalListItemProps = {
     personName: string;
@@ -29,8 +28,6 @@ export const TeamScoreListItem = ({ personName }: PersonalListItemProps) => {
             </Flex>
 
             <Spacer />
-
-            <IconButton aria-label="IconButton1" icon={<BsPeopleFill />} variant={'ghost'} />
         </Flex>
     );
 };

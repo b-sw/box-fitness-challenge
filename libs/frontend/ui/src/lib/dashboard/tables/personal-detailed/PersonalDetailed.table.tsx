@@ -34,7 +34,7 @@ export const PersonalDetailedTable = () => {
             <PersonalDetailedTableRaw
                 activities={activitiesQuery.data ?? []}
                 users={users}
-                readonly={isAdmin}
+                readonly={!isAdmin}
                 handleDelete={(activity: ActivityQueryType) => {
                     setSelectedActivity(activity);
                     onDeleteModalOpen();

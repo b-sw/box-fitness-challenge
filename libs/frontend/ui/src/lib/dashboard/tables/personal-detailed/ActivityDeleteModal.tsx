@@ -1,4 +1,5 @@
 import { ActivityQueryType, useActivityMutation } from '@box-fc/frontend/query';
+import { toastError, toastSuccess } from '@box-fc/frontend/ui';
 import { User } from '@box-fc/shared/types';
 import {
     Button,
@@ -11,7 +12,9 @@ import {
     ModalHeader,
     ModalOverlay,
     Text,
+    useToast,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { personalActivityItem } from './PersonalActivityListItem';
 
 type Props = {
@@ -23,10 +26,23 @@ type Props = {
 
 export const ActivityDeleteModal = ({ user, activity, isOpen, onClose }: Props) => {
     const { deleteMutation } = useActivityMutation();
+    const toast = useToast();
 
     const deleteActivity = () => {
         deleteMutation.mutate(activity.id);
     };
+
+    useEffect(() => {
+        if (deleteMutation.isError) {
+            toastError(toast, 'Error deleting activity');
+        }
+
+        if (deleteMutation.isSuccess) {
+            onClose();
+            toastSuccess(toast, 'Activity deleted');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [deleteMutation.status]);
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} isCentered size={'lg'}>

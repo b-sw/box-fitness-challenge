@@ -29,9 +29,9 @@ export const PersonalScoreListItem = ({ personName }: PersonalListItemProps) => 
                 <Text fontSize={'sm'} color={'gray.800'}>
                     Total time:
                 </Text>
-                <Badge colorScheme={'facebook'} variant={'outline'}>
-                    123h 45m
-                </Badge>
+                <Text fontSize={'sm'} fontWeight={'bold'}>
+                    12h 30m
+                </Text>
             </Flex>
             <Spacer />
             <IconButton aria-label="IconButton1" icon={<MdAssessment />} variant={'ghost'} />

@@ -27,7 +27,7 @@ export const TeamsAccumulatedTableRaw = ({ activities, users }: Props) => {
                     <Tab>Week II</Tab>
                     <Tab>Week III</Tab>
                     <Tab>Week IV</Tab>
-                    <Tab>Week V</Tab>
+                    <Tab>All</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel {...TabPanelDefaultProps}>
