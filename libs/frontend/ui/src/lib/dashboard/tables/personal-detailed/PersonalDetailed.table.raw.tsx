@@ -1,4 +1,4 @@
-import { ActivityQueryType } from '@box-fc/frontend/query';
+import { Activity } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
@@ -9,14 +9,14 @@ import { TablePanel } from '../../../utils/table-panel/TablePanel';
 import { PersonalActivityListItem } from './PersonalActivityListItem';
 
 type Props = {
-    activities: ActivityQueryType[];
+    activities: Activity[];
     users: { [key: string]: User };
     readonly: boolean;
-    handleDelete: (activity: ActivityQueryType) => void;
+    handleDelete: (activity: Activity) => void;
 };
 
 export const PersonalDetailedTableRaw = ({ activities, users, readonly, handleDelete }: Props) => {
-    const [filteredActivities, setFilteredActivities] = useState<ActivityQueryType[]>(activities);
+    const [filteredActivities, setFilteredActivities] = useState<Activity[]>(activities);
     const [filter, setFilter] = useState<string>('');
     const TITLE = 'Individual activities';
 

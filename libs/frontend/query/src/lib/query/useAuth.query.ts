@@ -3,14 +3,14 @@ import jwtDecode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { AUTH_QUERY_KEY } from '../query-keys/login.query-key';
-import { AuthQuery } from '../query-types';
+import { AuthCredentials } from '../query-types';
 
 type Token = {
     exp: number;
 };
 
 export const useAuthQuery = () => {
-    const authQuery = useQuery<AuthQuery>(AUTH_QUERY_KEY, {
+    const authQuery = useQuery<AuthCredentials>(AUTH_QUERY_KEY, {
         enabled: false,
         placeholderData: {
             userId: '',

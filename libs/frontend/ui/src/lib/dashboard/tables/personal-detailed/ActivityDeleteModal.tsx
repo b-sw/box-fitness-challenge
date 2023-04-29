@@ -1,4 +1,4 @@
-import { ActivityQueryType, useActivityMutation } from '@box-fc/frontend/query';
+import { Activity, useActivityMutation } from '@box-fc/frontend/query';
 import { toastError, toastSuccess } from '@box-fc/frontend/ui';
 import { User } from '@box-fc/shared/types';
 import {
@@ -19,7 +19,7 @@ import { personalActivityItem } from './PersonalActivityListItem';
 
 type Props = {
     user: User;
-    activity: ActivityQueryType;
+    activity: Activity;
     isOpen: boolean;
     onClose: () => void;
 };

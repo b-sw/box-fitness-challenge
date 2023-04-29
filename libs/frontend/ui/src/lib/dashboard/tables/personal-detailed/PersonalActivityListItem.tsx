@@ -1,13 +1,13 @@
-import { ActivityQueryType } from '@box-fc/frontend/query';
+import { Activity } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, HStack, IconButton, Spacer, Text, VStack } from '@chakra-ui/react';
 
 type PersonalListItemProps = {
-    activity: ActivityQueryType;
+    activity: Activity;
     user: User;
     readonly: boolean;
-    handleDelete: (activity: ActivityQueryType) => void;
+    handleDelete: (activity: Activity) => void;
 };
 
 export const PersonalActivityListItem = ({ activity, user, readonly, handleDelete }: PersonalListItemProps) => {
@@ -31,7 +31,7 @@ export const PersonalActivityListItem = ({ activity, user, readonly, handleDelet
     );
 };
 
-export const personalActivityItem = (user: User, activity: ActivityQueryType) => {
+export const personalActivityItem = (user: User, activity: Activity) => {
     return (
         <>
             <HStack w={'50%'}>
