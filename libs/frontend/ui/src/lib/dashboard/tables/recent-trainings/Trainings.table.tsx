@@ -3,10 +3,10 @@ import { User } from '@box-fc/shared/types';
 import { useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { isEmptyObject } from '../../../utils/object/is-empty';
-import { ActivityDeleteModal } from './ActivityDeleteModal';
-import { PersonalDetailedTableRaw } from './PersonalDetailed.table.raw';
+import { TrainingDeleteModal } from './Training.delete.modal';
+import { TrainingsTableRaw } from './Trainings.table.raw';
 
-export const PersonalDetailedTable = () => {
+export const TrainingsTable = () => {
     const { isOpen: isDeleteModalOpen, onOpen: onDeleteModalOpen, onClose: onDeleteModalClose } = useDisclosure();
     const { activitiesQuery } = useActivitiesQuery();
     const { usersQuery } = useUsersQuery();
@@ -24,14 +24,14 @@ export const PersonalDetailedTable = () => {
     return (
         <>
             {!isEmptyObject(users) && isDeleteModalOpen && (
-                <ActivityDeleteModal
+                <TrainingDeleteModal
                     user={users[selectedActivity?.userId as string]}
                     activity={selectedActivity as Activity}
                     isOpen={isDeleteModalOpen}
                     onClose={onDeleteModalClose}
                 />
             )}
-            <PersonalDetailedTableRaw
+            <TrainingsTableRaw
                 activities={activitiesQuery.data ?? []}
                 users={users}
                 readonly={!isAdmin}

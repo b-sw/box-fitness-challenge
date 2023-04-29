@@ -1,0 +1,85 @@
+import { Activity, useAuthQuery } from '@box-fc/frontend/query';
+import { OptionalArray, User } from '@box-fc/shared/types';
+import { Tab, TabList, TabPanel } from '@chakra-ui/react';
+import { jsx } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import { NoRecords } from '../../../utils/no-records/NoRecords';
+import { isEmptyObject } from '../../../utils/object/is-empty';
+import { SearchInput } from '../../../utils/search/SearchInput';
+import { TabPanelDefaultProps } from '../../../utils/tab-panel/tab-panel';
+import { TablePanel } from '../../../utils/table-panel/TablePanel';
+import { TabPanels } from '../../../utils/tabs/TabPanels';
+import { Tabs } from '../../../utils/tabs/Tabs';
+import { TrainingListItem } from './Training.list-item';
+import JSX = jsx.JSX;
+
+type Props = {
+    activities: Activity[];
+    users: { [key: string]: User };
+    readonly: boolean;
+    handleDelete: (activity: Activity) => void;
+};
+
+export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete }: Props) => {
+    const [myActivities, setMyActivities] = useState<Activity[]>([]);
+    const [allActivities, setAllActivities] = useState<Activity[]>(activities);
+    const [filter, setFilter] = useState<string>('');
+    const { authQuery } = useAuthQuery();
+    const TITLE = 'Recent trainings';
+
+    useEffect(() => {
+        if (isEmptyObject(users)) {
+            return;
+        }
+
+        const filteredAll = getFilteredActivities(activities);
+        const filteredMy = filteredAll.filter((activity) => activity.userId === authQuery.data?.userId);
+
+        setAllActivities(filteredAll);
+        setMyActivities(filteredMy);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [filter, activities, users, authQuery.data]);
+
+    const getFilteredActivities = (activities: Activity[]): Activity[] => {
+        return activities.filter((activity) => {
+            const { firstName, lastName, email, team } = users[activity.userId];
+            const searchedProps = [firstName, lastName, email, team, activity.type];
+
+            return searchedProps.some((value) => value.toLowerCase().includes(filter));
+        });
+    };
+
+    const getListItems = (activities: Activity[]): OptionalArray<JSX.Element> => {
+        if (!activities.length || isEmptyObject(users)) {
+            return <NoRecords />;
+        }
+
+        return activities.map((activity) => (
+            <TrainingListItem
+                key={`personal-activity-${activity.id}`}
+                activity={activity}
+                user={users[activity.userId]}
+                readonly={readonly}
+                handleDelete={handleDelete}
+            />
+        ));
+    };
+
+    return (
+        <TablePanel headerTitle={TITLE} headerButtons={false}>
+            <SearchInput handleChange={setFilter} />
+
+            <Tabs>
+                <TabList>
+                    <Tab>My trainings</Tab>
+                    <Tab>All trainings</Tab>
+                </TabList>
+                <TabPanels>
+                    <TabPanel {...TabPanelDefaultProps}>{getListItems(myActivities)}</TabPanel>
+
+                    <TabPanel {...TabPanelDefaultProps}>{getListItems(allActivities)}</TabPanel>
+                </TabPanels>
+            </Tabs>
+        </TablePanel>
+    );
+};

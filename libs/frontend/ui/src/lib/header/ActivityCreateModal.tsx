@@ -1,5 +1,5 @@
 import { useActivityMutation, useAuthQuery } from '@box-fc/frontend/query';
-import { toastError } from '@box-fc/frontend/ui';
+import { toastError, toastSuccess } from '@box-fc/frontend/ui';
 import {
     Button,
     FormControl,
@@ -35,7 +35,7 @@ export const ActivityCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
     useEffect(() => {
         if (createMutation.isSuccess) {
             handleClose();
-            toastError(toast, 'Activity created');
+            toastSuccess(toast, 'Activity created');
         }
 
         if (createMutation.isError) {

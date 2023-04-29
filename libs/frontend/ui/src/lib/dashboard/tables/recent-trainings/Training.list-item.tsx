@@ -2,6 +2,8 @@ import { Activity } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, HStack, IconButton, Spacer, Text, VStack } from '@chakra-ui/react';
+import dayjs from 'dayjs';
+import { DATETIME_FORMAT } from '../../../utils/datetime/datetime.format';
 
 type PersonalListItemProps = {
     activity: Activity;
@@ -10,7 +12,7 @@ type PersonalListItemProps = {
     handleDelete: (activity: Activity) => void;
 };
 
-export const PersonalActivityListItem = ({ activity, user, readonly, handleDelete }: PersonalListItemProps) => {
+export const TrainingListItem = ({ activity, user, readonly, handleDelete }: PersonalListItemProps) => {
     return (
         <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
             {personalActivityItem(user, activity)}
@@ -32,6 +34,9 @@ export const PersonalActivityListItem = ({ activity, user, readonly, handleDelet
 };
 
 export const personalActivityItem = (user: User, activity: Activity) => {
+    const trainingDate = dayjs(activity.trainingDate, DATETIME_FORMAT).format('DD-MM-YYYY');
+    const trainingTime = dayjs(activity.trainingDate, DATETIME_FORMAT).format('HH:MM');
+
     return (
         <>
             <HStack w={'50%'}>
@@ -58,20 +63,34 @@ export const personalActivityItem = (user: User, activity: Activity) => {
             <Flex w={'40%'} gap={1}>
                 <Flex direction={'column'} alignItems={'flex-end'}>
                     <Text fontSize={'sm'} color={'gray.800'}>
-                        Time:
+                        Duration:
                     </Text>
                     <Text fontSize={'sm'} color={'gray.800'}>
                         Activity:
                     </Text>
+                    <Text fontSize={'sm'} color={'gray.800'}>
+                        Date:
+                    </Text>
+                    <Text fontSize={'sm'} color={'gray.800'}>
+                        Time:
+                    </Text>
                 </Flex>
 
-                <Flex direction={'column'} alignItems={'flex-start'} gap={1}>
+                <Flex direction={'column'} alignItems={'flex-start'}>
                     <Text fontSize={'sm'} fontWeight={'bold'}>
                         {Math.floor(activity.duration / 60)}h {activity.duration % 60}m
                     </Text>
-                    <Badge colorScheme={'facebook'} variant={'outline'}>
-                        {activity.type}
-                    </Badge>
+                    <Text fontSize={'sm'}>
+                        <Badge colorScheme={'facebook'} variant={'outline'}>
+                            {activity.type}
+                        </Badge>
+                    </Text>
+                    <Text fontSize={'sm'} fontWeight={'bold'}>
+                        {trainingDate}
+                    </Text>
+                    <Text fontSize={'sm'} fontWeight={'bold'}>
+                        {trainingTime}
+                    </Text>
                 </Flex>
             </Flex>
         </>

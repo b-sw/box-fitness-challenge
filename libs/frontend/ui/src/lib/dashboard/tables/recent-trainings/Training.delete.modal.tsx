@@ -15,7 +15,7 @@ import {
     useToast,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { personalActivityItem } from './PersonalActivityListItem';
+import { personalActivityItem } from './Training.list-item';
 
 type Props = {
     user: User;
@@ -24,7 +24,7 @@ type Props = {
     onClose: () => void;
 };
 
-export const ActivityDeleteModal = ({ user, activity, isOpen, onClose }: Props) => {
+export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) => {
     const { deleteMutation } = useActivityMutation();
     const toast = useToast();
 
