@@ -27,7 +27,7 @@ type ActivityCreateModalProps = {
     handleClose: () => void;
 };
 
-export const ActivityCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
+export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
     const { authQuery } = useAuthQuery();
     const { createMutation } = useActivityMutation();
     const toast = useToast();
@@ -35,11 +35,11 @@ export const ActivityCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
     useEffect(() => {
         if (createMutation.isSuccess) {
             handleClose();
-            toastSuccess(toast, 'Activity created');
+            toastSuccess(toast, 'Training registered');
         }
 
         if (createMutation.isError) {
-            toastError(toast, 'Error creating activity');
+            toastError(toast, 'Error registering training');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createMutation.status]);

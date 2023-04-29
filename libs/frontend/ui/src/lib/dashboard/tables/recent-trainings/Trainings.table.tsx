@@ -10,7 +10,7 @@ export const TrainingsTable = () => {
     const { isOpen: isDeleteModalOpen, onOpen: onDeleteModalOpen, onClose: onDeleteModalClose } = useDisclosure();
     const { activitiesQuery } = useActivitiesQuery();
     const { usersQuery } = useUsersQuery();
-    const { isAdmin } = useAuthQuery();
+    const { isAdmin, currentUserId } = useAuthQuery();
     const [users, setUsers] = useState<{ [key: string]: User }>({});
     const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
 
@@ -34,6 +34,7 @@ export const TrainingsTable = () => {
             <TrainingsTableRaw
                 activities={activitiesQuery.data ?? []}
                 users={users}
+                currentUserId={currentUserId}
                 readonly={!isAdmin}
                 handleDelete={(activity: Activity) => {
                     setSelectedActivity(activity);

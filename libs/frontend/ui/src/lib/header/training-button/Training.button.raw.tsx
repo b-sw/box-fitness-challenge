@@ -6,7 +6,7 @@ type ActivityButtonRawProps = {
     isEnabled: boolean;
 };
 
-export const ActivityButtonRaw = ({ handleClicked, isEnabled }: ActivityButtonRawProps) => {
+export const TrainingButtonRaw = ({ handleClicked, isEnabled }: ActivityButtonRawProps) => {
     return (
         <Button isDisabled={!isEnabled} onClick={handleClicked} leftIcon={<FaDumbbell />}>
             Register training

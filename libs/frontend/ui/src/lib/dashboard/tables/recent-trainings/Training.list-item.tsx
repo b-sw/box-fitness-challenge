@@ -35,7 +35,7 @@ export const TrainingListItem = ({ activity, user, readonly, handleDelete }: Per
 
 export const personalActivityItem = (user: User, activity: Activity) => {
     const trainingDate = dayjs(activity.trainingDate, DATETIME_FORMAT).format('DD-MM-YYYY');
-    const trainingTime = dayjs(activity.trainingDate, DATETIME_FORMAT).format('HH:MM');
+    const trainingTime = dayjs(activity.trainingDate, DATETIME_FORMAT).format('HH:mm');
 
     return (
         <>

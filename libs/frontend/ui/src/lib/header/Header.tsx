@@ -1,14 +1,14 @@
-import { ActivityButton } from './ActivityButton';
 import { HeaderRaw } from './header/Header.raw';
 import { LoginButton } from './LoginButton';
 import { ProfileMenu } from './ProfileMenu';
+import { TrainingButton } from './Training.button';
 
 export const Header = () => {
     return (
         <HeaderRaw
-            title={'Big freaking header'}
+            title={'Box fitness challenge'}
             loginButton={<LoginButton />}
-            activityButton={<ActivityButton />}
+            activityButton={<TrainingButton />}
             profileMenu={<ProfileMenu />}
         />
     );

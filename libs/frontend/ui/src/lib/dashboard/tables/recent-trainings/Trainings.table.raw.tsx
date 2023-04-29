@@ -1,5 +1,5 @@
-import { Activity, useAuthQuery } from '@box-fc/frontend/query';
-import { OptionalArray, User } from '@box-fc/shared/types';
+import { Activity } from '@box-fc/frontend/query';
+import { Optional, OptionalArray, User } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel } from '@chakra-ui/react';
 import { jsx } from '@emotion/react';
 import { useEffect, useState } from 'react';
@@ -16,15 +16,15 @@ import JSX = jsx.JSX;
 type Props = {
     activities: Activity[];
     users: { [key: string]: User };
+    currentUserId: Optional<User['id']>;
     readonly: boolean;
     handleDelete: (activity: Activity) => void;
 };
 
-export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete }: Props) => {
+export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete, currentUserId }: Props) => {
     const [myActivities, setMyActivities] = useState<Activity[]>([]);
     const [allActivities, setAllActivities] = useState<Activity[]>(activities);
     const [filter, setFilter] = useState<string>('');
-    const { authQuery } = useAuthQuery();
     const TITLE = 'Recent trainings';
 
     useEffect(() => {
@@ -33,12 +33,12 @@ export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete }:
         }
 
         const filteredAll = getFilteredActivities(activities);
-        const filteredMy = filteredAll.filter((activity) => activity.userId === authQuery.data?.userId);
+        const filteredMy = filteredAll.filter((activity) => activity.userId === currentUserId);
 
         setAllActivities(filteredAll);
         setMyActivities(filteredMy);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter, activities, users, authQuery.data]);
+    }, [filter, activities, users, currentUserId]);
 
     const getFilteredActivities = (activities: Activity[]): Activity[] => {
         return activities.filter((activity) => {
