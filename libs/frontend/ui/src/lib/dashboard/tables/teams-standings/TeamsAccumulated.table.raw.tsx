@@ -1,4 +1,4 @@
-import { AccumulatedTeamActivity, User } from '@box-fc/shared/types';
+import { TeamActivity, User } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel } from '@chakra-ui/react';
 import { useState } from 'react';
 import { SearchInput } from '../../../utils/search/SearchInput';
@@ -9,7 +9,7 @@ import { Tabs } from '../../../utils/tabs/Tabs';
 import { TeamScoreListItem } from './TeamScoreListItem';
 
 type Props = {
-    activities: AccumulatedTeamActivity[];
+    activities: TeamActivity[];
     users: { [key: string]: User };
 };
 

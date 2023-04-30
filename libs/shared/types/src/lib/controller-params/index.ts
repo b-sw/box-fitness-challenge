@@ -1,2 +1,2 @@
-export * from './activity.params';
+export * from './training.params';
 export * from './user.params';

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDate } from 'class-validator';
 
-export class AccumulatedActivityDto {
+export class ActivityDto {
     @ApiProperty({ type: Date })
     @IsDate()
     startDate: Date;

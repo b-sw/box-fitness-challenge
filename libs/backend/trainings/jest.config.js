@@ -1,8 +1,8 @@
 module.exports = {
-    displayName: 'backend-activities',
+    displayName: 'backend-trainings',
     preset: '../../../jest.preset.js',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-    coverageDirectory: '../../../coverage/libs/backend/activities',
+    coverageDirectory: '../../../coverage/libs/backend/trainings',
     testEnvironment: 'node',
     transform: {
         '^.+\\.ts?$': 'ts-jest',

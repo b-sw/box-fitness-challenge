@@ -4,7 +4,7 @@ import { uuid } from '../uuid.type';
 import { User } from './user.entity';
 
 @Entity()
-export class Activity {
+export class Training {
     @PrimaryGeneratedColumn('uuid')
     id: uuid;
 

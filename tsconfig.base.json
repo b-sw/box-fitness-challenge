@@ -19,8 +19,8 @@
 		"strictPropertyInitialization": false,
 		"baseUrl": ".",
 		"paths": {
-			"@box-fc/backend/activities": [
-				"libs/backend/activities/src/index.ts"
+			"@box-fc/backend/trainings": [
+				"libs/backend/trainings/src/index.ts"
 			],
 			"@box-fc/backend/auth": [
 				"libs/backend/auth/src/index.ts"

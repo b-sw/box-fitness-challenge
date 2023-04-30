@@ -1,4 +1,4 @@
-import { AccumulatedUserActivity } from '@box-fc/shared/types';
+import { UserActivity } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel } from '@chakra-ui/react';
 import { useState } from 'react';
 import { SearchInput } from '../../../utils/search/SearchInput';
@@ -9,7 +9,7 @@ import { Tabs } from '../../../utils/tabs/Tabs';
 import { PersonalScoreListItem } from './PersonalScoreListItem';
 
 type Props = {
-    activities: AccumulatedUserActivity[];
+    activities: UserActivity[];
 };
 
 export const PersonalAccumulatedTableRaw = ({ activities }: Props) => {

@@ -1,4 +1,4 @@
 import { User } from './db-entities/user.entity';
 
-export type AccumulatedUserActivity = { userId: User['id']; activeTime: number; activitiesCount: number };
-export type AccumulatedTeamActivity = { team: User['team']; activeTime: number; activitiesCount: number };
+export type UserActivity = { userId: User['id']; activeTime: number; trainingsCount: number };
+export type TeamActivity = { team: User['team']; activeTime: number; trainingsCount: number };

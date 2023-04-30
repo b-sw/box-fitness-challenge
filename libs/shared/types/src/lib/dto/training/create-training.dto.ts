@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDate, IsUUID, Length, Max, Min } from 'class-validator';
 import { uuid } from '../../uuid.type';
 
-export class CreateActivityDto {
+export class CreateTrainingDto {
     @ApiProperty({ type: String })
     @IsUUID()
     userId: uuid;

@@ -1,3 +1,3 @@
-import { Activity as ActivityEntity } from '@box-fc/shared/types';
+import { Training as ActivityEntity } from '@box-fc/shared/types';
 
 export type Activity = Omit<ActivityEntity, 'user'>;

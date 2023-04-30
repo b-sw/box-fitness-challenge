@@ -1,4 +1,4 @@
-import { Activity, ActivityParams, User } from '@box-fc/shared/types';
+import { Training, TrainingParams, User } from '@box-fc/shared/types';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -8,15 +8,15 @@ import { AdminGuard } from '../admin/admin.guard';
 export class SelfGuard extends AdminGuard implements CanActivate {
     constructor(
         @InjectRepository(User) protected usersRepository: Repository<User>,
-        @InjectRepository(Activity) protected activitiesRepository: Repository<Activity>,
+        @InjectRepository(Training) protected activitiesRepository: Repository<Training>,
     ) {
         super(usersRepository);
     }
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
-        const params: ActivityParams = request.params;
-        const activity = await this.activitiesRepository.findOne({ where: { id: params.activityId } });
+        const params: TrainingParams = request.params;
+        const activity = await this.activitiesRepository.findOne({ where: { id: params.trainingId } });
 
         if (activity && activity.userId === request.user.id) {
             return true;

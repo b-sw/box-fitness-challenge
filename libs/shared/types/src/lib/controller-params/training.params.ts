@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsUUID } from 'class-validator';
 import { uuid } from '../uuid.type';
 
-export class ActivityParams {
+export class TrainingParams {
     @ApiProperty({ type: String })
     @IsUUID()
-    activityId: uuid;
+    trainingId: uuid;
 }
