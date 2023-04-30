@@ -24,6 +24,9 @@ describe('TrainingsService', () => {
     const teamStub1 = 'team1';
     const teamStub2 = 'team2';
 
+    let todayStart: Date;
+    let todayEnd: Date;
+    let tomorrowEnd: Date;
     let trainingRepository: Repository<Training>;
     let userRepository: Repository<User>;
     let service: TrainingsService;
@@ -34,6 +37,7 @@ describe('TrainingsService', () => {
         setRepositories();
         setService();
         await stubUserRepository();
+        stubDates();
     });
 
     it('should create an training', async () => {
@@ -62,56 +66,61 @@ describe('TrainingsService', () => {
         expect(training).toEqual(null);
     });
 
-    it('should get all activities', async () => {
+    it('should get all trainings', async () => {
         const trainingStub2 = { ...trainingDtoStub, id: 'anotherTrainingId' };
         await trainingRepository.insert(trainingStub);
         await trainingRepository.insert(trainingStub2);
 
-        const activities = await service.getAllTrainings();
+        const trainings = await service.getAllTrainings();
 
-        expect(activities).toEqual([trainingStub, trainingStub2]);
+        expect(trainings).toEqual([trainingStub, trainingStub2]);
     });
 
-    it('should get all activities for a user', async () => {
+    it('should get user trainings', async () => {
         const anotherUserTrainingStub = { ...trainingDtoStub, id: 'anotherTrainingId', userId: anotherUserIdStub };
         await trainingRepository.insert(trainingStub);
         await trainingRepository.insert(anotherUserTrainingStub);
 
-        const userActivities = await service.getUserTrainings(userIdStub);
+        const userTrainings = await service.getUserTrainings(userIdStub);
 
-        expect(userActivities).toEqual([trainingStub]);
+        expect(userTrainings).toEqual([trainingStub]);
     });
 
-    it('should get accumulated user training', async () => {
-        const [startDateStub, endDateStub] = [new Date(), new Date()];
-        await stubMultipleUsersActivities(startDateStub, endDateStub);
+    it('should get user activity for one day', async () => {
+        await stubMultipleUsersActivities();
 
-        const accumulatedTraining = await service.getUserActivity(userIdStub, startDateStub, endDateStub);
+        const userActivity = await service.getUserActivity(userIdStub, todayStart, todayEnd);
 
-        expect(accumulatedTraining).toEqual({ userId: userIdStub, activeTime: 3, trainingsCount: 2 });
+        expect(userActivity).toEqual({ userId: userIdStub, score: 6 });
     });
 
-    it('should get accumulated users activities', async () => {
-        const [startDateStub, endDateStub] = [new Date(), new Date()];
-        await stubMultipleUsersActivities(startDateStub, endDateStub);
+    it('should get user activity for multiple days', async () => {
+        await stubMultipleUsersActivities();
 
-        const accumulatedActivities = await service.getAllUsersActivities(startDateStub, endDateStub);
+        const userActivity = await service.getUserActivity(userIdStub, todayStart, tomorrowEnd);
+
+        expect(userActivity).toEqual({ userId: userIdStub, score: 15 });
+    });
+
+    it('should get users activities for multiple days', async () => {
+        await stubMultipleUsersActivities();
+
+        const accumulatedActivities = await service.getAllUsersActivities(todayStart, tomorrowEnd);
 
         expect(accumulatedActivities).toEqual([
-            { userId: userIdStub, activeTime: 3, trainingsCount: 2 },
-            { userId: anotherUserIdStub, activeTime: 4, trainingsCount: 1 },
+            { userId: userIdStub, score: 15 },
+            { userId: anotherUserIdStub, score: 12 },
         ]);
     });
 
-    it('should get accumulated teams activities', async () => {
-        const [startDateStub, endDateStub] = [new Date(), new Date()];
-        await stubMultipleUsersActivities(startDateStub, endDateStub);
+    it('should get teams activities for multiple days', async () => {
+        await stubMultipleUsersActivities();
 
-        const accumulatedActivities = await service.getAllTeamsActivities(startDateStub, endDateStub);
+        const accumulatedActivities = await service.getAllTeamsActivities(todayStart, todayEnd);
 
         expect(accumulatedActivities).toEqual([
-            { team: teamStub1, activeTime: 3, trainingsCount: 2 },
-            { team: teamStub2, activeTime: 4, trainingsCount: 1 },
+            { team: teamStub1, score: 6 },
+            { team: teamStub2, score: 12 },
         ]);
     });
 
@@ -196,19 +205,27 @@ describe('TrainingsService', () => {
         await userRepository.insert({ id: anotherUserIdStub, email: 'email2', ...baseUserStub, team: teamStub2 });
     }
 
-    async function stubMultipleUsersActivities(startDate: Date, endDate: Date): Promise<void> {
-        const anotherDateStub = new Date().setHours(endDate.getHours() + 1);
-        const trainingStub1 = { ...trainingDtoStub, id: 'id1', duration: 1, trainingDate: startDate };
-        const trainingStub2 = { ...trainingDtoStub, id: 'id2', duration: 2, trainingDate: endDate };
-        const trainingStub3 = { ...trainingDtoStub, id: 'id3', duration: 3, trainingDate: anotherDateStub };
+    async function stubMultipleUsersActivities(): Promise<void> {
+        const trainingStub1 = { ...trainingDtoStub, id: 'id1', duration: 1, trainingDate: todayStart };
+        const trainingStub2 = { ...trainingDtoStub, id: 'id2', duration: 3, trainingDate: todayEnd };
+        const trainingStub3 = { ...trainingDtoStub, id: 'id3', duration: 9, trainingDate: tomorrowEnd };
         const anotherUserTrainingStub = {
             ...trainingDtoStub,
             id: 'id4',
             userId: anotherUserIdStub,
-            duration: 4,
-            trainingDate: endDate,
+            duration: 16,
+            trainingDate: todayEnd,
         };
         await trainingRepository.insert([trainingStub1, trainingStub2, trainingStub3, anotherUserTrainingStub]);
+    }
+
+    function stubDates(): void {
+        todayStart = new Date();
+        todayStart.setUTCHours(0, 0, 0, 0);
+        todayEnd = new Date();
+        todayEnd.setUTCHours(23, 59, 59, 999);
+        tomorrowEnd = new Date(todayEnd);
+        tomorrowEnd.setUTCDate(tomorrowEnd.getUTCDate() + 1);
     }
 });
 

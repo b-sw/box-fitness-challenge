@@ -17,6 +17,8 @@ type Team = User['team'];
 
 @Injectable()
 export class TrainingsService implements CreatesTraining, GetsTrainings, UpdatesTraining, DeletesTraining {
+    private static readonly SCORE_FACTOR = 3;
+
     constructor(
         @InjectRepository(Training) private trainingsRepository: Repository<Training>,
         @InjectRepository(User) private usersRepository: Repository<User>,
@@ -44,44 +46,41 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         const trainings = await this.trainingsRepository.find({
             where: { userId: userId, trainingDate: Between(startDate, endDate) },
         });
-        const activeTime = trainings.reduce((acc, { duration }) => acc + duration, 0);
-        const trainingsCount = trainings.length;
+        const userScore = this._getTrainingsScore(trainings);
 
-        return { userId, activeTime, trainingsCount };
+        return { userId, score: userScore };
     }
 
     async getAllUsersActivities(startDate: Date, endDate: Date): Promise<UserActivity[]> {
         const trainings = await this._getTrainingsInRange(startDate, endDate);
-        const usersActivities = trainings.reduce((acc, { userId, duration }) => {
-            acc.set(userId, {
-                userId,
-                activeTime: (acc.get(userId)?.activeTime ?? 0) + duration,
-                trainingsCount: (acc.get(userId)?.trainingsCount ?? 0) + 1,
-            });
+        const usersTrainings = trainings.reduce((acc, training) => {
+            acc.set(training.userId, [...(acc.get(training.userId) ?? []), training]);
 
             return acc;
-        }, new Map<UserId, UserActivity>());
+        }, new Map<UserId, Training[]>());
 
-        return Array.from(usersActivities.values());
+        return Array.from(usersTrainings.entries()).map(([userId, trainings]) => ({
+            userId,
+            score: this._getTrainingsScore(trainings),
+        }));
     }
 
     async getAllTeamsActivities(startDate: Date, endDate: Date): Promise<TeamActivity[]> {
         const trainings = await this._getTrainingsInRange(startDate, endDate);
         const users = await this.usersRepository.find();
         const usersTeams = new Map(users.map(({ id, team }) => [id, team]));
-        const accumulatedTeamsActivities = trainings.reduce((acc, { userId, duration }) => {
-            const team = usersTeams.get(userId) as Team;
 
-            acc.set(team, {
-                team,
-                activeTime: (acc.get(team)?.activeTime ?? 0) + duration,
-                trainingsCount: (acc.get(team)?.trainingsCount ?? 0) + 1,
-            });
+        const teamsTrainings = trainings.reduce((acc, training) => {
+            const team = usersTeams.get(training.userId) as string;
+            acc.set(team, [...(acc.get(team) ?? []), training]);
 
             return acc;
-        }, new Map<Team, TeamActivity>());
+        }, new Map<Team, Training[]>());
 
-        return Array.from(accumulatedTeamsActivities.values());
+        return Array.from(teamsTrainings.entries()).map(([team, trainings]) => ({
+            team,
+            score: this._getTrainingsScore(trainings),
+        }));
     }
 
     async updateTraining(
@@ -99,6 +98,22 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         await this.trainingsRepository.delete(trainingId);
 
         return training;
+    }
+
+    private _getTrainingsScore(trainings: Training[]): number {
+        const dailyActiveTimes = trainings.reduce((acc, { trainingDate, duration }) => {
+            const date = trainingDate.toISOString().split('T')[0];
+
+            acc.set(date, (acc.get(date) ?? 0) + duration);
+
+            return acc;
+        }, new Map<string, number>());
+        const dailyActiveTimesArray = Array.from(dailyActiveTimes.values());
+
+        return dailyActiveTimesArray.reduce(
+            (acc, activeTime) => acc + Math.sqrt(activeTime) * TrainingsService.SCORE_FACTOR,
+            0,
+        );
     }
 
     private _getTrainingsInRange(startDate: Date, endDate: Date): Promise<Training[]> {
