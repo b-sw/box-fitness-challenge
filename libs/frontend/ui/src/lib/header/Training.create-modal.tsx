@@ -1,4 +1,4 @@
-import { useActivityMutation, useAuthQuery } from '@box-fc/frontend/query';
+import { useAuthQuery, useTrainingMutation } from '@box-fc/frontend/query';
 import { toastError, toastSuccess } from '@box-fc/frontend/ui';
 import {
     Button,
@@ -12,15 +12,14 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    NumberDecrementStepper,
-    NumberIncrementStepper,
     NumberInput,
     NumberInputField,
-    NumberInputStepper,
     useToast,
 } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import { Field, Formik } from 'formik';
 import { useEffect } from 'react';
+import { DATETIME_FORMAT } from '../utils/datetime/datetime.format';
 
 type ActivityCreateModalProps = {
     isOpen: boolean;
@@ -29,7 +28,7 @@ type ActivityCreateModalProps = {
 
 export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
     const { authQuery } = useAuthQuery();
-    const { createMutation } = useActivityMutation();
+    const { createMutation } = useTrainingMutation();
     const toast = useToast();
 
     useEffect(() => {
@@ -55,14 +54,15 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
                     initialValues={{
                         type: '',
                         duration: 30,
-                        trainingDate: new Date(),
+                        trainingDate: dayjs.utc().toDate(),
                     }}
                     onSubmit={(values) => {
                         createMutation.mutate({
                             ...values,
+                            trainingDate: dayjs(values.trainingDate, DATETIME_FORMAT).toDate(),
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                             userId: authQuery.data!.userId!,
-                            registrationDate: new Date(),
+                            registrationDate: dayjs.utc().toDate(),
                         });
                     }}
                 >
@@ -91,10 +91,6 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
                                         variant="filled"
                                     >
                                         <Field as={NumberInputField} name="duration" id="duration"></Field>
-                                        <NumberInputStepper>
-                                            <NumberIncrementStepper />
-                                            <NumberDecrementStepper />
-                                        </NumberInputStepper>
                                     </NumberInput>
                                 </FormControl>
 

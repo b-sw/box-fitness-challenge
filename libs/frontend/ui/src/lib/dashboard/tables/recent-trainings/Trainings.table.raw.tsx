@@ -1,4 +1,4 @@
-import { Activity } from '@box-fc/frontend/query';
+import { Training } from '@box-fc/frontend/query';
 import { Optional, OptionalArray, User } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel } from '@chakra-ui/react';
 import { jsx } from '@emotion/react';
@@ -14,16 +14,16 @@ import { TrainingListItem } from './Training.list-item';
 import JSX = jsx.JSX;
 
 type Props = {
-    activities: Activity[];
+    activities: Training[];
     users: { [key: string]: User };
     currentUserId: Optional<User['id']>;
     readonly: boolean;
-    handleDelete: (activity: Activity) => void;
+    handleDelete: (activity: Training) => void;
 };
 
 export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete, currentUserId }: Props) => {
-    const [myActivities, setMyActivities] = useState<Activity[]>([]);
-    const [allActivities, setAllActivities] = useState<Activity[]>(activities);
+    const [myActivities, setMyActivities] = useState<Training[]>([]);
+    const [allActivities, setAllActivities] = useState<Training[]>(activities);
     const [filter, setFilter] = useState<string>('');
     const TITLE = 'Recent trainings';
 
@@ -40,7 +40,7 @@ export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete, c
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter, activities, users, currentUserId]);
 
-    const getFilteredActivities = (activities: Activity[]): Activity[] => {
+    const getFilteredActivities = (activities: Training[]): Training[] => {
         return activities.filter((activity) => {
             const { firstName, lastName, email, team } = users[activity.userId];
             const searchedProps = [firstName, lastName, email, team, activity.type];
@@ -49,7 +49,7 @@ export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete, c
         });
     };
 
-    const getListItems = (activities: Activity[]): OptionalArray<JSX.Element> => {
+    const getListItems = (activities: Training[]): OptionalArray<JSX.Element> => {
         if (!activities.length || isEmptyObject(users)) {
             return <NoRecords />;
         }

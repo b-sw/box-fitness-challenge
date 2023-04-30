@@ -1,19 +1,45 @@
+import { TeamActivity, UserActivity } from '@box-fc/shared/types';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { ACTIVITIES_QUERY_KEY } from '../query-keys/activity.query-key';
-import { Activity } from '../query-types/activity.query-type';
+import { TRAININGS_QUERY_KEY } from '../query-keys/trainings.query-key';
 
-export const useActivitiesQuery = () => {
-    const ACTIVITIES_ENDPOINT = 'activities';
+type AccumulatedActivitiesQueryProps = {
+    startDate: Date;
+    endDate: Date;
+};
+
+export const useActivitiesQuery = ({ startDate, endDate }: AccumulatedActivitiesQueryProps) => {
+    // todo: move this to a shared file
+    const TRAININGS_ENDPOINT = 'activities';
     const DEFAULT_QUERY_OPTIONS = { enabled: true, initialData: [] };
 
-    const getAllActivities = async (): Promise<Activity[]> => {
-        const response = await axios.get(ACTIVITIES_ENDPOINT);
+    const getAccumulatedTeamsActivities = async (): Promise<TeamActivity[]> => {
+        const response = await axios.post(`${TRAININGS_ENDPOINT}/teams`, { startDate, endDate });
 
         return response.data;
     };
 
-    const activitiesQuery = useQuery<Activity[]>([ACTIVITIES_QUERY_KEY], getAllActivities, DEFAULT_QUERY_OPTIONS);
+    const getAccumulatedUsersActivities = async (): Promise<UserActivity[]> => {
+        const response = await axios.post(`${TRAININGS_ENDPOINT}/users`, { startDate, endDate });
 
-    return { activitiesQuery };
+        return response.data;
+    };
+
+    const teamsActivitiesQuery = useQuery<TeamActivity[]>(
+        [TRAININGS_QUERY_KEY, 'teams'],
+        getAccumulatedTeamsActivities,
+        DEFAULT_QUERY_OPTIONS,
+    );
+    const usersActivitiesQuery = useQuery<UserActivity[]>(
+        [TRAININGS_QUERY_KEY, 'users'],
+        getAccumulatedUsersActivities,
+        DEFAULT_QUERY_OPTIONS,
+    );
+
+    return {
+        teamsActivities: teamsActivitiesQuery.data,
+        teamsActivitiesStatus: teamsActivitiesQuery.status,
+        usersActivities: usersActivitiesQuery.data,
+        usersActivitiesStatus: usersActivitiesQuery.status,
+    };
 };

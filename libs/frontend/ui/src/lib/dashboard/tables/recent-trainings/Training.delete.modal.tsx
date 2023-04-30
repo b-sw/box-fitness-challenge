@@ -1,4 +1,4 @@
-import { Activity, useActivityMutation } from '@box-fc/frontend/query';
+import { Training, useTrainingMutation } from '@box-fc/frontend/query';
 import { toastError, toastSuccess } from '@box-fc/frontend/ui';
 import { User } from '@box-fc/shared/types';
 import {
@@ -19,13 +19,13 @@ import { personalActivityItem } from './Training.list-item';
 
 type Props = {
     user: User;
-    activity: Activity;
+    activity: Training;
     isOpen: boolean;
     onClose: () => void;
 };
 
 export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) => {
-    const { deleteMutation } = useActivityMutation();
+    const { deleteMutation } = useTrainingMutation();
     const toast = useToast();
 
     const deleteActivity = () => {

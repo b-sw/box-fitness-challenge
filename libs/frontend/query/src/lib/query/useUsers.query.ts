@@ -15,5 +15,5 @@ export const useUsersQuery = () => {
 
     const usersQuery = useQuery<User[]>([USERS_QUERY_KEY], getAllUsers, DEFAULT_QUERY_OPTIONS);
 
-    return { usersQuery };
+    return { users: usersQuery.data };
 };

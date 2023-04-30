@@ -1,8 +1,12 @@
 import { Dashboard, theme } from '@box-fc/frontend/ui';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+
+dayjs.extend(utc);
 
 const queryClient = new QueryClient();
 

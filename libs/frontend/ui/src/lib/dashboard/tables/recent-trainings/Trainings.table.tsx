@@ -1,4 +1,4 @@
-import { Activity, useActivitiesQuery, useAuthQuery, useUsersQuery } from '@box-fc/frontend/query';
+import { Training, useAuthQuery, useTrainingsQuery, useUsersQuery } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
@@ -8,35 +8,35 @@ import { TrainingsTableRaw } from './Trainings.table.raw';
 
 export const TrainingsTable = () => {
     const { isOpen: isDeleteModalOpen, onOpen: onDeleteModalOpen, onClose: onDeleteModalClose } = useDisclosure();
-    const { activitiesQuery } = useActivitiesQuery();
-    const { usersQuery } = useUsersQuery();
+    const { activitiesQuery } = useTrainingsQuery();
+    const { users } = useUsersQuery();
     const { isAdmin, currentUserId } = useAuthQuery();
-    const [users, setUsers] = useState<{ [key: string]: User }>({});
-    const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+    const [mappedUsers, setMappedUsers] = useState<{ [key: string]: User }>({});
+    const [selectedActivity, setSelectedActivity] = useState<Training | null>(null);
 
     useEffect(() => {
-        if (!activitiesQuery.data?.length || !usersQuery.data?.length) {
+        if (!activitiesQuery.data?.length || !users?.length) {
             return;
         }
-        setUsers(usersQuery.data.reduce((acc, user) => ({ ...acc, [user.id]: user }), {}));
-    }, [activitiesQuery.data, usersQuery.data]);
+        setMappedUsers(users.reduce((acc, user) => ({ ...acc, [user.id]: user }), {}));
+    }, [activitiesQuery.data, users]);
 
     return (
         <>
-            {!isEmptyObject(users) && isDeleteModalOpen && (
+            {!isEmptyObject(mappedUsers) && isDeleteModalOpen && (
                 <TrainingDeleteModal
-                    user={users[selectedActivity?.userId as string]}
-                    activity={selectedActivity as Activity}
+                    user={mappedUsers[selectedActivity?.userId as string]}
+                    activity={selectedActivity as Training}
                     isOpen={isDeleteModalOpen}
                     onClose={onDeleteModalClose}
                 />
             )}
             <TrainingsTableRaw
                 activities={activitiesQuery.data ?? []}
-                users={users}
+                users={mappedUsers}
                 currentUserId={currentUserId}
                 readonly={!isAdmin}
-                handleDelete={(activity: Activity) => {
+                handleDelete={(activity: Training) => {
                     setSelectedActivity(activity);
                     onDeleteModalOpen();
                 }}

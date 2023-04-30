@@ -62,20 +62,20 @@ export class TrainingsController {
         return this.trainingsService.getUserTrainings(userId);
     }
 
-    @Post('trainings/user/:userId')
-    @ApiOperation({ summary: 'Get user accumulated training' })
+    @Post('activities/user/:userId')
+    @ApiOperation({ summary: 'Get user activity' })
     getUserActivity(@Param() { userId }: UserParams, @Body() dto: ActivityDto): Promise<UserActivity> {
         return this.trainingsService.getUserActivity(userId, dto.startDate, dto.endDate);
     }
 
-    @Post('trainings/accumulated/users')
-    @ApiOperation({ summary: 'Get all users accumulated trainings' })
+    @Post('activities/users')
+    @ApiOperation({ summary: 'Get all users activities' })
     getUsersActivities(@Body() dto: ActivityDto): Promise<UserActivity[]> {
         return this.trainingsService.getAllUsersActivities(dto.startDate, dto.endDate);
     }
 
-    @Post('trainings/accumulated/teams')
-    @ApiOperation({ summary: 'Get all teams accumulated trainings' })
+    @Post('activities/teams')
+    @ApiOperation({ summary: 'Get all teams activities' })
     getTeamsActivities(@Body() dto: ActivityDto): Promise<TeamActivity[]> {
         return this.trainingsService.getAllTeamsActivities(dto.startDate, dto.endDate);
     }

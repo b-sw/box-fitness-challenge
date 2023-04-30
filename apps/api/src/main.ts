@@ -4,7 +4,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    // So that TypeORM can retrieve the correct date from DB
+    process.env.TZ = 'Etc/Universal';
+
+    const app = await NestFactory.create(AppModule, {
+        logger: ['error', 'warn', 'log'],
+    });
     const config = new DocumentBuilder().setTitle('Box-fc api').setVersion('1.0').addBearerAuth().build();
     const document = SwaggerModule.createDocument(app, config);
 

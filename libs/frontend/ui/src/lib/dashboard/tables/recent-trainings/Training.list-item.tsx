@@ -1,15 +1,16 @@
-import { Activity } from '@box-fc/frontend/query';
+import { Training } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, HStack, IconButton, Spacer, Text, VStack } from '@chakra-ui/react';
 import dayjs from 'dayjs';
+import 'dayjs/plugin/utc';
 import { DATETIME_FORMAT } from '../../../utils/datetime/datetime.format';
 
 type PersonalListItemProps = {
-    activity: Activity;
+    activity: Training;
     user: User;
     readonly: boolean;
-    handleDelete: (activity: Activity) => void;
+    handleDelete: (activity: Training) => void;
 };
 
 export const TrainingListItem = ({ activity, user, readonly, handleDelete }: PersonalListItemProps) => {
@@ -33,9 +34,9 @@ export const TrainingListItem = ({ activity, user, readonly, handleDelete }: Per
     );
 };
 
-export const personalActivityItem = (user: User, activity: Activity) => {
-    const trainingDate = dayjs(activity.trainingDate, DATETIME_FORMAT).format('DD-MM-YYYY');
-    const trainingTime = dayjs(activity.trainingDate, DATETIME_FORMAT).format('HH:mm');
+export const personalActivityItem = (user: User, activity: Training) => {
+    const trainingDate = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('DD-MM-YYYY');
+    const trainingTime = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('HH:mm');
 
     return (
         <>
