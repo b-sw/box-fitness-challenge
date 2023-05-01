@@ -1,8 +1,7 @@
 import { Training, useAuthQuery, useTrainingsQuery, useUsersQuery } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { useDisclosure } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { isEmptyObject } from '../../../utils/object/is-empty';
+import { useState } from 'react';
 import { TrainingDeleteModal } from './Training.delete.modal';
 import { TrainingsTableRaw } from './Trainings.table.raw';
 
@@ -11,29 +10,21 @@ export const TrainingsTable = () => {
     const { activitiesQuery } = useTrainingsQuery();
     const { users } = useUsersQuery();
     const { isAdmin, currentUserId } = useAuthQuery();
-    const [mappedUsers, setMappedUsers] = useState<{ [key: string]: User }>({});
     const [selectedActivity, setSelectedActivity] = useState<Training | null>(null);
-
-    useEffect(() => {
-        if (!activitiesQuery.data?.length || !users?.length) {
-            return;
-        }
-        setMappedUsers(users.reduce((acc, user) => ({ ...acc, [user.id]: user }), {}));
-    }, [activitiesQuery.data, users]);
 
     return (
         <>
-            {!isEmptyObject(mappedUsers) && isDeleteModalOpen && (
+            {selectedActivity && users.has(selectedActivity.userId) && isDeleteModalOpen && (
                 <TrainingDeleteModal
-                    user={mappedUsers[selectedActivity?.userId as string]}
+                    user={users.get(selectedActivity.userId) as User}
                     activity={selectedActivity as Training}
                     isOpen={isDeleteModalOpen}
                     onClose={onDeleteModalClose}
                 />
             )}
             <TrainingsTableRaw
-                activities={activitiesQuery.data ?? []}
-                users={mappedUsers}
+                trainings={activitiesQuery.data ?? []}
+                users={users}
                 currentUserId={currentUserId}
                 readonly={!isAdmin}
                 handleDelete={(activity: Training) => {

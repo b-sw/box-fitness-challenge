@@ -7,6 +7,7 @@ import {
     User,
     UserActivity,
 } from '@box-fc/shared/types';
+import { roundFloat } from '@box-fc/shared/util';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
@@ -109,11 +110,12 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
             return acc;
         }, new Map<string, number>());
         const dailyActiveTimesArray = Array.from(dailyActiveTimes.values());
-
-        return dailyActiveTimesArray.reduce(
+        const overallScore = dailyActiveTimesArray.reduce(
             (acc, activeTime) => acc + Math.sqrt(activeTime) * TrainingsService.SCORE_FACTOR,
             0,
         );
+
+        return roundFloat(overallScore);
     }
 
     private _getTrainingsInRange(startDate: Date, endDate: Date): Promise<Training[]> {

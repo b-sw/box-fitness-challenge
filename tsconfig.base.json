@@ -31,6 +31,9 @@
 			"@box-fc/backend/users": [
 				"libs/backend/users/src/index.ts"
 			],
+			"@box-fc/frontend/domain": [
+				"libs/frontend/domain/src/index.ts"
+			],
 			"@box-fc/frontend/query": [
 				"libs/frontend/query/src/index.ts"
 			],
@@ -40,8 +43,8 @@
 			"@box-fc/shared/types": [
 				"libs/shared/types/src/index.ts"
 			],
-			"@box-fc/frontend/domain": [
-				"libs/frontend/domain/src/index.ts"
+			"@box-fc/shared/util": [
+				"libs/shared/util/src/index.ts"
 			]
 		}
 	},

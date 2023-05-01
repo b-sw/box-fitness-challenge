@@ -4,7 +4,6 @@ import { Tab, TabList, TabPanel } from '@chakra-ui/react';
 import { jsx } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { NoRecords } from '../../../utils/no-records/NoRecords';
-import { isEmptyObject } from '../../../utils/object/is-empty';
 import { SearchInput } from '../../../utils/search/SearchInput';
 import { TabPanelDefaultProps } from '../../../utils/tab-panel/tab-panel';
 import { TablePanel } from '../../../utils/table-panel/TablePanel';
@@ -14,51 +13,51 @@ import { TrainingListItem } from './Training.list-item';
 import JSX = jsx.JSX;
 
 type Props = {
-    activities: Training[];
-    users: { [key: string]: User };
+    trainings: Training[];
+    users: Map<User['id'], User>;
     currentUserId: Optional<User['id']>;
     readonly: boolean;
-    handleDelete: (activity: Training) => void;
+    handleDelete: (training: Training) => void;
 };
 
-export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete, currentUserId }: Props) => {
-    const [myActivities, setMyActivities] = useState<Training[]>([]);
-    const [allActivities, setAllActivities] = useState<Training[]>(activities);
+export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, currentUserId }: Props) => {
+    const [myTrainings, setMyTrainings] = useState<Training[]>([]);
+    const [allTrainings, setAllTrainings] = useState<Training[]>(trainings);
     const [filter, setFilter] = useState<string>('');
     const TITLE = 'Recent trainings';
 
     useEffect(() => {
-        if (isEmptyObject(users)) {
+        if (users.size === 0) {
             return;
         }
 
-        const filteredAll = getFilteredActivities(activities);
-        const filteredMy = filteredAll.filter((activity) => activity.userId === currentUserId);
+        const filteredAll = getFilteredTrainings(trainings);
+        const filteredMy = filteredAll.filter((training) => training.userId === currentUserId);
 
-        setAllActivities(filteredAll);
-        setMyActivities(filteredMy);
+        setAllTrainings(filteredAll);
+        setMyTrainings(filteredMy);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter, activities, users, currentUserId]);
+    }, [filter, trainings, users, currentUserId]);
 
-    const getFilteredActivities = (activities: Training[]): Training[] => {
-        return activities.filter((activity) => {
-            const { firstName, lastName, email, team } = users[activity.userId];
-            const searchedProps = [firstName, lastName, email, team, activity.type];
+    const getFilteredTrainings = (trainings: Training[]): Training[] => {
+        return trainings.filter((training) => {
+            const { firstName, lastName, email, team } = users.get(training.userId) as User;
+            const searchedProps = [firstName, lastName, email, team, training.type];
 
-            return searchedProps.some((value) => value.toLowerCase().includes(filter));
+            return searchedProps.some((value) => value.toLowerCase().includes(filter.toLowerCase()));
         });
     };
 
-    const getListItems = (activities: Training[]): OptionalArray<JSX.Element> => {
-        if (!activities.length || isEmptyObject(users)) {
+    const getListItems = (trainings: Training[]): OptionalArray<JSX.Element> => {
+        if (!trainings.length || users.size === 0) {
             return <NoRecords />;
         }
 
-        return activities.map((activity) => (
+        return trainings.map((training) => (
             <TrainingListItem
-                key={`personal-activity-${activity.id}`}
-                activity={activity}
-                user={users[activity.userId]}
+                key={`personal-training-${training.id}`}
+                training={training}
+                user={users.get(training.userId) as User}
                 readonly={readonly}
                 handleDelete={handleDelete}
             />
@@ -75,9 +74,9 @@ export const TrainingsTableRaw = ({ activities, users, readonly, handleDelete, c
                     <Tab>All trainings</Tab>
                 </TabList>
                 <TabPanels>
-                    <TabPanel {...TabPanelDefaultProps}>{getListItems(myActivities)}</TabPanel>
+                    <TabPanel {...TabPanelDefaultProps}>{getListItems(myTrainings)}</TabPanel>
 
-                    <TabPanel {...TabPanelDefaultProps}>{getListItems(allActivities)}</TabPanel>
+                    <TabPanel {...TabPanelDefaultProps}>{getListItems(allTrainings)}</TabPanel>
                 </TabPanels>
             </Tabs>
         </TablePanel>

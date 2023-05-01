@@ -1,10 +1,19 @@
-import { Dashboard, theme } from '@box-fc/frontend/ui';
+import { Path } from '@box-fc/frontend/domain';
+import {
+    AnimatedTransition,
+    Dashboard,
+    LandingPage,
+    RequireAuthRouteUser,
+    theme,
+    UnauthorizedHandler,
+} from '@box-fc/frontend/ui';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
 dayjs.extend(utc);
 
@@ -16,7 +25,20 @@ export const App = () => {
             <ChakraProvider theme={theme}>
                 <QueryClientProvider client={queryClient}>
                     <ReactQueryDevtools initialIsOpen={false} />
-                    <Dashboard />
+                    <Router basename="/">
+                        <UnauthorizedHandler />
+                        <Routes>
+                            <Route element={<AnimatedTransition />}>
+                                <Route path={'*'} element={<Navigate to={Path.LANDING_PAGE} />} />
+
+                                <Route path={Path.LANDING_PAGE} element={<LandingPage />} />
+
+                                <Route element={<RequireAuthRouteUser />}>
+                                    <Route path={Path.DASHBOARD} element={<Dashboard />} />
+                                </Route>
+                            </Route>
+                        </Routes>
+                    </Router>
                 </QueryClientProvider>
             </ChakraProvider>
         </GoogleOAuthProvider>

@@ -7,16 +7,16 @@ import 'dayjs/plugin/utc';
 import { DATETIME_FORMAT } from '../../../utils/datetime/datetime.format';
 
 type PersonalListItemProps = {
-    activity: Training;
+    training: Training;
     user: User;
     readonly: boolean;
     handleDelete: (activity: Training) => void;
 };
 
-export const TrainingListItem = ({ activity, user, readonly, handleDelete }: PersonalListItemProps) => {
+export const TrainingListItem = ({ training, user, readonly, handleDelete }: PersonalListItemProps) => {
     return (
         <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
-            {personalActivityItem(user, activity)}
+            {personalActivityItem(user, training)}
 
             <Spacer />
 
@@ -26,7 +26,7 @@ export const TrainingListItem = ({ activity, user, readonly, handleDelete }: Per
                         aria-label="IconButton2"
                         icon={<DeleteIcon />}
                         variant={'ghost'}
-                        onClick={() => handleDelete(activity)}
+                        onClick={() => handleDelete(training)}
                     />
                 </Flex>
             )}

@@ -67,6 +67,9 @@
         "shared-types": {
             "tags": ["module"]
         },
+        "shared-util": {
+            "tags": []
+        },
         "ui-header": {
             "tags": []
         },

@@ -37,9 +37,9 @@ export const useActivitiesQuery = ({ startDate, endDate }: AccumulatedActivities
     );
 
     return {
-        teamsActivities: teamsActivitiesQuery.data,
+        teamsActivities: teamsActivitiesQuery.data as TeamActivity[],
         teamsActivitiesStatus: teamsActivitiesQuery.status,
-        usersActivities: usersActivitiesQuery.data,
+        usersActivities: usersActivitiesQuery.data as UserActivity[],
         usersActivitiesStatus: usersActivitiesQuery.status,
     };
 };

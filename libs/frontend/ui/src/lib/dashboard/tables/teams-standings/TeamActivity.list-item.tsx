@@ -19,9 +19,9 @@ export const TeamActivityListItem = ({ teamActivity }: Props) => {
                 <Text fontSize={'sm'} color={'gray.800'}>
                     Score:
                 </Text>
-                <Badge colorScheme={'facebook'} variant={'outline'}>
-                    {Math.round(teamActivity.score * 100) / 100}
-                </Badge>
+                <Text fontSize={'sm'} fontWeight={'bold'}>
+                    {teamActivity.score}
+                </Text>
             </Flex>
 
             <Spacer />
