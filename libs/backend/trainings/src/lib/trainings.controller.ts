@@ -62,7 +62,7 @@ export class TrainingsController {
         return this.trainingsService.getUserTrainings(userId);
     }
 
-    @Post('activities/user/:userId')
+    @Post('activities/users/:userId')
     @HttpCode(200)
     @ApiOperation({ summary: 'Get user activity' })
     getUserActivity(@Param() { userId }: UserParams, @Body() dto: ActivityDto): Promise<UserActivity> {
