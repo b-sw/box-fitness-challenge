@@ -1,4 +1,4 @@
-import { Week } from '@box-fc/frontend/domain';
+import { DatesRange } from '@box-fc/frontend/domain';
 import { useActivitiesQuery } from '@box-fc/frontend/query';
 import { TeamActivity } from '@box-fc/shared/types';
 import { useEffect, useState } from 'react';
@@ -7,7 +7,7 @@ import { TeamActivityListItem } from './TeamActivity.list-item';
 
 type Props = {
     filter: string;
-    week: Week;
+    week: DatesRange;
 };
 
 export const WeeklyTeamsActivitiesTab = ({ filter, week }: Props) => {

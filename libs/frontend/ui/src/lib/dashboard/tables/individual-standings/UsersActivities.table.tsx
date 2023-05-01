@@ -1,14 +1,14 @@
-import { Week, WEEKS } from '@box-fc/frontend/domain';
+import { DatesRange, WEEKS } from '@box-fc/frontend/domain';
 import { useUsersQuery } from '@box-fc/frontend/query';
 import { UserActivity } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel, useDisclosure } from '@chakra-ui/react';
-import { UserActivityModal } from 'libs/frontend/ui/src/lib/dashboard/tables/individual-standings/UserActivity.modal';
 import { useState } from 'react';
 import { SearchInput } from '../../../utils/search/SearchInput';
 import { TabPanelDefaultProps } from '../../../utils/tab-panel/tab-panel';
 import { TablePanel } from '../../../utils/table-panel/TablePanel';
 import { TabPanels } from '../../../utils/tabs/TabPanels';
 import { Tabs } from '../../../utils/tabs/Tabs';
+import { UserActivityModal } from './UserActivity.modal';
 import { WeeklyUsersActivities } from './WeeklyUsersActivities.tab';
 
 export const UsersActivitiesTable = () => {
@@ -16,7 +16,7 @@ export const UsersActivitiesTable = () => {
     const { users } = useUsersQuery();
 
     const [selectedActivity, setSelectedActivity] = useState<UserActivity | null>(null);
-    const [selectedRange, setSelectedRange] = useState<Week | null>(null);
+    const [selectedRange, setSelectedRange] = useState<DatesRange | null>(null);
     const [filter, setFilter] = useState<string>('');
 
     const TITLE = 'Individual standings';
@@ -35,7 +35,8 @@ export const UsersActivitiesTable = () => {
                     onClose={onDetailsClose}
                     isOpen={isDetailsOpen}
                     activity={selectedActivity as UserActivity}
-                    range={selectedRange as Week}
+                    range={selectedRange as DatesRange}
+                    users={users}
                 />
             )}
             <TablePanel headerTitle={TITLE} headerButtons={false}>

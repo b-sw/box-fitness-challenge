@@ -27,7 +27,7 @@ type ActivityCreateModalProps = {
 };
 
 export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
-    const { authQuery } = useAuthQuery();
+    const { currentUserId } = useAuthQuery();
     const { createMutation } = useTrainingMutation();
     const toast = useToast();
 
@@ -42,6 +42,8 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createMutation.status]);
+
+    console.log('currentUserId', currentUserId);
 
     return (
         <Modal isOpen={isOpen} onClose={handleClose} isCentered>
@@ -61,7 +63,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
                             ...values,
                             trainingDate: dayjs(values.trainingDate, DATETIME_FORMAT).toDate(),
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                            userId: authQuery.data!.userId!,
+                            userId: currentUserId,
                             registrationDate: dayjs.utc().toDate(),
                         });
                     }}

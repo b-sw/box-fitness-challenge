@@ -1,4 +1,4 @@
-import { Week } from '@box-fc/frontend/domain';
+import { DatesRange } from '@box-fc/frontend/domain';
 import { useActivitiesQuery } from '@box-fc/frontend/query';
 import { User, UserActivity } from '@box-fc/shared/types';
 import { useEffect, useState } from 'react';
@@ -7,10 +7,10 @@ import { UserActivityListItem } from './UserActivity.list-item';
 
 type Props = {
     filter: string;
-    week: Week;
+    week: DatesRange;
     users: Map<User['id'], User>;
     selectActivity: (activity: UserActivity) => void;
-    selectRange: (range: Week) => void;
+    selectRange: (range: DatesRange) => void;
     showDetails: () => void;
 };
 

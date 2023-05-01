@@ -8,6 +8,7 @@ export const useTrainingMutation = () => {
     const queryClient = useQueryClient();
 
     const createTraining = async (dto: CreateTrainingDto): Promise<Training> => {
+        console.log('dto', dto);
         const response = await axios.post(TRAININGS_ENDPOINT, dto);
 
         return response.data;

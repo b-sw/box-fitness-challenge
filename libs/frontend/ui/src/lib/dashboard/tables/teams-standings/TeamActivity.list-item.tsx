@@ -9,13 +9,13 @@ type Props = {
 export const TeamActivityListItem = ({ teamActivity }: Props) => {
     return (
         <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
-            <Badge colorScheme="whatsapp" fontSize={'xl'}>
-                {teamActivity.team}
-            </Badge>
+            <Flex w={'40%'}>
+                <Badge colorScheme="whatsapp" fontSize={'xl'}>
+                    {teamActivity.team}
+                </Badge>
+            </Flex>
 
-            <Spacer />
-
-            <Flex gap={1} alignItems={'center'} width={'30%'}>
+            <Flex gap={1} alignItems={'center'} w={'40%'}>
                 <Text fontSize={'sm'} color={'gray.800'}>
                     Score:
                 </Text>
@@ -24,9 +24,8 @@ export const TeamActivityListItem = ({ teamActivity }: Props) => {
                 </Text>
             </Flex>
 
-            <Spacer />
-
-            <Flex width={'15%'}>
+            <Flex w={'20%'}>
+                <Spacer />
                 <IconButton aria-label="IconButton1" icon={<BsPeopleFill />} variant={'ghost'} disabled />
             </Flex>
         </Flex>

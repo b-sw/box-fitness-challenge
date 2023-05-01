@@ -38,5 +38,5 @@ export const useAuthQuery = () => {
         Boolean(authQuery.data?.accessToken) && !tokenExpired(authQuery?.data?.accessToken as unknown as string);
     const currentUserId = authQuery.data?.userId;
 
-    return { authQuery, isLoggedIn, isAdmin, currentUserId };
+    return { authQuery, isLoggedIn, isAdmin, currentUserId } as { currentUserId: string } & any;
 };

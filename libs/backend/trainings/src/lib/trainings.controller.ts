@@ -22,7 +22,7 @@ export class TrainingsController {
 
     @Post('trainings')
     @UseGuards(JwtGuard, SelfGuard)
-    @ApiOperation({ summary: 'Create an training' })
+    @ApiOperation({ summary: 'Create a training' })
     createTraining(@Body() dto: CreateTrainingDto) {
         return this.trainingsService.createTraining(dto);
     }
@@ -41,7 +41,7 @@ export class TrainingsController {
 
     @Post('trainings/:trainingId')
     @UseGuards(JwtGuard, AdminGuard)
-    @ApiOperation({ summary: 'Update an training' })
+    @ApiOperation({ summary: 'Update a training' })
     updateTraining(
         @Param() { trainingId }: TrainingParams,
         @Body() dto: UpdateTrainingDto,
@@ -51,7 +51,7 @@ export class TrainingsController {
 
     @Delete('trainings/:trainingId')
     @UseGuards(JwtGuard, AdminGuard)
-    @ApiOperation({ summary: 'Delete an training' })
+    @ApiOperation({ summary: 'Delete a training' })
     deleteTraining(@Param() { trainingId }: TrainingParams) {
         return this.trainingsService.deleteTraining(trainingId);
     }

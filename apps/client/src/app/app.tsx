@@ -10,12 +10,14 @@ import {
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
 import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
 dayjs.extend(utc);
+dayjs.extend(isBetween);
 
 const queryClient = new QueryClient();
 
