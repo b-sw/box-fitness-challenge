@@ -31,7 +31,7 @@ export const PersonalAccumulatedTableRaw = ({ activities }: Props) => {
                 <TabPanels>
                     <TabPanel {...TabPanelDefaultProps}>
                         {/*{activities.map((activity) => (*/}
-                        {/*    <TeamScoreListItem personName={'Jan Kowalski'} />*/}
+                        {/*    <TeamActivityListItem personName={'Jan Kowalski'} />*/}
                         {/*))}*/}
                         <PersonalScoreListItem personName={'Jan Kowalski'} />
                         <PersonalScoreListItem personName={'Jan Kowalski'} />

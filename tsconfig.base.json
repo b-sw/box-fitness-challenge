@@ -19,14 +19,14 @@
 		"strictPropertyInitialization": false,
 		"baseUrl": ".",
 		"paths": {
-			"@box-fc/backend/trainings": [
-				"libs/backend/trainings/src/index.ts"
-			],
 			"@box-fc/backend/auth": [
 				"libs/backend/auth/src/index.ts"
 			],
 			"@box-fc/backend/guards": [
 				"libs/backend/guards/src/index.ts"
+			],
+			"@box-fc/backend/trainings": [
+				"libs/backend/trainings/src/index.ts"
 			],
 			"@box-fc/backend/users": [
 				"libs/backend/users/src/index.ts"
@@ -39,6 +39,9 @@
 			],
 			"@box-fc/shared/types": [
 				"libs/shared/types/src/index.ts"
+			],
+			"@box-fc/frontend/domain": [
+				"libs/frontend/domain/src/index.ts"
 			]
 		}
 	},

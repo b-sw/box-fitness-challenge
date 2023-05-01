@@ -10,7 +10,7 @@ import {
     UserActivity,
     UserParams,
 } from '@box-fc/shared/types';
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { TrainingsService } from './trainings.service';
 
@@ -63,18 +63,21 @@ export class TrainingsController {
     }
 
     @Post('activities/user/:userId')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Get user activity' })
     getUserActivity(@Param() { userId }: UserParams, @Body() dto: ActivityDto): Promise<UserActivity> {
         return this.trainingsService.getUserActivity(userId, dto.startDate, dto.endDate);
     }
 
     @Post('activities/users')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Get all users activities' })
     getUsersActivities(@Body() dto: ActivityDto): Promise<UserActivity[]> {
         return this.trainingsService.getAllUsersActivities(dto.startDate, dto.endDate);
     }
 
     @Post('activities/teams')
+    @HttpCode(200)
     @ApiOperation({ summary: 'Get all teams activities' })
     getTeamsActivities(@Body() dto: ActivityDto): Promise<TeamActivity[]> {
         return this.trainingsService.getAllTeamsActivities(dto.startDate, dto.endDate);

@@ -1,7 +1,7 @@
 import { TeamActivity, UserActivity } from '@box-fc/shared/types';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { TRAININGS_QUERY_KEY } from '../query-keys/trainings.query-key';
+import { ACTIVITIES_QUERY_KEY } from '../query-keys/activities.query-key';
 
 type AccumulatedActivitiesQueryProps = {
     startDate: Date;
@@ -26,12 +26,12 @@ export const useActivitiesQuery = ({ startDate, endDate }: AccumulatedActivities
     };
 
     const teamsActivitiesQuery = useQuery<TeamActivity[]>(
-        [TRAININGS_QUERY_KEY, 'teams'],
+        [ACTIVITIES_QUERY_KEY, 'teams', startDate.toISOString(), endDate.toISOString()],
         getAccumulatedTeamsActivities,
         DEFAULT_QUERY_OPTIONS,
     );
     const usersActivitiesQuery = useQuery<UserActivity[]>(
-        [TRAININGS_QUERY_KEY, 'users'],
+        [ACTIVITIES_QUERY_KEY, 'users', startDate.toISOString(), endDate.toISOString()],
         getAccumulatedUsersActivities,
         DEFAULT_QUERY_OPTIONS,
     );
