@@ -1,5 +1,5 @@
 import { DatesRange, WEEKS } from '@box-fc/frontend/domain';
-import { useUsersQuery } from '@box-fc/frontend/query';
+import { useMobileQuery, useUsersQuery } from '@box-fc/frontend/query';
 import { UserActivity } from '@box-fc/shared/types';
 import { Tab, TabList, TabPanel, useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -14,6 +14,7 @@ import { WeeklyUsersActivities } from './WeeklyUsersActivities.tab';
 export const UsersActivitiesTable = () => {
     const { isOpen: isDetailsOpen, onOpen: onDetailsOpen, onClose: onDetailsClose } = useDisclosure();
     const { users } = useUsersQuery();
+    const { isMobile } = useMobileQuery();
 
     const [selectedActivity, setSelectedActivity] = useState<UserActivity | null>(null);
     const [selectedRange, setSelectedRange] = useState<DatesRange | null>(null);
@@ -26,6 +27,7 @@ export const UsersActivitiesTable = () => {
         selectRange: setSelectedRange,
         filter,
         showDetails: onDetailsOpen,
+        isMobile,
     };
 
     return (

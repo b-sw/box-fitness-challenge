@@ -1,4 +1,4 @@
-import { Training, useAuthQuery, useTrainingsQuery, useUsersQuery } from '@box-fc/frontend/query';
+import { Training, useAuthQuery, useMobileQuery, useTrainingsQuery, useUsersQuery } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -10,6 +10,7 @@ export const TrainingsTable = () => {
     const { activitiesQuery } = useTrainingsQuery();
     const { users } = useUsersQuery();
     const { isAdmin, currentUserId } = useAuthQuery();
+    const { isMobile } = useMobileQuery();
     const [selectedActivity, setSelectedActivity] = useState<Training | null>(null);
 
     return (
@@ -31,6 +32,7 @@ export const TrainingsTable = () => {
                     setSelectedActivity(activity);
                     onDeleteModalOpen();
                 }}
+                isMobile={isMobile}
             />
         </>
     );

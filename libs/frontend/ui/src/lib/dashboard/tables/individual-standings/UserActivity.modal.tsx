@@ -1,5 +1,5 @@
 import { DatesRange } from '@box-fc/frontend/domain';
-import { Training, useUserTrainingsQuery } from '@box-fc/frontend/query';
+import { Training, useMobileQuery, useUserTrainingsQuery } from '@box-fc/frontend/query';
 import { User, UserActivity } from '@box-fc/shared/types';
 import {
     Button,
@@ -28,6 +28,7 @@ type Props = {
 export const UserActivityModal = ({ isOpen, onClose, activity, range, users }: Props) => {
     const { userTrainings } = useUserTrainingsQuery({ userId: activity.userId });
     const [trainingsInRange, setTrainingsInRange] = useState<Training[]>([]);
+    const { isMobile } = useMobileQuery();
 
     useEffect(() => {
         const trainingsInRange = userTrainings.filter(({ trainingDate }) => {
@@ -52,6 +53,7 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range, users }: P
                 user={users.get(training.userId) as User}
                 readonly={true}
                 handleDelete={() => null}
+                isMobile={isMobile}
             />
         ));
     };

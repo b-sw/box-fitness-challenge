@@ -1,4 +1,4 @@
-import { Training, useTrainingMutation } from '@box-fc/frontend/query';
+import { Training, useMobileQuery, useTrainingMutation } from '@box-fc/frontend/query';
 import { toastError, toastSuccess } from '@box-fc/frontend/ui';
 import { User } from '@box-fc/shared/types';
 import {
@@ -27,6 +27,7 @@ type Props = {
 export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) => {
     const { deleteMutation } = useTrainingMutation();
     const toast = useToast();
+    const { isMobile } = useMobileQuery();
 
     const deleteActivity = () => {
         deleteMutation.mutate(activity.id);
@@ -55,7 +56,7 @@ export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) 
                         Are you sure you want to delete the following referee?
                     </Text>
                     <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
-                        {personalActivityItem(user, activity)}
+                        {personalActivityItem(user, activity, isMobile)}
                     </Flex>
                     <Text fontWeight="bold" mt="1rem">
                         You can't undo this action afterwards.

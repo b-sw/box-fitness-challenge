@@ -18,9 +18,10 @@ type Props = {
     currentUserId: Optional<User['id']>;
     readonly: boolean;
     handleDelete: (training: Training) => void;
+    isMobile: boolean;
 };
 
-export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, currentUserId }: Props) => {
+export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, currentUserId, isMobile }: Props) => {
     const [myTrainings, setMyTrainings] = useState<Training[]>([]);
     const [allTrainings, setAllTrainings] = useState<Training[]>(trainings);
     const [filter, setFilter] = useState<string>('');
@@ -60,6 +61,7 @@ export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, cu
                 user={users.get(training.userId) as User}
                 readonly={readonly}
                 handleDelete={handleDelete}
+                isMobile={isMobile}
             />
         ));
     };

@@ -12,9 +12,18 @@ type Props = {
     selectActivity: (activity: UserActivity) => void;
     selectRange: (range: DatesRange) => void;
     showDetails: () => void;
+    isMobile: boolean;
 };
 
-export const WeeklyUsersActivities = ({ filter, week, users, selectActivity, selectRange, showDetails }: Props) => {
+export const WeeklyUsersActivities = ({
+    filter,
+    week,
+    users,
+    selectActivity,
+    selectRange,
+    showDetails,
+    isMobile,
+}: Props) => {
     const [filteredActivities, setFilteredActivities] = useState<UserActivity[]>([]);
     const { usersActivities } = useActivitiesQuery({ ...week });
 
@@ -49,6 +58,7 @@ export const WeeklyUsersActivities = ({ filter, week, users, selectActivity, sel
                         userActivity={userActivity}
                         user={users.get(userActivity.userId) as User}
                         onClick={showActivityDetails}
+                        isMobile={isMobile}
                     />
                 ))}
             </>

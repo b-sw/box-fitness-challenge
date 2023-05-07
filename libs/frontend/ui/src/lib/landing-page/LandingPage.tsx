@@ -5,7 +5,7 @@ import { Page } from '../utils/page/Page';
 export const LandingPage = () => {
     return (
         <Page>
-            <Flex alignItems={'center'} h={'100%'}>
+            <Flex alignItems={'center'} h={'100vh'}>
                 <Spacer />
 
                 <Flex direction={'column'} alignItems={'center'}>

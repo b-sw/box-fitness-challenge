@@ -17,9 +17,11 @@ export const HeaderRaw = ({ title, loginButton, activityButton, profileMenu }: H
             <Spacer />
 
             <Flex alignItems={'center'} gap={2}>
+                <Spacer />
                 {loginButton}
                 {activityButton}
                 {profileMenu}
+                <Spacer />
             </Flex>
         </Flex>
     );
