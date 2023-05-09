@@ -11,7 +11,7 @@ export const TrainingsTable = () => {
     const { users } = useUsersQuery();
     const { isAdmin } = useAuthQuery();
     const { isMobile } = useMobileQuery();
-    const { user } = useAuthStore((state) => state);
+    const { user } = useAuthStore();
     console.log('current user trainings table', user);
 
     const { isOpen: isDeleteModalOpen, onOpen: onDeleteModalOpen, onClose: onDeleteModalClose } = useDisclosure();

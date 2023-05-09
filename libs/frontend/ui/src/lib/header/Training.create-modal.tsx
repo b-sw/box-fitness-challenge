@@ -30,7 +30,7 @@ type ActivityCreateModalProps = {
 export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
     const {
         user: { id: currentUserId },
-    } = useAuthStore((state) => state);
+    } = useAuthStore();
     const { createMutation } = useTrainingMutation();
     const toast = useToast();
 
