@@ -1,5 +1,5 @@
 import { DatesRange } from '@box-fc/frontend/domain';
-import { useActivitiesQuery } from '@box-fc/frontend/query';
+import { useActivitiesQuery, useMobileQuery } from '@box-fc/frontend/query';
 import { TeamActivity } from '@box-fc/shared/types';
 import { useEffect, useState } from 'react';
 import { NoRecords } from '../../../utils/no-records/NoRecords';
@@ -13,6 +13,7 @@ type Props = {
 export const WeeklyTeamsActivitiesTab = ({ filter, week }: Props) => {
     const [filteredActivities, setFilteredActivities] = useState<TeamActivity[]>([]);
     const { teamsActivities } = useActivitiesQuery({ ...week });
+    const { isMobile } = useMobileQuery();
 
     useEffect(() => {
         const filteredActivities = getFilteredActivities();
@@ -29,7 +30,11 @@ export const WeeklyTeamsActivitiesTab = ({ filter, week }: Props) => {
         return (
             <>
                 {filteredActivities.map((teamActivity) => (
-                    <TeamActivityListItem key={`${teamActivity.team}`} teamActivity={teamActivity} />
+                    <TeamActivityListItem
+                        key={`${teamActivity.team}`}
+                        teamActivity={teamActivity}
+                        isMobile={isMobile}
+                    />
                 ))}
             </>
         );

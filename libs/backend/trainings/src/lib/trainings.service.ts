@@ -110,6 +110,8 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
     }
 
     private _requireTrainingDateValid(trainingDate: Date): void {
+        return;
+        // todo: enable, disabled for debugging
         if (dayjs(trainingDate).isAfter(dayjs())) {
             throw new HttpException(TrainingsService.TRAINING_FROM_THE_FUTURE_ERROR_MESSAGE, 400);
         }

@@ -6,7 +6,14 @@ type PageProps = {
 
 export const ListItem = ({ children }: PageProps) => {
     return (
-        <Flex direction={['column', 'row']} p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
+        <Flex
+            direction={['column', 'row']}
+            p={3}
+            borderRadius={10}
+            alignItems={'center'}
+            backgroundColor={'gray.50'}
+            gap={[1, 0]}
+        >
             {children}
         </Flex>
     );

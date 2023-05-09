@@ -1,4 +1,5 @@
 import { Training } from '@box-fc/frontend/query';
+import { ColonList } from '@box-fc/frontend/ui';
 import { User } from '@box-fc/shared/types';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
@@ -41,6 +42,42 @@ export const personalActivityItem = (user: User, activity: Training, isMobile: b
     const trainingDate = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('DD-MM-YYYY');
     const trainingTime = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('HH:mm');
 
+    const trainingFieldsNames = (
+        <>
+            <Text fontSize={'sm'} color={'gray.800'}>
+                Duration:
+            </Text>
+            <Text fontSize={'sm'} color={'gray.800'}>
+                Activity:
+            </Text>
+            <Text fontSize={'sm'} color={'gray.800'}>
+                Date:
+            </Text>
+            <Text fontSize={'sm'} color={'gray.800'}>
+                Time:
+            </Text>
+        </>
+    );
+
+    const trainingFieldsValues = (
+        <>
+            <Text fontSize={'sm'} fontWeight={'bold'}>
+                {Math.floor(activity.duration / 60)}h {activity.duration % 60}m
+            </Text>
+            <Text fontSize={'sm'}>
+                <Badge colorScheme={'facebook'} variant={'outline'}>
+                    {activity.type}
+                </Badge>
+            </Text>
+            <Text fontSize={'sm'} fontWeight={'bold'}>
+                {trainingDate}
+            </Text>
+            <Text fontSize={'sm'} fontWeight={'bold'}>
+                {trainingTime}
+            </Text>
+        </>
+    );
+
     return (
         <Flex direction={['column', 'row']} w={'100%'}>
             <Flex w={['100%', '60%']} alignItems={'center'} gap={1}>
@@ -60,43 +97,12 @@ export const personalActivityItem = (user: User, activity: Training, isMobile: b
                 </Flex>
             </Flex>
 
-            <Flex w={['100%', '40%']}>
-                <Flex gap={1} alignItems={'center'} w={'100%'}>
-                    {isMobile && <Spacer />}
-                    <Flex direction={'column'} alignItems={'flex-end'}>
-                        <Text fontSize={'sm'} color={'gray.800'}>
-                            Duration:
-                        </Text>
-                        <Text fontSize={'sm'} color={'gray.800'}>
-                            Activity:
-                        </Text>
-                        <Text fontSize={'sm'} color={'gray.800'}>
-                            Date:
-                        </Text>
-                        <Text fontSize={'sm'} color={'gray.800'}>
-                            Time:
-                        </Text>
-                    </Flex>
-
-                    <Flex direction={'column'} alignItems={'flex-start'}>
-                        <Text fontSize={'sm'} fontWeight={'bold'}>
-                            {Math.floor(activity.duration / 60)}h {activity.duration % 60}m
-                        </Text>
-                        <Text fontSize={'sm'}>
-                            <Badge colorScheme={'facebook'} variant={'outline'}>
-                                {activity.type}
-                            </Badge>
-                        </Text>
-                        <Text fontSize={'sm'} fontWeight={'bold'}>
-                            {trainingDate}
-                        </Text>
-                        <Text fontSize={'sm'} fontWeight={'bold'}>
-                            {trainingTime}
-                        </Text>
-                    </Flex>
-                    {isMobile && <Spacer />}
-                </Flex>
-            </Flex>
+            <ColonList
+                xlWidth={'40%'}
+                isMobile={isMobile}
+                leftChildren={trainingFieldsNames}
+                rightChildren={trainingFieldsValues}
+            />
         </Flex>
     );
 };

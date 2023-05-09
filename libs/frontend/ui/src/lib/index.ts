@@ -6,3 +6,4 @@ export * from './landing-page/LandingPage';
 export * from './auth';
 export * from './utils/loading-overlay/LoadingOverlay';
 export * from './utils/list-item/ListItem';
+export * from './utils/generic-components';

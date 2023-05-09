@@ -3,7 +3,5 @@ import { ProfileMenu } from './ProfileMenu';
 import { TrainingButton } from './Training.button';
 
 export const Header = () => {
-    return (
-        <HeaderRaw title={'Box fitness challenge'} trainingButton={<TrainingButton />} profileMenu={<ProfileMenu />} />
-    );
+    return <HeaderRaw title={'Fitness challenge'} trainingButton={<TrainingButton />} profileMenu={<ProfileMenu />} />;
 };

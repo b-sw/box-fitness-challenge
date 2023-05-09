@@ -5,7 +5,11 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-export const useAuthMutation = () => {
+type Props = {
+    onLoginError?: (message: string) => void;
+};
+
+export const useAuthMutation = ({ onLoginError }: Props) => {
     const SERVER_AUTH_ENDPOINT = 'google/auth';
     const GOOGLE_USER_INFO_ENDPOINT = 'https://www.googleapis.com/oauth2/v1/userinfo';
     const navigate = useNavigate();
@@ -28,11 +32,11 @@ export const useAuthMutation = () => {
 
     const loginMutation = useMutation(login, {
         onSuccess: async (response: UserCredentials & { imageUrl: string }) => {
-            console.log('response', response);
             setUser(response);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.accessToken;
             navigate(Path.DASHBOARD);
         },
+        onError: (error: Error) => onLoginError?.(error.message),
     });
 
     return { loginMutation, logout };

@@ -5,7 +5,7 @@ import { ProfileMenuRaw } from './profile-menu/ProfileMenu.raw';
 export const ProfileMenu = () => {
     const { isLoggedIn } = useAuthQuery();
     const { user } = useAuthStore();
-    const { logout } = useAuthMutation();
+    const { logout } = useAuthMutation({});
 
     if (!(user.firstName && user.lastName && user.email && user.team && user.division && user.imageUrl)) {
         return null;

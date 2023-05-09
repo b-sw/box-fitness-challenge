@@ -1,33 +1,58 @@
+import { ColonList, ListItem } from '@box-fc/frontend/ui';
 import { TeamActivity } from '@box-fc/shared/types';
 import { Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
 import { BsPeopleFill } from 'react-icons/bs';
 
 type Props = {
     teamActivity: TeamActivity;
+    isMobile: boolean;
 };
 
-export const TeamActivityListItem = ({ teamActivity }: Props) => {
+export const TeamActivityListItem = ({ teamActivity, isMobile }: Props) => {
+    const scoreFieldsNames = (
+        <>
+            <Text fontSize={'sm'} color={'gray.800'}>
+                Score:
+            </Text>
+            <Text fontSize={'sm'} color={'gray.800'}>
+                Avg. Score:
+            </Text>
+        </>
+    );
+
+    const scoreFieldsValues = (
+        <>
+            <Text fontSize={'sm'} fontWeight={'bold'}>
+                {teamActivity.score}
+            </Text>
+            <Text fontSize={'sm'} fontWeight={'bold'}>
+                {teamActivity.meanScore}
+            </Text>
+        </>
+    );
+
     return (
-        <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
-            <Flex w={'40%'}>
+        <ListItem>
+            <Flex w={['100%', '40%']}>
+                {isMobile && <Spacer />}
                 <Badge colorScheme="whatsapp" fontSize={'xl'}>
                     {teamActivity.team}
                 </Badge>
+                <Spacer />
             </Flex>
 
-            <Flex gap={1} alignItems={'center'} w={'40%'}>
-                <Text fontSize={'sm'} color={'gray.800'}>
-                    Score:
-                </Text>
-                <Text fontSize={'sm'} fontWeight={'bold'}>
-                    {teamActivity.score}
-                </Text>
-            </Flex>
+            <ColonList
+                xlWidth={'40%'}
+                isMobile={isMobile}
+                leftChildren={scoreFieldsNames}
+                rightChildren={scoreFieldsValues}
+            />
 
-            <Flex w={'20%'}>
+            <Flex w={['100%', '20%']}>
                 <Spacer />
                 <IconButton aria-label="IconButton1" icon={<BsPeopleFill />} variant={'ghost'} disabled />
+                <Spacer />
             </Flex>
-        </Flex>
+        </ListItem>
     );
 };

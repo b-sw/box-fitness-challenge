@@ -6,11 +6,12 @@ import { LoginButtonRaw } from './login-buton/LoginButton.raw';
 
 export const LoginButton = () => {
     const toast = useToast();
-    const { loginMutation } = useAuthMutation();
     const googleLogin = useGoogleLogin({
         onSuccess: (codeResponse) => loginMutation.mutate(codeResponse.access_token),
         onError: ({ error_description }) => toast({ title: error_description, ...defaultToastErrorOptions }),
     });
+    const onLoginError = (message: string) => toast({ title: message, ...defaultToastErrorOptions });
+    const { loginMutation } = useAuthMutation({ onLoginError });
 
     return <LoginButtonRaw onCLick={googleLogin} isLoading={loginMutation.isLoading} />;
 };

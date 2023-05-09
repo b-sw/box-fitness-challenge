@@ -1,5 +1,5 @@
 import { Path } from '@box-fc/frontend/domain';
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 
 import { useEffect } from 'react';
@@ -10,15 +10,16 @@ export const UnauthorizedHandler = () => {
 
     useEffect(() => {
         axios.interceptors.response.use(
-            (response) => response,
-            (error) => {
-                const statusCode: StatusCodes = error.response ? error.response.status : null;
+            (response: AxiosResponse) => response,
+            (error: AxiosError) => {
+                const statusCode: StatusCodes | null = error.response ? error.response.status : null;
+                const errorMessage: string = error.response ? (error.response.data as any).message : 'Error';
 
-                if (statusCode !== StatusCodes.UNAUTHORIZED) {
-                    return;
+                if (statusCode === StatusCodes.UNAUTHORIZED) {
+                    navigate(Path.LANDING_PAGE, { state: { customMessage: 'You have been logged out.' } });
                 }
 
-                navigate(Path.LANDING_PAGE, { state: { customMessage: 'You have been logged out.' } });
+                return Promise.reject(new Error(errorMessage));
             },
         );
     }, []);

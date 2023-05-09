@@ -31,7 +31,7 @@ export const App = () => {
                         <UnauthorizedHandler />
                         <Routes>
                             <Route element={<AnimatedTransition />}>
-                                <Route path={'*'} element={<Navigate to={Path.LANDING_PAGE} />} />
+                                <Route path={'*'} element={<Navigate to={Path.LANDING_PAGE} replace />} />
 
                                 <Route path={Path.LANDING_PAGE} element={<LandingPage />} />
 
