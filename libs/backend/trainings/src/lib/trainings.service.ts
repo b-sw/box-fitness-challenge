@@ -8,8 +8,9 @@ import {
     UserActivity,
 } from '@box-fc/shared/types';
 import { roundFloat } from '@box-fc/shared/util';
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import dayjs from 'dayjs';
 import { Between, Repository } from 'typeorm';
 import { CreatesTraining, DeletesTraining, GetsTrainings, UpdatesTraining } from './interfaces';
 
@@ -19,6 +20,7 @@ type Team = User['team'];
 @Injectable()
 export class TrainingsService implements CreatesTraining, GetsTrainings, UpdatesTraining, DeletesTraining {
     private static readonly SCORE_FACTOR = 3;
+    private static readonly TRAINING_FROM_THE_FUTURE_ERROR_MESSAGE = 'Training date cannot be in the future';
 
     constructor(
         @InjectRepository(Training) private trainingsRepository: Repository<Training>,
@@ -26,13 +28,15 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
     ) {}
 
     createTraining(createTrainingDto: CreateTrainingDto): Promise<Training> {
+        this._requireTrainingDateValid(createTrainingDto.trainingDate);
+
         const training = this.trainingsRepository.create(createTrainingDto);
 
         return this.trainingsRepository.save(training);
     }
 
     getAllTrainings(): Promise<Training[]> {
-        return this.trainingsRepository.find();
+        return this.trainingsRepository.find({ order: { trainingDate: 'DESC' } });
     }
 
     getTrainingById(trainingId: Training['id']): Promise<Optional<Training>> {
@@ -40,7 +44,7 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
     }
 
     getUserTrainings(userId: UserId): Promise<Training[]> {
-        return this.trainingsRepository.find({ where: { userId: userId } });
+        return this.trainingsRepository.find({ where: { userId: userId }, order: { trainingDate: 'DESC' } });
     }
 
     async getUserActivity(userId: UserId, startDate: Date, endDate: Date): Promise<UserActivity> {
@@ -60,10 +64,12 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
             return acc;
         }, new Map<UserId, Training[]>());
 
-        return Array.from(usersTrainings.entries()).map(([userId, trainings]) => ({
-            userId,
-            score: this._getTrainingsScore(trainings),
-        }));
+        return [...usersTrainings.entries()]
+            .map(([userId, trainings]) => ({
+                userId,
+                score: this._getTrainingsScore(trainings),
+            }))
+            .sort((a, b) => b.score - a.score);
     }
 
     async getAllTeamsActivities(startDate: Date, endDate: Date): Promise<TeamActivity[]> {
@@ -78,10 +84,12 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
             return acc;
         }, new Map<Team, Training[]>());
 
-        return Array.from(teamsTrainings.entries()).map(([team, trainings]) => ({
-            team,
-            score: this._getTrainingsScore(trainings),
-        }));
+        return [...teamsTrainings.entries()]
+            .map(([team, trainings]) => ({
+                team,
+                score: this._getTrainingsScore(trainings),
+            }))
+            .sort((a, b) => b.score - a.score);
     }
 
     async updateTraining(
@@ -101,6 +109,12 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         return training;
     }
 
+    private _requireTrainingDateValid(trainingDate: Date): void {
+        if (dayjs(trainingDate).isAfter(dayjs())) {
+            throw new HttpException(TrainingsService.TRAINING_FROM_THE_FUTURE_ERROR_MESSAGE, 400);
+        }
+    }
+
     private _getTrainingsScore(trainings: Training[]): number {
         const dailyActiveTimes = trainings.reduce((acc, { trainingDate, duration }) => {
             const date = trainingDate.toISOString().split('T')[0];
@@ -109,7 +123,7 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
 
             return acc;
         }, new Map<string, number>());
-        const dailyActiveTimesArray = Array.from(dailyActiveTimes.values());
+        const dailyActiveTimesArray = [...dailyActiveTimes.values()];
         const overallScore = dailyActiveTimesArray.reduce(
             (acc, activeTime) => acc + Math.sqrt(activeTime) * TrainingsService.SCORE_FACTOR,
             0,

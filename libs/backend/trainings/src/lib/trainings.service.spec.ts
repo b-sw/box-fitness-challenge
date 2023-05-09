@@ -1,4 +1,5 @@
 import { CreateTrainingDto, Training as ActualTraining, User as ActualUser, uuid } from '@box-fc/shared/types';
+import { HttpException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { Type } from 'class-transformer';
@@ -40,19 +41,27 @@ describe('TrainingsService', () => {
         stubDates();
     });
 
-    it('should create an training', async () => {
-        const createdTraining = await service.createTraining(trainingDtoStub);
+    it('should create a training', async () => {
+        const createdTraining = await service.createTraining({ ...trainingDtoStub, trainingDate: todayStart });
 
-        expect(createdTraining).toEqual({ ...trainingDtoStub, id: expect.any(String) });
+        expect(createdTraining).toEqual({ ...trainingDtoStub, trainingDate: todayStart, id: expect.any(String) });
     });
 
-    it('should persist an training', async () => {
+    it('should not create a training in the future', async () => {
+        const trainingDto = { ...trainingDtoStub, trainingDate: tomorrowEnd };
+
+        const shouldThrow = async () => await service.createTraining(trainingDto);
+
+        await expect(shouldThrow()).rejects.toThrow(new HttpException('Training date cannot be in the future', 400));
+    });
+
+    it('should persist a training', async () => {
         await service.createTraining(trainingDtoStub);
 
         expect(await trainingRepository.find()).toEqual([{ ...trainingDtoStub, id: expect.any(String) }]);
     });
 
-    it('should get an training', async () => {
+    it('should get a training', async () => {
         await trainingRepository.insert(trainingStub);
 
         const training = await service.getTrainingById(trainingIdStub);
@@ -119,8 +128,8 @@ describe('TrainingsService', () => {
         const accumulatedActivities = await service.getAllTeamsActivities(todayStart, todayEnd);
 
         expect(accumulatedActivities).toEqual([
-            { team: teamStub1, score: 6 },
             { team: teamStub2, score: 12 },
+            { team: teamStub1, score: 6 },
         ]);
     });
 
