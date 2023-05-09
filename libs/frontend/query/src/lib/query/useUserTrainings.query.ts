@@ -2,7 +2,7 @@ import { User } from '@box-fc/shared/types';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { TRAININGS_QUERY_KEY } from '../query-keys/trainings.query-key';
-import { Training } from '../query-types/activity.query-type';
+import { Training } from '../query-types/training.query-type';
 
 type Props = {
     userId: User['id'];

@@ -45,6 +45,9 @@
 			],
 			"@box-fc/shared/util": [
 				"libs/shared/util/src/index.ts"
+			],
+			"@box-fc/frontend/store": [
+				"libs/frontend/store/src/index.ts"
 			]
 		}
 	},

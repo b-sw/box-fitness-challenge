@@ -1,2 +1,1 @@
-export * from './auth.query-type';
-export * from './activity.query-type';
+export * from './training.query-type';

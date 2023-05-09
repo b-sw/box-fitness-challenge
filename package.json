@@ -45,6 +45,7 @@
         "class-validator": "^0.14.0",
         "core-js": "^3.6.5",
         "dayjs-plugin-utc": "^0.1.2",
+        "deep-equal": "^2.2.1",
         "formik": "^2.2.9",
         "framer-motion": "4.1.17",
         "google-auth-library": "^8.7.0",
@@ -66,7 +67,8 @@
         "sqlite3": "^5.1.6",
         "tslib": "^2.0.0",
         "typeorm": "^0.3.15",
-        "yup": "^1.1.1"
+        "yup": "^1.1.1",
+        "zustand": "^4.3.8"
     },
     "devDependencies": {
         "@nestjs/schematics": "^8.0.4",

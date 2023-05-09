@@ -2,12 +2,11 @@ import { Flex, Spacer, Text } from '@chakra-ui/react';
 
 type HeaderPanelProps = {
     title: string;
-    loginButton: JSX.Element;
-    activityButton: JSX.Element;
+    trainingButton: JSX.Element;
     profileMenu: JSX.Element;
 };
 
-export const HeaderRaw = ({ title, loginButton, activityButton, profileMenu }: HeaderPanelProps) => {
+export const HeaderRaw = ({ title, trainingButton, profileMenu }: HeaderPanelProps) => {
     return (
         <Flex direction={['column', 'row']} backgroundColor={'blue.600'} mb={3}>
             <Text fontSize={'4xl'} color={'gray.50'} fontWeight={'bold'}>
@@ -18,8 +17,7 @@ export const HeaderRaw = ({ title, loginButton, activityButton, profileMenu }: H
 
             <Flex alignItems={'center'} gap={2}>
                 <Spacer />
-                {loginButton}
-                {activityButton}
+                {trainingButton}
                 {profileMenu}
                 <Spacer />
             </Flex>

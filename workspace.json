@@ -318,6 +318,27 @@
                 }
             }
         },
+        "frontend-store": {
+            "root": "libs/frontend/store",
+            "sourceRoot": "libs/frontend/store/src",
+            "projectType": "library",
+            "targets": {
+                "lint": {
+                    "executor": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/frontend/store/**/*.{ts,tsx,js,jsx}"]
+                    }
+                },
+                "test": {
+                    "executor": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/frontend/store"],
+                    "options": {
+                        "jestConfig": "libs/frontend/store/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
         "frontend-ui": {
             "root": "libs/frontend/ui",
             "sourceRoot": "libs/frontend/ui/src",

@@ -3,6 +3,7 @@ import { User } from '@box-fc/shared/types';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
 import dayjs from 'dayjs';
+import 'dayjs/plugin/isBetween';
 import 'dayjs/plugin/utc';
 import { DATETIME_FORMAT } from '../../../utils/datetime/datetime.format';
 import { ListItem } from '../../../utils/list-item/ListItem';

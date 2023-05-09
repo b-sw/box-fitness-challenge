@@ -1,5 +1,5 @@
-import { useAuthQuery, useTrainingMutation } from '@box-fc/frontend/query';
-import { toastError, toastSuccess } from '@box-fc/frontend/ui';
+import { useTrainingMutation } from '@box-fc/frontend/query';
+import { useAuthStore } from '@box-fc/frontend/store';
 import {
     Button,
     FormControl,
@@ -20,6 +20,7 @@ import dayjs from 'dayjs';
 import { Field, Formik } from 'formik';
 import { useEffect } from 'react';
 import { DATETIME_FORMAT } from '../utils/datetime/datetime.format';
+import { toastError, toastSuccess } from '../utils/toast/toast-info';
 
 type ActivityCreateModalProps = {
     isOpen: boolean;
@@ -27,7 +28,9 @@ type ActivityCreateModalProps = {
 };
 
 export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
-    const { currentUserId } = useAuthQuery();
+    const {
+        user: { id: currentUserId },
+    } = useAuthStore((state) => state);
     const { createMutation } = useTrainingMutation();
     const toast = useToast();
 
@@ -43,7 +46,9 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModal
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createMutation.status]);
 
-    console.log('currentUserId', currentUserId);
+    if (!currentUserId) {
+        return null;
+    }
 
     return (
         <Modal isOpen={isOpen} onClose={handleClose} isCentered>

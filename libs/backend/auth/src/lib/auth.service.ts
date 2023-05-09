@@ -17,7 +17,7 @@ export class AuthService {
         const jwt = this._getJwt(email, user.id);
 
         return {
-            userId: user.id,
+            id: user.id,
             accessToken: jwt,
             firstName: user.firstName,
             lastName: user.lastName,

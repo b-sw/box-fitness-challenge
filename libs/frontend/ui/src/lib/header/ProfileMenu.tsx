@@ -1,19 +1,25 @@
 import { useAuthMutation, useAuthQuery } from '@box-fc/frontend/query';
+import { useAuthStore } from '@box-fc/frontend/store';
 import { ProfileMenuRaw } from './profile-menu/ProfileMenu.raw';
 
 export const ProfileMenu = () => {
-    const { isLoggedIn, authQuery } = useAuthQuery();
+    const { isLoggedIn } = useAuthQuery();
+    const { user } = useAuthStore();
     const { logout } = useAuthMutation();
+
+    if (!(user.firstName && user.lastName && user.email && user.team && user.division && user.imageUrl)) {
+        return null;
+    }
 
     return (
         <ProfileMenuRaw
             isEnabled={isLoggedIn}
-            firstName={authQuery.data?.firstName ?? ''}
-            lastName={authQuery.data?.lastName ?? ''}
-            email={authQuery.data?.email ?? ''}
-            team={authQuery.data?.team ?? ''}
-            division={authQuery.data?.division ?? ''}
-            profilePictureSrc={authQuery.data?.userImageSrc ?? ''}
+            firstName={user.firstName}
+            lastName={user.lastName}
+            email={user.email}
+            team={user.team}
+            division={user.division}
+            profilePictureSrc={user.imageUrl}
             handleLogout={logout}
         />
     );
