@@ -51,9 +51,9 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         const trainings = await this.trainingsRepository.find({
             where: { userId: userId, trainingDate: Between(startDate, endDate) },
         });
-        const userScore = this._getTrainingsScore(trainings);
+        const { score } = this._getTrainingsScore(trainings);
 
-        return { userId, score: userScore };
+        return { userId, score };
     }
 
     async getAllUsersActivities(startDate: Date, endDate: Date): Promise<UserActivity[]> {
@@ -67,7 +67,7 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         return [...usersTrainings.entries()]
             .map(([userId, trainings]) => ({
                 userId,
-                score: this._getTrainingsScore(trainings),
+                score: this._getTrainingsScore(trainings).score,
             }))
             .sort((a, b) => b.score - a.score);
     }
@@ -87,9 +87,9 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         return [...teamsTrainings.entries()]
             .map(([team, trainings]) => ({
                 team,
-                score: this._getTrainingsScore(trainings),
+                ...this._getTrainingsScore(trainings),
             }))
-            .sort((a, b) => b.score - a.score);
+            .sort((a, b) => b.meanScore - a.meanScore);
     }
 
     async updateTraining(
@@ -115,7 +115,8 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
         }
     }
 
-    private _getTrainingsScore(trainings: Training[]): number {
+    private _getTrainingsScore(trainings: Training[]): { score: number; meanScore: number } {
+        const uniqueUsersCount = new Set(trainings.map(({ userId }) => userId)).size;
         const dailyActiveTimes = trainings.reduce((acc, { trainingDate, duration }) => {
             const date = trainingDate.toISOString().split('T')[0];
 
@@ -128,8 +129,9 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
             (acc, activeTime) => acc + Math.sqrt(activeTime) * TrainingsService.SCORE_FACTOR,
             0,
         );
+        const meanScore = overallScore / uniqueUsersCount;
 
-        return roundFloat(overallScore);
+        return { score: roundFloat(overallScore), meanScore: roundFloat(meanScore) };
     }
 
     private _getTrainingsInRange(startDate: Date, endDate: Date): Promise<Training[]> {

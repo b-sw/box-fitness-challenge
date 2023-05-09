@@ -11,7 +11,8 @@ type TestTraining = Omit<ActualTraining, 'user'>;
 
 describe('TrainingsService', () => {
     const userIdStub = 'userId';
-    const anotherUserIdStub = 'anotherUserId';
+    const userFromTheSameTeamIdStub = 'userFromTheSameTeamId';
+    const userFromAnotherTeamIdStub = 'anotherUserId';
     const trainingIdStub = 'trainingId';
     const durationStub = 1;
     const trainingDtoStub: CreateTrainingDto = {
@@ -86,7 +87,11 @@ describe('TrainingsService', () => {
     });
 
     it('should get user trainings', async () => {
-        const anotherUserTrainingStub = { ...trainingDtoStub, id: 'anotherTrainingId', userId: anotherUserIdStub };
+        const anotherUserTrainingStub = {
+            ...trainingDtoStub,
+            id: 'anotherTrainingId',
+            userId: userFromAnotherTeamIdStub,
+        };
         await trainingRepository.insert(trainingStub);
         await trainingRepository.insert(anotherUserTrainingStub);
 
@@ -117,8 +122,9 @@ describe('TrainingsService', () => {
         const accumulatedActivities = await service.getAllUsersActivities(todayStart, tomorrowEnd);
 
         expect(accumulatedActivities).toEqual([
+            { userId: userFromTheSameTeamIdStub, score: 21 },
             { userId: userIdStub, score: 15 },
-            { userId: anotherUserIdStub, score: 12 },
+            { userId: userFromAnotherTeamIdStub, score: 12 },
         ]);
     });
 
@@ -128,8 +134,8 @@ describe('TrainingsService', () => {
         const accumulatedActivities = await service.getAllTeamsActivities(todayStart, todayEnd);
 
         expect(accumulatedActivities).toEqual([
-            { team: teamStub2, score: 12 },
-            { team: teamStub1, score: 6 },
+            { team: teamStub2, score: 12, meanScore: 12 },
+            { team: teamStub1, score: 21.84, meanScore: 10.92 },
         ]);
     });
 
@@ -211,21 +217,50 @@ describe('TrainingsService', () => {
             role: 'role',
         };
         await userRepository.insert({ id: userIdStub, email: 'email1', ...baseUserStub, team: teamStub1 });
-        await userRepository.insert({ id: anotherUserIdStub, email: 'email2', ...baseUserStub, team: teamStub2 });
+        await userRepository.insert({
+            id: userFromTheSameTeamIdStub,
+            email: 'email2',
+            ...baseUserStub,
+            team: teamStub1,
+        });
+        await userRepository.insert({
+            id: userFromAnotherTeamIdStub,
+            email: 'email3',
+            ...baseUserStub,
+            team: teamStub2,
+        });
     }
 
     async function stubMultipleUsersActivities(): Promise<void> {
         const trainingStub1 = { ...trainingDtoStub, id: 'id1', duration: 1, trainingDate: todayStart };
-        const trainingStub2 = { ...trainingDtoStub, id: 'id2', duration: 3, trainingDate: todayEnd };
+        const trainingStub2 = {
+            ...trainingDtoStub,
+            id: 'id2',
+            duration: 3,
+            trainingDate: todayEnd,
+        };
         const trainingStub3 = { ...trainingDtoStub, id: 'id3', duration: 9, trainingDate: tomorrowEnd };
-        const anotherUserTrainingStub = {
+        const userFromTheSameTeamTrainingStub = {
             ...trainingDtoStub,
             id: 'id4',
-            userId: anotherUserIdStub,
+            duration: 49,
+            trainingDate: todayEnd,
+            userId: userFromTheSameTeamIdStub,
+        };
+        const userFromOtherTeamTrainingStub = {
+            ...trainingDtoStub,
+            id: 'id5',
+            userId: userFromAnotherTeamIdStub,
             duration: 16,
             trainingDate: todayEnd,
         };
-        await trainingRepository.insert([trainingStub1, trainingStub2, trainingStub3, anotherUserTrainingStub]);
+        await trainingRepository.insert([
+            trainingStub1,
+            trainingStub2,
+            trainingStub3,
+            userFromTheSameTeamTrainingStub,
+            userFromOtherTeamTrainingStub,
+        ]);
     }
 
     function stubDates(): void {
