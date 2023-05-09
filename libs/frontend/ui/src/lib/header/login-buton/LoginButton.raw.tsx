@@ -8,7 +8,7 @@ type LoginButtonProps = {
 
 export const LoginButtonRaw = ({ onCLick, isLoading }: LoginButtonProps) => {
     return (
-        <Button isLoading={isLoading} onClick={onCLick} leftIcon={<FcGoogle />}>
+        <Button isLoading={isLoading} onClick={onCLick} leftIcon={<FcGoogle />} disabled={true}>
             Sign in
         </Button>
     );
