@@ -2,11 +2,18 @@ import { AuthModule } from '@box-fc/backend/auth';
 import { TrainingsModule } from '@box-fc/backend/trainings';
 import { UsersModule } from '@box-fc/backend/users';
 import { Module } from '@nestjs/common';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dbConfig } from '../../ormconfig';
 
 @Module({
-    imports: [TypeOrmModule.forRoot(dbConfig), UsersModule, TrainingsModule, AuthModule],
+    imports: [
+        AuthModule,
+        UsersModule,
+        ThrottlerModule.forRoot({ ttl: 60, limit: 60 }),
+        TrainingsModule,
+        TypeOrmModule.forRoot(dbConfig),
+    ],
     controllers: [],
     providers: [],
 })
