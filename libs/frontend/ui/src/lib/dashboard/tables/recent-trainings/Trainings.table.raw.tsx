@@ -27,8 +27,6 @@ export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, cu
     const [filter, setFilter] = useState<string>('');
     const TITLE = 'Recent trainings';
 
-    console.log('trainings', allTrainings, myTrainings, currentUserId, trainings);
-
     useEffect(() => {
         if (users.size === 0) {
             return;
