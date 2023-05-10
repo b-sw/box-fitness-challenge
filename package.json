@@ -45,6 +45,7 @@
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.0",
 		"core-js": "^3.6.5",
+		"dayjs": "^1.11.7",
 		"dayjs-plugin-utc": "^0.1.2",
 		"deep-equal": "^2.2.1",
 		"formik": "^2.2.9",
