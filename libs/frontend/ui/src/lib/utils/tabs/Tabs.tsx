@@ -1,11 +1,11 @@
-import { Tabs as ChakraTabs, TabsProps as ChakraTabsProps } from '@chakra-ui/react';
+import { Tabs as ChakraTabs, TabsProps } from '@chakra-ui/react';
 
-type TabsProps = {
+type Props = {
     children?: (JSX.Element | false)[] | (JSX.Element | false);
-    options?: ChakraTabsProps;
+    options?: TabsProps;
 };
 
-export const Tabs = ({ children, options }: TabsProps) => {
+export const Tabs = ({ children, options }: Props) => {
     return (
         <ChakraTabs
             display={'flex'}

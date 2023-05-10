@@ -1,13 +1,13 @@
 import { Flex, FlexProps, Spacer, Text } from '@chakra-ui/react';
 
-type TablePanelProps = {
+type Props = {
     headerTitle: string;
     headerButtons?: JSX.Element | false;
     children?: (JSX.Element | false)[] | (JSX.Element | false);
     options?: FlexProps;
 };
 
-export const TablePanel = ({ headerTitle, headerButtons, children, options }: TablePanelProps) => {
+export const TablePanel = ({ headerTitle, headerButtons, children, options }: Props) => {
     return (
         <Flex direction={'column'} overflow={'hidden'} flexGrow={1} {...options}>
             <Flex mb={1} mr={1} alignItems={'center'}>

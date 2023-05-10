@@ -2,12 +2,12 @@ import { useMobileQuery } from '@box-fc/frontend/query';
 import { Flex, Spacer, Text } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 
-type HeaderPanelProps = {
+type Props = {
     title: string;
     buttons: ReactElement;
 };
 
-export const HeaderRaw = ({ title, buttons }: HeaderPanelProps) => {
+export const HeaderRaw = ({ title, buttons }: Props) => {
     const { isMobile } = useMobileQuery();
 
     return (

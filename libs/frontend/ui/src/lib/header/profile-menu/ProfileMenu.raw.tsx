@@ -1,6 +1,6 @@
 import { Avatar, Badge, Button, Flex, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from '@chakra-ui/react';
 
-type ProfileMenuRawProps = {
+type Props = {
     isEnabled: boolean;
     firstName: string;
     lastName: string;
@@ -20,7 +20,7 @@ export const ProfileMenuRaw = ({
     division,
     profilePictureSrc,
     handleLogout,
-}: ProfileMenuRawProps) => {
+}: Props) => {
     return (
         <Menu>
             <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0} disabled={!isEnabled}>

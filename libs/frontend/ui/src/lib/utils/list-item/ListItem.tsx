@@ -1,10 +1,10 @@
 import { Flex } from '@chakra-ui/react';
 
-type PageProps = {
+type Props = {
     children?: (JSX.Element | false)[] | (JSX.Element | false);
 };
 
-export const ListItem = ({ children }: PageProps) => {
+export const ListItem = ({ children }: Props) => {
     return (
         <Flex
             direction={['column', 'row']}

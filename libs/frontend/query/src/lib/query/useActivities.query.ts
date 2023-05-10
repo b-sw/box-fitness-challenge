@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { ACTIVITIES_QUERY_KEY } from '../query-keys/activities.query-key';
 
-type AccumulatedActivitiesQueryProps = {
+type Props = {
     startDate: Date;
     endDate: Date;
 };
 
-export const useActivitiesQuery = ({ startDate, endDate }: AccumulatedActivitiesQueryProps) => {
+export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
     // todo: move this to a shared file
     const TRAININGS_ENDPOINT = 'activities';
     const DEFAULT_QUERY_OPTIONS = { enabled: true, initialData: [] };

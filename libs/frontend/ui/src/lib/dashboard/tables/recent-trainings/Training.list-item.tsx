@@ -1,5 +1,4 @@
 import { Training } from '@box-fc/frontend/query';
-import { ColonList } from '@box-fc/frontend/ui';
 import { User } from '@box-fc/shared/types';
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
@@ -7,9 +6,10 @@ import dayjs from 'dayjs';
 import 'dayjs/plugin/isBetween';
 import 'dayjs/plugin/utc';
 import { DATETIME_FORMAT } from '../../../utils/datetime/datetime.format';
+import { ColonList } from '../../../utils/generic-components/ColonList';
 import { ListItem } from '../../../utils/list-item/ListItem';
 
-type PersonalListItemProps = {
+type Props = {
     training: Training;
     user: User;
     readonly: boolean;
@@ -17,7 +17,7 @@ type PersonalListItemProps = {
     isMobile: boolean;
 };
 
-export const TrainingListItem = ({ training, user, readonly, handleDelete, isMobile }: PersonalListItemProps) => {
+export const TrainingListItem = ({ training, user, readonly, handleDelete, isMobile }: Props) => {
     return (
         <ListItem>
             {personalActivityItem(user, training, isMobile)}
