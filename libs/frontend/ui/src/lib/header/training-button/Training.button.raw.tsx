@@ -1,14 +1,13 @@
 import { Button } from '@chakra-ui/react';
 import { FaDumbbell } from 'react-icons/fa';
 
-type ActivityButtonRawProps = {
+type Props = {
     handleClicked: () => void;
-    isEnabled: boolean;
 };
 
-export const TrainingButtonRaw = ({ handleClicked, isEnabled }: ActivityButtonRawProps) => {
+export const TrainingButtonRaw = ({ handleClicked }: Props) => {
     return (
-        <Button isDisabled={!isEnabled} onClick={handleClicked} leftIcon={<FaDumbbell />}>
+        <Button onClick={handleClicked} leftIcon={<FaDumbbell />}>
             Register training
         </Button>
     );

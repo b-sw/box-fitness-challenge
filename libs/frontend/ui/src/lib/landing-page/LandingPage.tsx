@@ -1,6 +1,6 @@
 import { Flex, Spacer } from '@chakra-ui/react';
-import { LoginButton } from '../header/LoginButton';
 import { Page } from '../utils/page/Page';
+import { LoginButton } from './LoginButton';
 
 export const LandingPage = () => {
     return (

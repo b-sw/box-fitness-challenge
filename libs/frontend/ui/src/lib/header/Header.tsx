@@ -1,7 +1,19 @@
-import { HeaderRaw } from './header/Header.raw';
-import { ProfileMenu } from './ProfileMenu';
-import { TrainingButton } from './Training.button';
+import { useAuthQuery } from '@box-fc/frontend/query';
+import { HeaderRaw } from './Header.raw';
+import { ProfileMenu } from './profile-menu/ProfileMenu';
+import { TeamsButton } from './teams-button/TeamsButton';
+import { TrainingButton } from './training-button/Training.button';
 
 export const Header = () => {
-    return <HeaderRaw title={'Fitness challenge'} trainingButton={<TrainingButton />} profileMenu={<ProfileMenu />} />;
+    const { isAdmin } = useAuthQuery();
+
+    const buttons = (
+        <>
+            {isAdmin && <TeamsButton />}
+            <TrainingButton />
+            <ProfileMenu />
+        </>
+    );
+
+    return <HeaderRaw title={'Fitness challenge'} buttons={buttons} />;
 };

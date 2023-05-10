@@ -1,6 +1,6 @@
 import { useAuthMutation, useAuthQuery } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
-import { ProfileMenuRaw } from './profile-menu/ProfileMenu.raw';
+import { ProfileMenuRaw } from './ProfileMenu.raw';
 
 export const ProfileMenu = () => {
     const { isLoggedIn } = useAuthQuery();

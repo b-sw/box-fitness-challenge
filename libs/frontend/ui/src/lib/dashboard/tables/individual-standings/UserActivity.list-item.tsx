@@ -46,15 +46,16 @@ export const UserActivityListItem = ({ userActivity, user, onClick, isMobile }: 
 
                         {isMobile && <Spacer />}
                     </Flex>
-
-                    <IconButton
-                        w={['100%', '25%']}
-                        aria-label="IconButton1"
-                        icon={<MdAssessment />}
-                        variant={'ghost'}
-                        onClick={() => onClick(userActivity)}
-                    />
                 </Flex>
+
+                <Spacer />
+
+                <IconButton
+                    aria-label="user-activity-button"
+                    icon={<MdAssessment />}
+                    variant={'ghost'}
+                    onClick={() => onClick(userActivity)}
+                />
             </Flex>
         </ListItem>
     );

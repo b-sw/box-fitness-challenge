@@ -19,15 +19,15 @@ import {
 import dayjs from 'dayjs';
 import { Field, Formik } from 'formik';
 import { useEffect } from 'react';
-import { DATETIME_FORMAT } from '../utils/datetime/datetime.format';
-import { toastError, toastSuccess } from '../utils/toast/toast-info';
+import { DATETIME_FORMAT } from '../../utils/datetime/datetime.format';
+import { toastError, toastSuccess } from '../../utils/toast/toast-info';
 
-type ActivityCreateModalProps = {
+type Props = {
     isOpen: boolean;
     handleClose: () => void;
 };
 
-export const TrainingCreateModal = ({ isOpen, handleClose }: ActivityCreateModalProps) => {
+export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
     const {
         user: { id: currentUserId },
     } = useAuthStore();

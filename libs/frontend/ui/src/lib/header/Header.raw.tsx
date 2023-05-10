@@ -1,13 +1,13 @@
 import { useMobileQuery } from '@box-fc/frontend/query';
 import { Flex, Spacer, Text } from '@chakra-ui/react';
+import { ReactElement } from 'react';
 
 type HeaderPanelProps = {
     title: string;
-    trainingButton: JSX.Element;
-    profileMenu: JSX.Element;
+    buttons: ReactElement;
 };
 
-export const HeaderRaw = ({ title, trainingButton, profileMenu }: HeaderPanelProps) => {
+export const HeaderRaw = ({ title, buttons }: HeaderPanelProps) => {
     const { isMobile } = useMobileQuery();
 
     return (
@@ -24,8 +24,7 @@ export const HeaderRaw = ({ title, trainingButton, profileMenu }: HeaderPanelPro
 
             <Flex alignItems={'center'} gap={2}>
                 <Spacer />
-                {trainingButton}
-                {profileMenu}
+                {buttons}
                 <Spacer />
             </Flex>
         </Flex>
