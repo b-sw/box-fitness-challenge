@@ -16,12 +16,15 @@ export class User {
     @Column({ unique: true })
     email: string;
 
-    @Column()
-    team: string;
+    @Column({ nullable: true })
+    team?: string;
 
-    @Column()
-    division: string;
+    @Column({ nullable: true })
+    division?: string;
 
     @Column({ type: 'enum', enum: Role })
     role: Role;
+
+    @Column()
+    imageUrl: string;
 }

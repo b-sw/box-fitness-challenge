@@ -25,6 +25,7 @@ describe('TrainingsService', () => {
     const trainingStub = { ...trainingDtoStub, id: trainingIdStub };
     const teamStub1 = 'team1';
     const teamStub2 = 'team2';
+    const teamlessUserIdStub = 'teamlessUserId';
 
     let todayStart: Date;
     let todayEnd: Date;
@@ -139,6 +140,15 @@ describe('TrainingsService', () => {
         ]);
     });
 
+    it('should not get teams activities for no teams', async () => {
+        const trainingStub1 = { ...trainingDtoStub, trainingDate: todayStart, userId: teamlessUserIdStub };
+        await trainingRepository.insert(trainingStub1);
+
+        const accumulatedActivities = await service.getAllTeamsActivities(todayStart, todayEnd);
+
+        expect(accumulatedActivities).toEqual([]);
+    });
+
     it('should update training', async () => {
         await trainingRepository.insert(trainingStub);
 
@@ -229,6 +239,7 @@ describe('TrainingsService', () => {
             ...baseUserStub,
             team: teamStub2,
         });
+        await userRepository.insert({ id: teamlessUserIdStub, email: 'email4', ...baseUserStub });
     }
 
     async function stubMultipleUsersActivities(): Promise<void> {
@@ -287,14 +298,17 @@ class User implements TestUser {
     @Column({ unique: true })
     email: string;
 
-    @Column()
-    team: string;
+    @Column({ nullable: true })
+    team?: string;
 
-    @Column()
-    division: string;
+    @Column({ nullable: true })
+    division?: string;
 
     @Column()
     role: string;
+
+    @Column({ nullable: true })
+    imageUrl: string;
 }
 
 @Entity()

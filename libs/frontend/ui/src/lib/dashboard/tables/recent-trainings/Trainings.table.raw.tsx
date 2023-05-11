@@ -45,7 +45,7 @@ export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, cu
             const { firstName, lastName, email, team } = users.get(training.userId) as User;
             const searchedProps = [firstName, lastName, email, team, training.type];
 
-            return searchedProps.some((value) => value.toLowerCase().includes(filter.toLowerCase()));
+            return searchedProps.some((value) => value?.toLowerCase().includes(filter.toLowerCase()));
         });
     };
 

@@ -1,4 +1,4 @@
-import { GETS_USERS, UsersService } from '@box-fc/backend/users';
+import { CREATES_USER, GETS_USERS, UsersService } from '@box-fc/backend/users';
 import { User } from '@box-fc/shared/types';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
@@ -13,6 +13,10 @@ import { JwtStrategy } from './strategies';
         JwtStrategy,
         {
             provide: GETS_USERS,
+            useClass: UsersService,
+        },
+        {
+            provide: CREATES_USER,
             useClass: UsersService,
         },
         AuthService,

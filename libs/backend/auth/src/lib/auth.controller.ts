@@ -1,4 +1,4 @@
-import { UserCredentials } from '@box-fc/shared/types';
+import { UserInfo } from '@box-fc/shared/types';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
@@ -13,7 +13,7 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
     @Post('google/auth')
-    async authenticateUser(@Body() authDto: AuthDto): Promise<UserCredentials> {
+    async authenticateUser(@Body() authDto: AuthDto): Promise<UserInfo> {
         return this.authService.googleLogin(authDto.googleToken);
     }
 

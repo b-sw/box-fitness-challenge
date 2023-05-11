@@ -39,7 +39,7 @@ export const WeeklyUsersActivities = ({
             const { firstName, lastName, email, team } = users.get(userActivity.userId) as User;
             const searchedProps = [firstName, lastName, email, team];
 
-            return searchedProps.some((value) => value.toLowerCase().includes(filter.toLowerCase()));
+            return searchedProps.some((value) => value?.toLowerCase().includes(filter.toLowerCase()));
         });
     };
 

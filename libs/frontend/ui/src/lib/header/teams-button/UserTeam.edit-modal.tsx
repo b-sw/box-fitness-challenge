@@ -51,8 +51,8 @@ export const UserTeamEditModal = ({ isOpen, handleClose, user }: Props) => {
 
                 <Formik
                     initialValues={{
-                        team: user.team,
-                        division: user.division,
+                        team: user.team || '',
+                        division: user.division || '',
                     }}
                     onSubmit={(values) => {
                         updateMutation.mutate({

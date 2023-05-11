@@ -1,8 +1,8 @@
-import { UserCredentials, WithNull } from '@box-fc/shared/types';
+import { UserInfo, WithNull } from '@box-fc/shared/types';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-type User = WithNull<UserCredentials> & WithNull<{ imageUrl: string }>;
+type User = WithNull<UserInfo> & WithNull<{ imageUrl: string }>;
 
 const getInitialUser = (): User => ({
     id: null,

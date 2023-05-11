@@ -1,51 +1,83 @@
-import { GETS_USERS, GetsUsers } from '@box-fc/backend/users';
-import { User, UserCredentials, uuid } from '@box-fc/shared/types';
+import { CREATES_USER, CreatesUser, GETS_USERS, GetsUsers } from '@box-fc/backend/users';
+import { Role, User, UserInfo, uuid } from '@box-fc/shared/types';
 import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { OAuth2Client } from 'google-auth-library';
+import axios from 'axios';
+import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
+
+dayjs.extend(isBetween);
+
+type GoogleUser = {
+    email: string;
+    family_name: string;
+    given_name: string;
+    picture: string;
+};
 
 @Injectable()
 export class AuthService {
     private static readonly USER_NOT_FOUND_MESSAGE = 'User not found';
     private static readonly USER_INVALID_MESSAGE = 'User is invalid';
+    private static readonly CHALLENGE_NOT_STARTED_MESSAGE = 'Challenge has not yet started';
+    private static readonly GOOGLE_USER_INFO_ENDPOINT = 'https://www.googleapis.com/oauth2/v1/userinfo';
 
-    constructor(@Inject(GETS_USERS) private readonly getsUsers: GetsUsers, private jwtService: JwtService) {}
+    constructor(
+        @Inject(GETS_USERS) private readonly getsUsers: GetsUsers,
+        @Inject(CREATES_USER) private readonly createsUser: CreatesUser,
+        private jwtService: JwtService,
+    ) {}
 
-    async googleLogin(googleToken: string): Promise<UserCredentials> {
-        const client = new OAuth2Client();
-        const { email } = (await client.getTokenInfo(googleToken)) as { email: string };
-        this._requireBoxEmail(email);
-        const user = await this._getValidUser(email);
-        const jwt = this._getJwt(email, user.id);
+    async googleLogin(googleToken: string): Promise<UserInfo> {
+        const { data: googleUser }: { data: GoogleUser } = await axios.get(
+            `${AuthService.GOOGLE_USER_INFO_ENDPOINT}?access_token=${googleToken}`,
+            {
+                baseURL: '',
+                headers: { Authorization: `Bearer ${googleToken}`, Accept: 'application/json' },
+            },
+        );
+        this._requireBoxEmail(googleUser.email);
+        this._requireChallengeStarted(googleUser.email);
 
-        return {
-            id: user.id,
-            accessToken: jwt,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: email,
-            team: user.team,
-            division: user.division,
-            role: user.role,
-        };
+        const user =
+            (await this.getsUsers.getUserByEmail(googleUser.email)) ??
+            (await this._createUserFromGoogleData(googleUser));
+        const jwt = this._getJwt(user.email, user.id);
+
+        return { ...user, accessToken: jwt };
     }
 
     async devLogin(email: string): Promise<{ accessToken: string }> {
-        const user = await this._getValidUser(email);
+        const user = await this._getUser(email);
         const jwt = this._getJwt(user.email, user.id);
         return { accessToken: jwt };
     }
 
-    private _requireBoxEmail(email: string): void {
-        // todo: remove later on
-        const isMeOrKuba = email === 'bswitalski.misc@gmail.com' || email === 'bswitalski.main@gmail.com';
+    private _createUserFromGoogleData(googleUser: GoogleUser): Promise<User> {
+        return this.createsUser.createUser({
+            email: googleUser.email,
+            firstName: googleUser.given_name,
+            lastName: googleUser.family_name,
+            imageUrl: googleUser.picture,
+            role: Role.Employee,
+        });
+    }
 
-        if (!email.endsWith('@box.com') && !isMeOrKuba) {
+    private _requireBoxEmail(email: string): void {
+        if (!email.endsWith('@box.com') && !this._isMeOrKuba(email)) {
             throw new BadRequestException(AuthService.USER_INVALID_MESSAGE);
         }
     }
 
-    private async _getValidUser(email: string): Promise<User> {
+    private _requireChallengeStarted(email: string): void {
+        const isChallengeStarted = dayjs().isBetween('2021-05-15', '2021-06-18');
+
+        if (!isChallengeStarted && !this._isMeOrKuba(email)) {
+            throw new BadRequestException(AuthService.CHALLENGE_NOT_STARTED_MESSAGE);
+        }
+    }
+
+    private async _getUser(email: string): Promise<User> {
         const user = await this.getsUsers.getUserByEmail(email);
 
         if (!user) {
@@ -58,5 +90,15 @@ export class AuthService {
     private _getJwt(userEmail: string, userId: uuid): string {
         const payload = { email: userEmail, sub: userId };
         return this.jwtService.sign(payload);
+    }
+
+    // todo: remove later on
+    private _isMeOrKuba(email: string): boolean {
+        return (
+            email === 'bswitalski.misc@gmail.com' ||
+            email === 'bswitalski.main@gmail.com' ||
+            email === 'bswitalski@box.com' ||
+            email === 'jwincewicz@box.com'
+        );
     }
 }

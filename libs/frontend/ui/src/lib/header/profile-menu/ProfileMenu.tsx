@@ -7,7 +7,7 @@ export const ProfileMenu = () => {
     const { user } = useAuthStore();
     const { logout } = useAuthMutation({});
 
-    if (!(user.firstName && user.lastName && user.email && user.team && user.division && user.imageUrl)) {
+    if (!(user.firstName && user.lastName && user.email && user.imageUrl)) {
         return null;
     }
 
@@ -17,8 +17,8 @@ export const ProfileMenu = () => {
             firstName={user.firstName}
             lastName={user.lastName}
             email={user.email}
-            team={user.team}
-            division={user.division}
+            team={user.team ?? 'N/A team'}
+            division={user.division ?? 'N/A team'}
             profilePictureSrc={user.imageUrl}
             handleLogout={logout}
         />

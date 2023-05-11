@@ -1,7 +1,7 @@
-import { ColonList, ListItem } from '@box-fc/frontend/ui';
 import { TeamActivity } from '@box-fc/shared/types';
-import { Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
-import { BsPeopleFill } from 'react-icons/bs';
+import { Badge, Flex, Spacer, Text } from '@chakra-ui/react';
+import { ColonList } from '../../../utils/generic-components/ColonList';
+import { ListItem } from '../../../utils/list-item/ListItem';
 
 type Props = {
     teamActivity: TeamActivity;
@@ -48,11 +48,11 @@ export const TeamActivityListItem = ({ teamActivity, isMobile }: Props) => {
                 rightChildren={scoreFieldsValues}
             />
 
-            <Flex w={['100%', '20%']}>
-                <Spacer />
-                <IconButton aria-label="IconButton1" icon={<BsPeopleFill />} variant={'ghost'} disabled />
-                <Spacer />
-            </Flex>
+            {/*<Flex w={['100%', '20%']}>*/}
+            {/*    <Spacer />*/}
+            {/*    <IconButton aria-label="IconButton1" icon={<BsPeopleFill />} variant={'ghost'} disabled />*/}
+            {/*    <Spacer />*/}
+            {/*</Flex>*/}
         </ListItem>
     );
 };

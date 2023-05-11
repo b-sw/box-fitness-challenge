@@ -15,11 +15,11 @@ export const UserActivityListItem = ({ userActivity, user, onClick, isMobile }: 
         <ListItem>
             <Flex direction={['column', 'row']} w={'100%'}>
                 <Flex w={['100%', '60%']} gap={1} alignItems={'center'}>
-                    <Avatar size={'sm'} />
+                    <Avatar size={'sm'} src={user.imageUrl} />
                     <Flex direction={'column'}>
                         <Flex alignItems={'center'} gap={1}>
                             <Badge colorScheme="whatsapp" fontSize={'xs'}>
-                                {user.team}
+                                {user.team ?? 'N/A team'}
                             </Badge>
                             <Text fontSize={'md'}>
                                 {user.firstName} {user.lastName}

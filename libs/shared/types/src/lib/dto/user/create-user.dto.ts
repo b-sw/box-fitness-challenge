@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, Length, MaxLength } from 'class-validator';
+import { IsEnum, IsOptional, Length, MaxLength } from 'class-validator';
 import { Role } from '../../role.type';
 
 export class CreateUserDto {
@@ -17,13 +17,18 @@ export class CreateUserDto {
 
     @ApiProperty()
     @MaxLength(15, { message: 'Team name too long.' })
-    team: string;
+    @IsOptional()
+    team?: string;
 
     @ApiProperty()
     @MaxLength(15, { message: 'Division name too long.' })
-    division: string;
+    @IsOptional()
+    division?: string;
 
     @ApiProperty()
     @IsEnum(Role)
     role: Role;
+
+    @ApiProperty()
+    imageUrl: string;
 }
