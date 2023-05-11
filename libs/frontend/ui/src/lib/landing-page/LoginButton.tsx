@@ -15,7 +15,7 @@ export const LoginButton = () => {
 
     return (
         <Button isLoading={loginMutation.isLoading} onClick={() => googleLogin()} leftIcon={<FcGoogle />}>
-            Sign in (coming soon)
+            Sign in
         </Button>
     );
 };
