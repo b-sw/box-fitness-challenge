@@ -11,6 +11,7 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Get('users')
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get all users' })
     async getAll(): Promise<User[]> {
         return this.usersService.getAllUsers();
@@ -24,12 +25,14 @@ export class UsersController {
     }
 
     @Get('users/employees')
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get all employees' })
     async getAllEmployees(): Promise<User[]> {
         return this.usersService.getUsersByRole(Role.Employee);
     }
 
     @Get('users/:userId')
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get user by id' })
     async getById(@Param() params: UserParams): Promise<User | null> {
         return await this.usersService.getUserById(params.userId);

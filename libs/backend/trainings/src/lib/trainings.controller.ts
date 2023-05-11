@@ -28,12 +28,14 @@ export class TrainingsController {
     }
 
     @Get('trainings')
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get all trainings' })
     getAll() {
         return this.trainingsService.getAllTrainings();
     }
 
     @Get('trainings/:trainingId')
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get training by id' })
     getById(@Param() { trainingId }: TrainingParams): Promise<Optional<Training>> {
         return this.trainingsService.getTrainingById(trainingId);
@@ -57,6 +59,7 @@ export class TrainingsController {
     }
 
     @Get('trainings/users/:userId')
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get user trainings' })
     getUserTrainings(@Param() { userId }: UserParams): Promise<Training[]> {
         return this.trainingsService.getUserTrainings(userId);
@@ -64,6 +67,7 @@ export class TrainingsController {
 
     @Post('activities/users/:userId')
     @HttpCode(200)
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get user activity' })
     getUserActivity(@Param() { userId }: UserParams, @Body() dto: ActivityDto): Promise<UserActivity> {
         return this.trainingsService.getUserActivity(userId, dto.startDate, dto.endDate);
@@ -71,6 +75,7 @@ export class TrainingsController {
 
     @Post('activities/users')
     @HttpCode(200)
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get all users activities' })
     getUsersActivities(@Body() dto: ActivityDto): Promise<UserActivity[]> {
         return this.trainingsService.getAllUsersActivities(dto.startDate, dto.endDate);
@@ -78,6 +83,7 @@ export class TrainingsController {
 
     @Post('activities/teams')
     @HttpCode(200)
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get all teams activities' })
     getTeamsActivities(@Body() dto: ActivityDto): Promise<TeamActivity[]> {
         return this.trainingsService.getAllTeamsActivities(dto.startDate, dto.endDate);
