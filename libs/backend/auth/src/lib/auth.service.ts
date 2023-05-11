@@ -64,7 +64,7 @@ export class AuthService {
     }
 
     private _requireBoxEmail(email: string): void {
-        if (!email.endsWith('@box.com') && !this._isMeOrKuba(email)) {
+        if (!email.endsWith('@box.com') && !this._isMeOrKuba(email) && email !== 'bartus.switalski@gmail.com') {
             throw new BadRequestException(AuthService.USER_INVALID_MESSAGE);
         }
     }
