@@ -1,4 +1,5 @@
 import { UserInfo, WithNull } from '@box-fc/shared/types';
+import axios from 'axios';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
@@ -36,3 +37,5 @@ export const useAuthStore = create<AuthState>()(
         ),
     ),
 );
+
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + useAuthStore.getState().user.accessToken;
