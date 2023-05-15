@@ -49,33 +49,33 @@ export const UsersModal = ({ isOpen, handleClose, users }: Props) => {
     const getUserListItem = (user: User) => (
         <ListItem key={`user-list-item-${user.id}`}>
             <Flex direction={['column', 'row']} w={'100%'}>
-                <Flex w={['100%', '80%']} gap={1} alignItems={'center'}>
-                    <Avatar size={'sm'} src={user.imageUrl} />
+                <Flex w={['100%', '90%']} gap={1} alignItems={'center'}>
+                    <Avatar size={'md'} src={user.imageUrl} />
                     <Flex direction={'column'}>
-                        <Flex alignItems={'center'} gap={1}>
-                            <Badge colorScheme="whatsapp" fontSize={'xs'}>
+                        <Text fontSize={'md'}>
+                            {user.firstName} {user.lastName}
+                        </Text>
+                        <Flex>
+                            <Badge colorScheme="linkedin" fontSize={'xs'}>
                                 {user.team ?? 'N/A team'}
                             </Badge>
-                            <Text fontSize={'md'}>
-                                {user.firstName} {user.lastName}
-                            </Text>
                         </Flex>
-                        <Flex direction={'column'}>
-                            <Text fontSize={'sm'} color={'gray.400'}>
-                                {user.email}
-                            </Text>
-                        </Flex>
+                        <Text fontSize={'sm'} color={'gray.400'}>
+                            {user.email}
+                        </Text>
                     </Flex>
                 </Flex>
 
                 <Spacer />
 
-                <IconButton
-                    aria-label="edit-user-button"
-                    icon={<EditIcon />}
-                    variant={'ghost'}
-                    onClick={() => handleUserClicked(user)}
-                />
+                <Flex w={['100%', '10%']} alignItems={'center'}>
+                    <IconButton
+                        aria-label="edit-user-button"
+                        icon={<EditIcon />}
+                        variant={'ghost'}
+                        onClick={() => handleUserClicked(user)}
+                    />
+                </Flex>
             </Flex>
         </ListItem>
     );

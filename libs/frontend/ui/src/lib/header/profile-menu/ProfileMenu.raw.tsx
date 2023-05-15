@@ -36,8 +36,8 @@ export const ProfileMenuRaw = ({
                         {email}
                     </Text>
 
-                    <Flex mt={3} gap={2}>
-                        <Badge colorScheme={'green'} fontSize={'xs'}>
+                    <Flex mt={3} gap={2} direction={'column'}>
+                        <Badge colorScheme={'linkedin'} fontSize={'xs'}>
                             {team}
                         </Badge>
                         <Badge colorScheme={'gray'} fontSize={'xs'}>
