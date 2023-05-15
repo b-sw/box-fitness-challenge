@@ -59,7 +59,7 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range, users }: P
     };
 
     return (
-        <Modal onClose={onClose} isOpen={isOpen} isCentered>
+        <Modal onClose={onClose} isOpen={isOpen} isCentered size={'lg'}>
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>User's trainings</ModalHeader>

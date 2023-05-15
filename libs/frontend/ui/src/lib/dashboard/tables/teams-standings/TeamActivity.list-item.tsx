@@ -33,16 +33,16 @@ export const TeamActivityListItem = ({ teamActivity, isMobile }: Props) => {
 
     return (
         <ListItem>
-            <Flex w={['100%', '40%']}>
+            <Flex w={['100%', '70%']}>
                 {isMobile && <Spacer />}
-                <Badge colorScheme="whatsapp" fontSize={'xl'}>
+                <Badge colorScheme="linkedin" fontSize={'md'} variant={'subtle'}>
                     {teamActivity.team}
                 </Badge>
                 <Spacer />
             </Flex>
 
             <ColonList
-                xlWidth={'40%'}
+                xlWidth={'30%'}
                 isMobile={isMobile}
                 leftChildren={scoreFieldsNames}
                 rightChildren={scoreFieldsValues}

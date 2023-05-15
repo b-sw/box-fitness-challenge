@@ -14,16 +14,18 @@ export const UserActivityListItem = ({ userActivity, user, onClick, isMobile }: 
     return (
         <ListItem>
             <Flex direction={['column', 'row']} w={'100%'}>
-                <Flex w={['100%', '60%']} gap={1} alignItems={'center'}>
-                    <Avatar size={'sm'} src={user.imageUrl} />
+                <Flex w={['100%', '70%']} gap={1} alignItems={'center'}>
+                    <Avatar size={'md'} src={user.imageUrl} />
                     <Flex direction={'column'}>
                         <Flex alignItems={'center'} gap={1}>
-                            <Badge colorScheme="whatsapp" fontSize={'xs'}>
-                                {user.team ?? 'N/A team'}
-                            </Badge>
-                            <Text fontSize={'md'}>
+                            <Text fontSize={'lg'}>
                                 {user.firstName} {user.lastName}
                             </Text>
+                        </Flex>
+                        <Flex>
+                            <Badge colorScheme="linkedin" fontSize={'xs'} variant={'subtle'}>
+                                {user.team ?? 'N/A team'}
+                            </Badge>
                         </Flex>
                         <Flex direction={'column'}>
                             <Text fontSize={'sm'} color={'gray.400'}>
@@ -33,7 +35,7 @@ export const UserActivityListItem = ({ userActivity, user, onClick, isMobile }: 
                     </Flex>
                 </Flex>
 
-                <Flex w={['100%', '40%']} direction={['column', 'row']}>
+                <Flex w={['100%', '20%']} direction={['column', 'row']}>
                     <Flex w={['100%', '75%']} gap={1} alignItems={'center'}>
                         {isMobile && <Spacer />}
 
@@ -50,12 +52,14 @@ export const UserActivityListItem = ({ userActivity, user, onClick, isMobile }: 
 
                 <Spacer />
 
-                <IconButton
-                    aria-label="user-activity-button"
-                    icon={<MdAssessment />}
-                    variant={'ghost'}
-                    onClick={() => onClick(userActivity)}
-                />
+                <Flex w={['100%', '10%']} direction={['column', 'row']} alignItems={'center'}>
+                    <IconButton
+                        aria-label="user-activity-button"
+                        icon={<MdAssessment />}
+                        variant={'ghost'}
+                        onClick={() => onClick(userActivity)}
+                    />
+                </Flex>
             </Flex>
         </ListItem>
     );

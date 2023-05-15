@@ -48,9 +48,6 @@ export const personalActivityItem = (user: User, activity: Training, isMobile: b
                 Duration:
             </Text>
             <Text fontSize={'sm'} color={'gray.800'}>
-                Activity:
-            </Text>
-            <Text fontSize={'sm'} color={'gray.800'}>
                 Date:
             </Text>
             <Text fontSize={'sm'} color={'gray.800'}>
@@ -64,11 +61,6 @@ export const personalActivityItem = (user: User, activity: Training, isMobile: b
             <Text fontSize={'sm'} fontWeight={'bold'}>
                 {Math.floor(activity.duration / 60)}h {activity.duration % 60}m
             </Text>
-            <Text fontSize={'sm'}>
-                <Badge colorScheme={'facebook'} variant={'outline'}>
-                    {activity.type}
-                </Badge>
-            </Text>
             <Text fontSize={'sm'} fontWeight={'bold'}>
                 {trainingDate}
             </Text>
@@ -79,30 +71,47 @@ export const personalActivityItem = (user: User, activity: Training, isMobile: b
     );
 
     return (
-        <Flex direction={['column', 'row']} w={'100%'}>
-            <Flex w={['100%', '60%']} alignItems={'center'} gap={1}>
-                <Avatar size={'sm'} src={user.imageUrl} />
-                <Flex direction={'column'}>
-                    <Flex alignItems={'center'} gap={1}>
-                        <Badge colorScheme="whatsapp" fontSize={'xs'}>
+        <Flex direction={'column'} w={'100%'}>
+            <Flex direction={['column', 'row']} w={'100%'}>
+                <Flex w={['100%', '65%']} alignItems={'center'} gap={1}>
+                    <Avatar size={'md'} src={user.imageUrl} />
+                    <Flex direction={'column'}>
+                        <Flex alignItems={'center'} gap={1}>
+                            <Text fontSize={'lg'}>
+                                {user.firstName} {user.lastName}
+                            </Text>
+                        </Flex>
+                        <Badge colorScheme="linkedin" fontSize={'xs'}>
                             {user.team ?? 'N/A team'}
                         </Badge>
-                        <Text fontSize={'md'}>
-                            {user.firstName} {user.lastName}
+                        <Text fontSize={'sm'} color={'gray.400'}>
+                            {user.email}
                         </Text>
                     </Flex>
-                    <Text fontSize={'sm'} color={'gray.400'}>
-                        {user.email}
-                    </Text>
                 </Flex>
+
+                <ColonList
+                    xlWidth={'35%'}
+                    isMobile={isMobile}
+                    leftChildren={trainingFieldsNames}
+                    rightChildren={trainingFieldsValues}
+                />
             </Flex>
 
-            <ColonList
-                xlWidth={'40%'}
-                isMobile={isMobile}
-                leftChildren={trainingFieldsNames}
-                rightChildren={trainingFieldsValues}
-            />
+            <Flex alignItems={'center'} gap={1}>
+                <Spacer />
+
+                <Text fontSize={'md'} color={'gray.800'}>
+                    Activity:
+                </Text>
+                <Text fontSize={'md'}>
+                    <Badge colorScheme={'facebook'} variant={'outline'}>
+                        {activity.type}
+                    </Badge>
+                </Text>
+
+                <Spacer />
+            </Flex>
         </Flex>
     );
 };

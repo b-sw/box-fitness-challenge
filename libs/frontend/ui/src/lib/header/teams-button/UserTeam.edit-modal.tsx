@@ -1,3 +1,4 @@
+import { useUserMutation } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import {
     Button,
@@ -14,7 +15,6 @@ import {
     useToast,
 } from '@chakra-ui/react';
 import { Field, Formik } from 'formik';
-import { useUserMutation } from 'libs/frontend/query/src/lib/mutation/useUser.mutation';
 import { useEffect } from 'react';
 import { toastError, toastSuccess } from '../../utils/toast/toast-info';
 

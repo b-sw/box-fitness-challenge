@@ -19,6 +19,6 @@ export const dbConfig: MysqlConnectionOptions = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: entities,
-    synchronize: true,
+    // synchronize: true,
     charset: 'utf8mb4_unicode_ci',
 };
