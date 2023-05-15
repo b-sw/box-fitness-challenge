@@ -11,7 +11,7 @@ export const HeaderRaw = ({ title, buttons }: Props) => {
     const { isMobile } = useMobileQuery();
 
     return (
-        <Flex direction={['column', 'row']} backgroundColor={'blue.600'} mb={3}>
+        <Flex direction={['column', 'row']} backgroundColor={'boxBlue.500'} mb={3}>
             <Flex>
                 {isMobile && <Spacer />}
                 <Text fontSize={'4xl'} color={'gray.50'} fontWeight={'bold'}>
