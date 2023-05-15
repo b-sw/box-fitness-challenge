@@ -41,7 +41,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
         }
 
         if (createMutation.isError) {
-            toastError(toast, 'Error registering training');
+            toastError(toast, (createMutation.error as Error).message);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createMutation.status]);
