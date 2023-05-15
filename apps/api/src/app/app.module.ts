@@ -10,7 +10,7 @@ import { dbConfig } from '../../ormconfig';
     imports: [
         AuthModule,
         UsersModule,
-        ThrottlerModule.forRoot({ ttl: 60, limit: 60 }),
+        ThrottlerModule.forRoot({ ttl: 60, limit: 300 }),
         TrainingsModule,
         TypeOrmModule.forRoot(dbConfig),
     ],
