@@ -81,9 +81,11 @@ export const personalActivityItem = (user: User, activity: Training, isMobile: b
                                 {user.firstName} {user.lastName}
                             </Text>
                         </Flex>
-                        <Badge colorScheme="linkedin" fontSize={'xs'}>
-                            {user.team ?? 'N/A team'}
-                        </Badge>
+                        <Flex>
+                            <Badge colorScheme="linkedin" fontSize={'xs'}>
+                                {user.team ?? 'N/A team'}
+                            </Badge>
+                        </Flex>
                         <Text fontSize={'sm'} color={'gray.400'}>
                             {user.email}
                         </Text>
