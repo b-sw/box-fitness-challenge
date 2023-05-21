@@ -8,7 +8,7 @@ export class CreateTrainingDto {
     userId: uuid;
 
     @ApiProperty()
-    @Length(3, 20)
+    @Length(3, 30)
     type: string;
 
     @ApiProperty()

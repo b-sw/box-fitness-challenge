@@ -67,6 +67,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                     onSubmit={(values) => {
                         createMutation.mutate({
                             ...values,
+                            duration: Number(values.duration),
                             trainingDate: dayjs(values.trainingDate, DATETIME_FORMAT).toDate(),
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                             userId: currentUserId,
@@ -93,7 +94,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                         <FormLabel>training duration (minutes)</FormLabel>
                                         <NumberInput
                                             defaultValue={30}
-                                            min={0}
+                                            min={1}
                                             max={180}
                                             placeholder="in minutes"
                                             variant="filled"

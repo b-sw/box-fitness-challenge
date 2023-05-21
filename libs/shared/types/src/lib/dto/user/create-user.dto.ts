@@ -8,20 +8,20 @@ export class CreateUserDto {
     email: string;
 
     @ApiProperty()
-    @MaxLength(15, { message: 'First name too long.' })
+    @MaxLength(20, { message: 'First name too long.' })
     firstName: string;
 
     @ApiProperty()
-    @MaxLength(15, { message: 'Last name too long.' })
+    @MaxLength(20, { message: 'Last name too long.' })
     lastName: string;
 
     @ApiProperty()
-    @MaxLength(15, { message: 'Team name too long.' })
+    @MaxLength(30, { message: 'Team name too long.' })
     @IsOptional()
     team?: string;
 
     @ApiProperty()
-    @MaxLength(15, { message: 'Division name too long.' })
+    @MaxLength(30, { message: 'Division name too long.' })
     @IsOptional()
     division?: string;
 

@@ -1,6 +1,5 @@
 import { useAuthQuery } from '@box-fc/frontend/query';
 import { HeaderRaw } from './Header.raw';
-import { InfoButton } from './info-button/Info.button';
 import { ProfileMenu } from './profile-menu/ProfileMenu';
 import { TeamsButton } from './teams-button/TeamsButton';
 import { TrainingButton } from './training-button/Training.button';
@@ -12,7 +11,6 @@ export const Header = () => {
         <>
             {isAdmin && <TeamsButton />}
             <TrainingButton />
-            <InfoButton />
             <ProfileMenu />
         </>
     );
