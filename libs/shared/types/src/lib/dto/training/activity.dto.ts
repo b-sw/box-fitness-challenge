@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate } from 'class-validator';
+import { IsDateString } from 'class-validator';
 
 export class ActivityDto {
     @ApiProperty({ type: Date })
-    @IsDate()
+    @IsDateString()
     startDate: Date;
 
     @ApiProperty({ type: Date })
-    @IsDate()
+    @IsDateString()
     endDate: Date;
 }

@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
@@ -10,6 +11,7 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule, {
         logger: ['error', 'warn', 'log'],
     });
+    app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: false }));
     const config = new DocumentBuilder().setTitle('Box-fc api').setVersion('1.0').addBearerAuth().build();
     const document = SwaggerModule.createDocument(app, config);
 
