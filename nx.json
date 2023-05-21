@@ -1,86 +1,104 @@
 {
-    "npmScope": "nx-nestjs-react-starter",
-    "affected": {
-        "defaultBase": "main"
-    },
-    "implicitDependencies": {
-        "package.json": {
-            "dependencies": "*",
-            "devDependencies": "*"
-        },
-        ".eslintrc.json": "*"
-    },
-    "tasksRunnerOptions": {
-        "default": {
-            "runner": "@nrwl/workspace/tasks-runners/default",
-            "options": {
-                "cacheableOperations": ["build", "lint", "test", "e2e"]
-            }
-        }
-    },
-    "targetDependencies": {
-        "build": [
-            {
-                "target": "build",
-                "projects": "dependencies"
-            }
-        ]
-    },
-    "projects": {
-        "api": {
-            "tags": ["backend"]
-        },
-        "backend-auth": {
-            "tags": []
-        },
-        "backend-guards": {
-            "tags": []
-        },
-        "backend-migrations": {
-            "tags": []
-        },
-        "backend-trainings": {
-            "tags": []
-        },
-        "backend-users": {
-            "tags": []
-        },
-        "client": {
-            "tags": ["frontend"]
-        },
-        "client-e2e": {
-            "tags": ["end-2-end-tests"],
-            "implicitDependencies": ["client"]
-        },
-        "feature": {
-            "tags": []
-        },
-        "feature-header": {
-            "tags": []
-        },
-        "frontend-domain": {
-            "tags": []
-        },
-        "frontend-query": {
-            "tags": []
-        },
-        "frontend-store": {
-            "tags": []
-        },
-        "frontend-ui": {
-            "tags": []
-        },
-        "shared-types": {
-            "tags": ["module"]
-        },
-        "shared-util": {
-            "tags": []
-        },
-        "ui-header": {
-            "tags": []
-        },
-        "util-ui": {
-            "tags": []
-        }
-    }
+	"npmScope": "nx-nestjs-react-starter",
+	"affected": {
+		"defaultBase": "main"
+	},
+	"implicitDependencies": {
+		"package.json": {
+			"dependencies": "*",
+			"devDependencies": "*"
+		},
+		".eslintrc.json": "*"
+	},
+	"tasksRunnerOptions": {
+		"default": {
+			"runner": "@nrwl/workspace/tasks-runners/default",
+			"options": {
+				"cacheableOperations": [
+					"build",
+					"lint",
+					"test",
+					"e2e"
+				]
+			}
+		}
+	},
+	"targetDependencies": {
+		"build": [
+			{
+				"target": "build",
+				"projects": "dependencies"
+			}
+		]
+	},
+	"projects": {
+		"api": {
+			"tags": [
+				"backend"
+			]
+		},
+		"backend-auth": {
+			"tags": []
+		},
+		"backend-guards": {
+			"tags": []
+		},
+		"backend-migrations": {
+			"tags": []
+		},
+		"backend-trainings": {
+			"tags": []
+		},
+		"backend-users": {
+			"tags": []
+		},
+		"backend-winners": {
+			"tags": []
+		},
+		"client": {
+			"tags": [
+				"frontend"
+			]
+		},
+		"client-e2e": {
+			"tags": [
+				"end-2-end-tests"
+			],
+			"implicitDependencies": [
+				"client"
+			]
+		},
+		"feature": {
+			"tags": []
+		},
+		"feature-header": {
+			"tags": []
+		},
+		"frontend-domain": {
+			"tags": []
+		},
+		"frontend-query": {
+			"tags": []
+		},
+		"frontend-store": {
+			"tags": []
+		},
+		"frontend-ui": {
+			"tags": []
+		},
+		"shared-types": {
+			"tags": [
+				"module"
+			]
+		},
+		"shared-util": {
+			"tags": []
+		},
+		"ui-header": {
+			"tags": []
+		},
+		"util-ui": {
+			"tags": []
+		}
+	}
 }

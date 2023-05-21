@@ -1,4 +1,4 @@
-import { Training, User, Week, WeekWinner } from '@box-fc/shared/types';
+import { Training, User, Week, Winner } from '@box-fc/shared/types';
 import { config } from 'dotenv';
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 
@@ -9,7 +9,7 @@ config();
     It causes db schema to sync if it detects there's a mismatch between db schema and entities.
     This behaviour may lead to an automatic table drop.
  */
-const entities = [User, Training, Week, WeekWinner];
+const entities = [User, Training, Week, Winner];
 
 export const dbConfig: MysqlConnectionOptions = {
     type: 'mariadb',
@@ -19,7 +19,7 @@ export const dbConfig: MysqlConnectionOptions = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: entities,
-    // synchronize: true,
+    synchronize: true,
     migrations: [],
     charset: 'utf8mb4_unicode_ci',
 };

@@ -1,10 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Place } from '../place';
 import { uuid } from '../uuid.type';
 import { User } from './user.entity';
 import { Week } from './week.entity';
 
 @Entity()
-export class WeekWinner {
+export class Winner {
     @PrimaryGeneratedColumn('uuid')
     id: uuid;
 
@@ -13,6 +14,9 @@ export class WeekWinner {
 
     @Column()
     weekId: uuid;
+
+    @Column({ type: 'enum', enum: Place })
+    place: Place;
 
     @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'userId' })
