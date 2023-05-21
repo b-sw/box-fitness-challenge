@@ -93,6 +93,27 @@
                 }
             }
         },
+        "backend-migrations": {
+            "root": "libs/backend/migrations",
+            "sourceRoot": "libs/backend/migrations/src",
+            "projectType": "library",
+            "targets": {
+                "lint": {
+                    "executor": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["libs/backend/migrations/**/*.{ts,tsx,js,jsx}"]
+                    }
+                },
+                "test": {
+                    "executor": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/backend/migrations"],
+                    "options": {
+                        "jestConfig": "libs/backend/migrations/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
         "backend-trainings": {
             "root": "libs/backend/trainings",
             "sourceRoot": "libs/backend/trainings/src",

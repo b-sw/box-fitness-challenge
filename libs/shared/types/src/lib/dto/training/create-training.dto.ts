@@ -19,8 +19,4 @@ export class CreateTrainingDto {
     @ApiProperty({ type: Date })
     @IsDate()
     trainingDate: Date;
-
-    @ApiProperty({ type: Date })
-    @IsDate()
-    registrationDate: Date;
 }

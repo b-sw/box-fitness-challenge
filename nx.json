@@ -36,6 +36,9 @@
         "backend-guards": {
             "tags": []
         },
+        "backend-migrations": {
+            "tags": []
+        },
         "backend-trainings": {
             "tags": []
         },

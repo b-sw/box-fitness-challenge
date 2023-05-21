@@ -69,7 +69,6 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                             trainingDate: dayjs(values.trainingDate, DATETIME_FORMAT).toDate(),
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                             userId: currentUserId,
-                            registrationDate: dayjs.utc().toDate(),
                         });
                     }}
                 >
