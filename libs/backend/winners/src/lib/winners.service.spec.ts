@@ -77,6 +77,12 @@ describe('WinnersService', () => {
         await expect(throws()).rejects.toThrow();
     });
 
+    it('gets weeks', async () => {
+        const weeks = await service.getWeeks();
+
+        expect(weeks).toEqual([]);
+    });
+
     async function initializeModule(): Promise<void> {
         module = await Test.createTestingModule({
             imports: [
@@ -128,8 +134,8 @@ describe('WinnersService', () => {
     }
 
     async function stubWeeksRepository(): Promise<void> {
-        await weeksRepository.insert({ id: weekIdStub, startDate: yesterday, endDate: today });
         await weeksRepository.insert({ id: anotherWeekIdStub, startDate: today, endDate: tomorrow });
+        await weeksRepository.insert({ id: weekIdStub, startDate: yesterday, endDate: today });
     }
 });
 

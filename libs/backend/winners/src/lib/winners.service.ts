@@ -1,4 +1,4 @@
-import { CreateWinnerDto, Winner } from '@box-fc/shared/types';
+import { CreateWinnerDto, Week, Winner } from '@box-fc/shared/types';
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -7,7 +7,10 @@ import { Repository } from 'typeorm';
 export class WinnersService {
     private static readonly WINNER_NOT_FOUND = 'Winner not found';
 
-    constructor(@InjectRepository(Winner) private winnersRepository: Repository<Winner>) {}
+    constructor(
+        @InjectRepository(Winner) private winnersRepository: Repository<Winner>,
+        @InjectRepository(Week) private weeksRepository: Repository<Week>,
+    ) {}
 
     create(dto: CreateWinnerDto): Promise<Winner> {
         const winner = this.winnersRepository.create(dto);
@@ -17,6 +20,10 @@ export class WinnersService {
 
     getAll(): Promise<Winner[]> {
         return this.winnersRepository.find();
+    }
+
+    getWeeks(): Promise<Week[]> {
+        return this.weeksRepository.find({ order: { startDate: 'ASC' } });
     }
 
     async delete(winnerId: Winner['id']): Promise<Winner> {

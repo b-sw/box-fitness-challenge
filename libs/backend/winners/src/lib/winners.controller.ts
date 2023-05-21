@@ -1,5 +1,5 @@
 import { AdminGuard, JwtGuard } from '@box-fc/backend/guards';
-import { CreateWinnerDto, Winner, WinnersParams } from '@box-fc/shared/types';
+import { CreateWinnerDto, Week, Winner, WinnersParams } from '@box-fc/shared/types';
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { WinnersService } from './winners.service';
@@ -18,10 +18,17 @@ export class WinnersController {
     }
 
     @Get('winners')
-    @UseGuards(JwtGuard, AdminGuard)
+    @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get all winners' })
     getAll(): Promise<Winner[]> {
         return this.winnersService.getAll();
+    }
+
+    @Get('weeks')
+    @UseGuards(JwtGuard)
+    @ApiOperation({ summary: 'Get weeks' })
+    getWeeks(): Promise<Week[]> {
+        return this.winnersService.getWeeks();
     }
 
     @Delete('winners/:winnerId')
