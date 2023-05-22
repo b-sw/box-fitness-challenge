@@ -11,4 +11,3 @@ export * from './lib/optional.type';
 export * from './lib/optional-array.type';
 export * from './lib/activity.type';
 export * from './lib/with-null.type';
-export * from './lib/place';

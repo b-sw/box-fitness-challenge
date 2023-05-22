@@ -36,7 +36,7 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
     }
 
     getAllTrainings(): Promise<Training[]> {
-        return this.trainingsRepository.find({ order: { registrationDate: 'DESC' } });
+        return this.trainingsRepository.find({ order: { trainingDate: 'DESC' } });
     }
 
     getTrainingById(trainingId: Training['id']): Promise<Optional<Training>> {
@@ -44,7 +44,7 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
     }
 
     getUserTrainings(userId: UserId): Promise<Training[]> {
-        return this.trainingsRepository.find({ where: { userId: userId }, order: { registrationDate: 'DESC' } });
+        return this.trainingsRepository.find({ where: { userId: userId }, order: { trainingDate: 'DESC' } });
     }
 
     async getUserActivity(userId: UserId, startDate: Date, endDate: Date): Promise<UserActivity> {

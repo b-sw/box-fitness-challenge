@@ -1,4 +1,4 @@
-import { useUsersQuery, useWeeksQuery } from '@box-fc/frontend/query';
+import { useUsersQuery } from '@box-fc/frontend/query';
 import { SimpleGrid } from '@chakra-ui/react';
 import { Header } from '../header/Header';
 import { LoadingOverlay } from '../utils/loading-overlay/LoadingOverlay';
@@ -8,10 +8,9 @@ import { TrainingsTable } from './tables/recent-trainings/Trainings.table';
 import { TeamsStandingsTable } from './tables/teams-standings/TeamsStandings.table';
 
 export const Dashboard = () => {
-    const { isLoading: usersLoading } = useUsersQuery();
-    const { isLoading: weeksLoading } = useWeeksQuery();
+    const { isLoading } = useUsersQuery();
 
-    if (usersLoading || weeksLoading) {
+    if (isLoading) {
         return <LoadingOverlay />;
     }
 

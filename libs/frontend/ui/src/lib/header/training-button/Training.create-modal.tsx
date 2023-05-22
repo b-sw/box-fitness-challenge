@@ -2,7 +2,6 @@ import { useTrainingMutation } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
 import {
     Button,
-    Flex,
     FormControl,
     FormLabel,
     Input,
@@ -62,52 +61,50 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                     initialValues={{
                         type: '',
                         duration: 30,
-                        trainingDate: null,
+                        trainingDate: dayjs.utc().toDate(),
                     }}
                     onSubmit={(values) => {
                         createMutation.mutate({
                             ...values,
-                            duration: Number(values.duration),
                             trainingDate: dayjs(values.trainingDate, DATETIME_FORMAT).toDate(),
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                             userId: currentUserId,
+                            registrationDate: dayjs.utc().toDate(),
                         });
                     }}
                 >
                     {({ handleSubmit }: { handleSubmit: any }) => (
                         <form onSubmit={handleSubmit}>
                             <ModalBody>
-                                <Flex gap={2} direction={'column'}>
-                                    <FormControl>
-                                        <FormLabel>training type</FormLabel>
-                                        <Field
-                                            as={Input}
-                                            id="type"
-                                            name="type"
-                                            type="type"
-                                            variant="filled"
-                                            placeholder="running, football, etc."
-                                        />
-                                    </FormControl>
+                                <FormControl>
+                                    <FormLabel>training type</FormLabel>
+                                    <Field
+                                        as={Input}
+                                        id="type"
+                                        name="type"
+                                        type="type"
+                                        variant="filled"
+                                        placeholder="running, football, etc."
+                                    />
+                                </FormControl>
 
-                                    <FormControl>
-                                        <FormLabel>training duration (minutes)</FormLabel>
-                                        <NumberInput
-                                            defaultValue={30}
-                                            min={1}
-                                            max={180}
-                                            placeholder="in minutes"
-                                            variant="filled"
-                                        >
-                                            <Field as={NumberInputField} name="duration" id="duration"></Field>
-                                        </NumberInput>
-                                    </FormControl>
+                                <FormControl>
+                                    <FormLabel>training duration (minutes)</FormLabel>
+                                    <NumberInput
+                                        defaultValue={30}
+                                        min={0}
+                                        max={180}
+                                        placeholder="in minutes"
+                                        variant="filled"
+                                    >
+                                        <Field as={NumberInputField} name="duration" id="duration"></Field>
+                                    </NumberInput>
+                                </FormControl>
 
-                                    <FormControl>
-                                        <FormLabel>training date</FormLabel>
-                                        <Field as={Input} name="trainingDate" id="trainingDate" type="datetime-local" />
-                                    </FormControl>
-                                </Flex>
+                                <FormControl>
+                                    <FormLabel>training date</FormLabel>
+                                    <Field as={Input} name="trainingDate" id="trainingDate" type="datetime-local" />
+                                </FormControl>
                             </ModalBody>
 
                             <ModalFooter>

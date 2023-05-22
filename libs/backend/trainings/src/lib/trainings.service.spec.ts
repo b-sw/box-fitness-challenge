@@ -3,7 +3,7 @@ import { HttpException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { Type } from 'class-transformer';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Repository } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Repository } from 'typeorm';
 import { TrainingsService } from './trainings.service';
 
 type TestUser = Omit<ActualUser, 'role'>;
@@ -19,6 +19,7 @@ describe('TrainingsService', () => {
         userId: userIdStub,
         trainingDate: new Date(),
         duration: durationStub,
+        registrationDate: new Date(),
         type: 'type',
     };
     const trainingStub = { ...trainingDtoStub, id: trainingIdStub };
@@ -45,12 +46,7 @@ describe('TrainingsService', () => {
     it('should create a training', async () => {
         const createdTraining = await service.createTraining({ ...trainingDtoStub, trainingDate: todayStart });
 
-        expect(createdTraining).toEqual({
-            ...trainingDtoStub,
-            trainingDate: todayStart,
-            id: expect.any(String),
-            registrationDate: expect.any(Date),
-        });
+        expect(createdTraining).toEqual({ ...trainingDtoStub, trainingDate: todayStart, id: expect.any(String) });
     });
 
     it('should not create a training in the future', async () => {
@@ -64,13 +60,7 @@ describe('TrainingsService', () => {
     it('should persist a training', async () => {
         await service.createTraining(trainingDtoStub);
 
-        expect(await trainingRepository.find()).toEqual([
-            {
-                ...trainingDtoStub,
-                id: expect.any(String),
-                registrationDate: expect.any(Date),
-            },
-        ]);
+        expect(await trainingRepository.find()).toEqual([{ ...trainingDtoStub, id: expect.any(String) }]);
     });
 
     it('should get a training', async () => {
@@ -339,7 +329,7 @@ export class Training implements TestTraining {
     @Type(() => Date)
     trainingDate: Date;
 
-    @CreateDateColumn()
+    @Column({ type: 'datetime' })
     @Type(() => Date)
     registrationDate: Date;
 

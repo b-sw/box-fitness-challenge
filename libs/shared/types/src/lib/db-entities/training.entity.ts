@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { uuid } from '../uuid.type';
 import { User } from './user.entity';
 
@@ -21,7 +21,7 @@ export class Training {
     @Type(() => Date)
     trainingDate: Date;
 
-    @CreateDateColumn()
+    @Column({ type: 'datetime' })
     @Type(() => Date)
     registrationDate: Date;
 

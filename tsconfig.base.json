@@ -25,9 +25,6 @@
 			"@box-fc/backend/guards": [
 				"libs/backend/guards/src/index.ts"
 			],
-			"@box-fc/backend/migrations": [
-				"libs/backend/migrations/src/index.ts"
-			],
 			"@box-fc/backend/trainings": [
 				"libs/backend/trainings/src/index.ts"
 			],
@@ -40,9 +37,6 @@
 			"@box-fc/frontend/query": [
 				"libs/frontend/query/src/index.ts"
 			],
-			"@box-fc/frontend/store": [
-				"libs/frontend/store/src/index.ts"
-			],
 			"@box-fc/frontend/ui": [
 				"libs/frontend/ui/src/index.ts"
 			],
@@ -52,8 +46,8 @@
 			"@box-fc/shared/util": [
 				"libs/shared/util/src/index.ts"
 			],
-			"@box-fc/backend/winners": [
-				"libs/backend/winners/src/index.ts"
+			"@box-fc/frontend/store": [
+				"libs/frontend/store/src/index.ts"
 			]
 		}
 	},
