@@ -55,7 +55,7 @@ export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) 
                     <Text fontWeight="bold" mb="1rem">
                         Are you sure you want to delete the following referee?
                     </Text>
-                    <Flex p={3} borderRadius={10} alignItems={'center'} backgroundColor={'gray.50'}>
+                    <Flex p={3} borderRadius={20} alignItems={'center'} backgroundColor={'gray.50'}>
                         {personalActivityItem(user, activity, isMobile)}
                     </Flex>
                     <Text fontWeight="bold" mt="1rem">

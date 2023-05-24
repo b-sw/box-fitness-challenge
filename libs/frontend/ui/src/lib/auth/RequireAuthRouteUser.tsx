@@ -10,5 +10,7 @@ export const RequireAuthRouteUser = () => {
         return <Outlet />;
     }
 
+    console.log('isLoggedIn', isLoggedIn);
+
     return <Navigate to={Path.LANDING_PAGE} state={{ from: location }} replace />;
 };

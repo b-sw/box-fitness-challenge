@@ -1,18 +1,22 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, FlexProps } from '@chakra-ui/react';
 
 type Props = {
     children?: (JSX.Element | false)[] | (JSX.Element | false);
+    options?: FlexProps;
 };
 
-export const ListItem = ({ children }: Props) => {
+export const ListItem = ({ children, options }: Props) => {
     return (
         <Flex
             direction={['column', 'row']}
-            p={3}
-            borderRadius={10}
+            p={4}
+            borderRadius={0}
             alignItems={'center'}
             backgroundColor={'gray.50'}
             gap={[1, 0]}
+            {...options}
+            borderBottom={'1px solid #ebebeb'}
+            _hover={{ boxShadow: 'lg', zIndex: 999 }}
         >
             {children}
         </Flex>

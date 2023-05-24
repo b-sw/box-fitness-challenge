@@ -13,7 +13,7 @@ export const TeamsStandingsTable = () => {
     const TITLE = 'Teams standings';
 
     return (
-        <TablePanel headerTitle={TITLE} headerButtons={false}>
+        <TablePanel>
             <SearchInput handleChange={setFilter} />
 
             <Tabs>

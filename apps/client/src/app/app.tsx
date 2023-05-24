@@ -1,12 +1,5 @@
 import { Path } from '@box-fc/frontend/domain';
-import {
-    AnimatedTransition,
-    Dashboard,
-    LandingPage,
-    RequireAuthRouteUser,
-    theme,
-    UnauthorizedHandler,
-} from '@box-fc/frontend/ui';
+import { Dashboard, LandingPage, RequireAuthRouteUser, theme, UnauthorizedHandler } from '@box-fc/frontend/ui';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import dayjs from 'dayjs';
@@ -29,15 +22,13 @@ export const App = () => {
                     <Router basename="/">
                         <UnauthorizedHandler />
                         <Routes>
-                            <Route element={<AnimatedTransition />}>
-                                <Route path={'*'} element={<Navigate to={Path.LANDING_PAGE} replace />} />
+                            <Route path={Path.LANDING_PAGE} element={<LandingPage />} />
 
-                                <Route path={Path.LANDING_PAGE} element={<LandingPage />} />
-
-                                <Route element={<RequireAuthRouteUser />}>
-                                    <Route path={Path.DASHBOARD} element={<Dashboard />} />
-                                </Route>
+                            <Route element={<RequireAuthRouteUser />}>
+                                <Route path={`${Path.DASHBOARD}/*`} element={<Dashboard />} />
                             </Route>
+
+                            <Route path={'*'} element={<Navigate to={Path.LANDING_PAGE} replace />} />
                         </Routes>
                     </Router>
                 </QueryClientProvider>

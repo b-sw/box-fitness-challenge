@@ -41,7 +41,7 @@ export const UsersActivitiesTable = () => {
                     users={users}
                 />
             )}
-            <TablePanel headerTitle={TITLE} headerButtons={false}>
+            <TablePanel>
                 <SearchInput handleChange={setFilter} />
 
                 <Tabs>

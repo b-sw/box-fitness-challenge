@@ -29,7 +29,7 @@ export const useAuthMutation = ({ onLoginError }: Props) => {
         onSuccess: async (response: UserInfo) => {
             setUser(response);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.accessToken;
-            navigate(Path.DASHBOARD);
+            navigate(`${Path.DASHBOARD}${Path.TRAININGS}`);
         },
         onError: (error: Error) => onLoginError?.(error.message),
     });

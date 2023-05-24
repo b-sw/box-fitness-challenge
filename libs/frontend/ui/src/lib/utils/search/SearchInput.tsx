@@ -3,15 +3,16 @@ import { MdSearch } from 'react-icons/all';
 
 type Props = {
     handleChange: (value: string) => void;
+    placeholder?: string;
 };
 
-export const SearchInput = ({ handleChange }: Props) => {
-    const PLACEHOLDER = 'Search here';
+export const SearchInput = ({ handleChange, placeholder }: Props) => {
+    const PLACEHOLDER = placeholder ?? 'Search here';
 
     return (
-        <InputGroup>
-            <InputLeftElement pointerEvents={'none'} children={<MdSearch />} />
-            <Input mb={2} placeholder={PLACEHOLDER} onChange={(event) => handleChange(event.target.value)} />
+        <InputGroup size={'lg'} pb={5}>
+            <InputLeftElement pointerEvents={'none'} children={<MdSearch />} fontSize={25} />
+            <Input placeholder={PLACEHOLDER} onChange={(event) => handleChange(event.target.value)} rounded={'full'} />
         </InputGroup>
     );
 };

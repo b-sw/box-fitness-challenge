@@ -1,14 +1,29 @@
+import { Path } from '@box-fc/frontend/domain';
 import { useUsersQuery } from '@box-fc/frontend/query';
-import { SimpleGrid } from '@chakra-ui/react';
-import { Header } from '../header/Header';
+import { Flex, Spacer } from '@chakra-ui/react';
+import { useMemo } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Sidebar } from '../sidebar/Sidebar';
+import { TrainingsDashboard } from '../trainings-dashboard/Trainings.dashboard';
 import { LoadingOverlay } from '../utils/loading-overlay/LoadingOverlay';
 import { Page } from '../utils/page/Page';
 import { UsersActivitiesTable } from './tables/individual-standings/UsersActivities.table';
-import { TrainingsTable } from './tables/recent-trainings/Trainings.table';
 import { TeamsStandingsTable } from './tables/teams-standings/TeamsStandings.table';
 
 export const Dashboard = () => {
     const { isLoading } = useUsersQuery();
+
+    const routes = useMemo(
+        () => (
+            <Routes>
+                <Route path={Path.TRAININGS} element={<TrainingsDashboard />} />
+                <Route path={Path.STANDINGS} element={<TeamsStandingsTable />} />
+                <Route path={Path.WINNERS} element={<UsersActivitiesTable />} />
+                <Route path="*" element={<Navigate to={Path.LANDING_PAGE} replace />} />
+            </Routes>
+        ),
+        [],
+    );
 
     if (isLoading) {
         return <LoadingOverlay />;
@@ -16,12 +31,12 @@ export const Dashboard = () => {
 
     return (
         <Page>
-            <Header />
-            <SimpleGrid columns={[1, 1, 3]} flexGrow={1} overflowY={'hidden'} spacing={5}>
-                <TrainingsTable />
-                <TeamsStandingsTable />
-                <UsersActivitiesTable />
-            </SimpleGrid>
+            <Sidebar />
+            <Flex w={'100%'}>
+                <Spacer />
+                {routes}
+                <Spacer />
+            </Flex>
         </Page>
     );
 };

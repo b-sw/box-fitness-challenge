@@ -15,5 +15,5 @@ export const useTrainingsQuery = () => {
 
     const trainingsQuery = useQuery<Training[]>([TRAININGS_QUERY_KEY], getAllTrainings, DEFAULT_QUERY_OPTIONS);
 
-    return { activitiesQuery: trainingsQuery };
+    return { trainingsQuery };
 };

@@ -10,6 +10,7 @@ type Props = {
 
 export const useUserTrainingsQuery = ({ userId }: Props) => {
     const TRAININGS_ENDPOINT = 'trainings';
+    // todo: not enabled: false
     const DEFAULT_QUERY_OPTIONS = { enabled: true, initialData: [] };
 
     const getUserTrainings = async (): Promise<Training[]> => {

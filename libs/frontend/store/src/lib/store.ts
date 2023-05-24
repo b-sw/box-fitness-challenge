@@ -1,25 +1,24 @@
-import { UserInfo, WithNull } from '@box-fc/shared/types';
+import { UserInfo } from '@box-fc/shared/types';
 import axios from 'axios';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-type User = WithNull<UserInfo> & WithNull<{ imageUrl: string }>;
-
-const getInitialUser = (): User => ({
-    id: null,
-    accessToken: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    team: null,
-    division: null,
-    role: null,
-    imageUrl: null,
-});
+const getInitialUser = (): UserInfo =>
+    ({
+        id: null,
+        accessToken: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        team: null,
+        division: null,
+        role: null,
+        imageUrl: null,
+    } as unknown as UserInfo);
 
 type AuthState = {
-    user: User;
-    setUser: (newUser: User) => void;
+    user: UserInfo;
+    setUser: (newUser: UserInfo) => void;
     clearUser: () => void;
 };
 
@@ -28,7 +27,7 @@ export const useAuthStore = create<AuthState>()(
         persist(
             (set) => ({
                 user: getInitialUser(),
-                setUser: (newUser: User) => set((_) => ({ user: newUser })),
+                setUser: (newUser: UserInfo) => set((_) => ({ user: newUser })),
                 clearUser: () => set((_) => ({ user: getInitialUser() })),
             }),
             {
