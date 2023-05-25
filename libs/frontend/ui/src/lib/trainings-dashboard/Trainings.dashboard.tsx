@@ -1,8 +1,8 @@
 import { Training, useTrainingsQuery } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { Dashboard } from '../utils/generic-components/Dashboard';
+import { ListingSwitcher } from '../utils/generic-components/listing-switcher/ListingSwitcher';
 import { TrainingsTable } from './Trainings.table';
 
 enum Listing {
@@ -14,7 +14,7 @@ export const TrainingsDashboard = () => {
     const { trainingsQuery } = useTrainingsQuery();
     const { user } = useAuthStore();
     const [myTrainings, setMyTrainings] = useState<Training[]>([]);
-    const [listing, setListing] = useState<Listing>(Listing.MINE);
+    const [activeListing, setActiveListing] = useState<Listing>(Listing.MINE);
 
     useEffect(() => {
         setMyTrainings(trainingsQuery.data?.filter((training) => training.userId === user.id) ?? []);
@@ -26,52 +26,18 @@ export const TrainingsDashboard = () => {
     };
 
     const switchListing = () => {
-        if (listing === Listing.MINE) {
-            setListing(Listing.ALL);
+        if (activeListing === Listing.MINE) {
+            setActiveListing(Listing.ALL);
         } else {
-            setListing(Listing.MINE);
+            setActiveListing(Listing.MINE);
         }
     };
 
     return (
-        <Flex direction={'column'} gap={5}>
-            <Spacer />
+        <Dashboard>
+            <ListingSwitcher activeListing={activeListing} switchListing={switchListing} />
 
-            <Flex alignItems={'center'}>
-                <Flex w={'30%'}>
-                    <Spacer />
-                    <IconButton
-                        aria-label={'left'}
-                        icon={<ArrowBackIcon />}
-                        onClick={switchListing}
-                        rounded={'full'}
-                        size={'md'}
-                        backgroundColor={'primary.50'}
-                    />
-                </Flex>
-                <Spacer />
-
-                <Text fontSize={'4xl'} fontWeight={'bold'} color={'gray.50'}>
-                    {listing}
-                </Text>
-
-                <Spacer />
-                <Flex w={'30%'}>
-                    <IconButton
-                        aria-label={'left'}
-                        icon={<ArrowForwardIcon />}
-                        onClick={switchListing}
-                        rounded={'full'}
-                        size={'md'}
-                        backgroundColor={'primary.50'}
-                    />
-                    <Spacer />
-                </Flex>
-            </Flex>
-
-            {pages[listing]}
-
-            <Spacer />
-        </Flex>
+            {pages[activeListing]}
+        </Dashboard>
     );
 };

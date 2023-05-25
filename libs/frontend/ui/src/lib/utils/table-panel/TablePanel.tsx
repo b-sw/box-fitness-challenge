@@ -12,7 +12,6 @@ export const TablePanel = ({ children, options }: Props) => {
                 direction={'column'}
                 borderRadius={20}
                 p={5}
-                // backgroundColor={'gray.300'}
                 shadow={'md'}
                 overflow={'hidden'}
                 flexGrow={1}

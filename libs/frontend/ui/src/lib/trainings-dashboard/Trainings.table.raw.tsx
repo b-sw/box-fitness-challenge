@@ -50,12 +50,12 @@ export const TrainingsTableRaw = ({
         });
     };
 
-    const getListItems = (trainings: Training[]): OptionalArray<JSX.Element> => {
-        if (!trainings.length || users.size === 0) {
+    const getListItems = (): OptionalArray<JSX.Element> => {
+        if (!filteredTrainings.length || users.size === 0) {
             return <NoRecords />;
         }
 
-        return trainings.map((training) => (
+        return filteredTrainings.map((training) => (
             <TrainingListItem
                 key={`personal-training-${training.id}`}
                 training={training}
@@ -89,7 +89,7 @@ export const TrainingsTableRaw = ({
                 backgroundColor={'gray.50'}
                 borderRadius={25}
             >
-                {getListItems(filteredTrainings)}
+                {getListItems()}
             </Flex>
         </TablePanel>
     );

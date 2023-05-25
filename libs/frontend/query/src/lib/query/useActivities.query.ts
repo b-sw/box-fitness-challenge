@@ -1,11 +1,12 @@
 import { TeamActivity, UserActivity } from '@box-fc/shared/types';
 import axios from 'axios';
+import { Dayjs } from 'dayjs';
 import { useQuery } from 'react-query';
 import { ACTIVITIES_QUERY_KEY } from '../query-keys/activities.query-key';
 
 type Props = {
-    startDate: Date;
-    endDate: Date;
+    startDate: Dayjs;
+    endDate: Dayjs;
 };
 
 export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
@@ -40,6 +41,6 @@ export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
         teamsActivities: teamsActivitiesQuery.data as TeamActivity[],
         teamsActivitiesStatus: teamsActivitiesQuery.status,
         usersActivities: usersActivitiesQuery.data as UserActivity[],
-        usersActivitiesStatus: usersActivitiesQuery.status,
+        usersActivitiesAreLoading: usersActivitiesQuery.isLoading,
     };
 };

@@ -4,10 +4,10 @@ import { Flex, Spacer } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Sidebar } from '../sidebar/Sidebar';
+import { StandingsDashboard } from '../standings-dashboard/Standings.dashboard';
 import { TrainingsDashboard } from '../trainings-dashboard/Trainings.dashboard';
 import { LoadingOverlay } from '../utils/loading-overlay/LoadingOverlay';
 import { Page } from '../utils/page/Page';
-import { TeamsStandingsTable } from './tables/teams-standings/TeamsStandings.table';
 
 export const Dashboard = () => {
     const { isLoading } = useUsersQuery();
@@ -16,7 +16,7 @@ export const Dashboard = () => {
         () => (
             <Routes>
                 <Route path={Path.TRAININGS} element={<TrainingsDashboard />} />
-                <Route path={Path.STANDINGS} element={<TeamsStandingsTable />} />
+                <Route path={Path.STANDINGS} element={<StandingsDashboard />} />
                 {/*<Route path={Path.WINNERS} element={<UsersActivitiesTable />} />*/}
                 <Route path="*" element={<Navigate to={Path.LANDING_PAGE} replace />} />
             </Routes>

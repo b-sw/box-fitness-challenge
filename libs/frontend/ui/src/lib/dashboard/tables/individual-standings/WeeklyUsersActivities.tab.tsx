@@ -1,9 +1,9 @@
 import { DatesRange } from '@box-fc/frontend/domain';
 import { useActivitiesQuery } from '@box-fc/frontend/query';
 import { User, UserActivity } from '@box-fc/shared/types';
+import { UserActivityListItem } from 'libs/frontend/ui/src/lib/standings-dashboard/UserActivity.list-item';
 import { useEffect, useState } from 'react';
 import { NoRecords } from '../../../utils/no-records/NoRecords';
-import { UserActivityListItem } from './UserActivity.list-item';
 
 type Props = {
     filter: string;
