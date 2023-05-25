@@ -1,7 +1,7 @@
 import { Path } from '@box-fc/frontend/domain';
 import { useAuthMutation } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
-import { Avatar, Badge, Divider, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
+import { Avatar, Badge, Button, Divider, Flex, Icon, IconButton, Spacer, Text } from '@chakra-ui/react';
 import { FaTrophy, MdBarChart, MdLogout } from 'react-icons/all';
 import { FaDumbbell } from 'react-icons/fa';
 import { NavigationButton } from './Navigation.button';
@@ -25,7 +25,37 @@ export const Sidebar = () => {
             <Flex direction={'column'} gap={5}>
                 <NavigationButton path={Path.TRAININGS} icon={FaDumbbell} description={'Trainings'} />
                 <NavigationButton path={Path.STANDINGS} icon={MdBarChart} description={'Standings'} />
-                <NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} />
+                {/*<NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} />*/}
+
+                <Flex alignItems={'center'}>
+                    <Button
+                        variant={'link'}
+                        outline="none"
+                        _focus={{ boxShadow: 'none' }}
+                        _active={{ boxShadow: 'none' }}
+                        _hover={{ textDecoration: 'none' }}
+                        size={'lg'}
+                        disabled
+                    >
+                        <Flex w={'100%'} pl={5} alignItems={'center'} gap={2}>
+                            <Icon as={FaTrophy} color={'gray.400'} />
+                            <Text color={'gray.400'} fontWeight={'normal'} fontSize={'2xl'}>
+                                Winners
+                            </Text>
+                            <Spacer />
+                        </Flex>
+                    </Button>
+
+                    <Badge
+                        fontSize={'10'}
+                        textColor={'boxBlue.500'}
+                        backgroundColor={'blue.50'}
+                        border={'1px'}
+                        borderRadius={15}
+                    >
+                        <Text px={1}>Soon</Text>
+                    </Badge>
+                </Flex>
             </Flex>
 
             <Spacer />

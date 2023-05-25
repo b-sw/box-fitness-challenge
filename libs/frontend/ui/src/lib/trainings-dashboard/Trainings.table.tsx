@@ -2,7 +2,7 @@ import { Training, useAuthQuery, useMobileQuery, useUsersQuery } from '@box-fc/f
 import { useAuthStore } from '@box-fc/frontend/store';
 import { User } from '@box-fc/shared/types';
 import { useDisclosure } from '@chakra-ui/react';
-import { TrainingCreateModal } from 'libs/frontend/ui/src/lib/header/training-button/Training.create-modal';
+import { TrainingCreateModal } from 'libs/frontend/ui/src/lib/trainings-dashboard/Training.create-modal';
 import { useState } from 'react';
 import { TrainingDeleteModal } from './Training.delete.modal';
 import { TrainingsTableRaw } from './Trainings.table.raw';

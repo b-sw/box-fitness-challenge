@@ -1,11 +1,12 @@
 import { Training } from '@box-fc/frontend/query';
 import { Optional, OptionalArray, User } from '@box-fc/shared/types';
-import { Flex } from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
+import { Flex, IconButton, Tooltip } from '@chakra-ui/react';
 import { jsx } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { NoRecords } from '../../../utils/no-records/NoRecords';
-import { SearchInput } from '../../../utils/search/SearchInput';
-import { TablePanel } from '../../../utils/table-panel/TablePanel';
+import { NoRecords } from '../utils/no-records/NoRecords';
+import { SearchInput } from '../utils/search/SearchInput';
+import { TablePanel } from '../utils/table-panel/TablePanel';
 import { TrainingListItem } from './Training.list-item';
 import JSX = jsx.JSX;
 
@@ -61,16 +62,25 @@ export const TrainingsTableRaw = ({
                 user={users.get(training.userId) as User}
                 readonly={readonly}
                 handleDelete={handleDelete}
-                isMobile={isMobile}
             />
         ));
     };
 
     return (
         <TablePanel>
-            <SearchInput handleChange={setFilter} placeholder={'Search trainings'} />
-
-            {/*<Divider style={{ borderWidth: '1px' }} my={5} />*/}
+            <Flex gap={5}>
+                <SearchInput handleChange={setFilter} placeholder={'Search trainings'} />
+                <Tooltip label={'Register training'}>
+                    <IconButton
+                        aria-label={'register-training'}
+                        size={'lg'}
+                        rounded={'full'}
+                        onClick={handleCreate}
+                        icon={<AddIcon />}
+                        backgroundColor={'primary.50'}
+                    />
+                </Tooltip>
+            </Flex>
 
             <Flex
                 direction={'column'}
@@ -79,32 +89,6 @@ export const TrainingsTableRaw = ({
                 backgroundColor={'gray.50'}
                 borderRadius={25}
             >
-                {/*<ListItem*/}
-                {/*    options={{*/}
-                {/*        backgroundColor: 'gray.300',*/}
-                {/*        borderStyle: 'dashed',*/}
-                {/*        borderColor: 'gray.500',*/}
-                {/*        borderWidth: '2px',*/}
-                {/*        _hover: {*/}
-                {/*            backgroundColor: 'gray.400',*/}
-                {/*        },*/}
-                {/*        _active: {*/}
-                {/*            backgroundColor: 'gray.500',*/}
-                {/*        },*/}
-                {/*        cursor: 'pointer',*/}
-                {/*        onClick: handleCreate,*/}
-                {/*        gap: 1,*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    <Avatar size={'md'} visibility={'hidden'} w={'0%'} />*/}
-                {/*    <Spacer />*/}
-                {/*    <AddIcon />*/}
-                {/*    <Text fontSize={'xl'} fontWeight={'bold'} color={'gray.900'}>*/}
-                {/*        Register training*/}
-                {/*    </Text>*/}
-                {/*    <Spacer />*/}
-                {/*</ListItem>*/}
-
                 {getListItems(filteredTrainings)}
             </Flex>
         </TablePanel>

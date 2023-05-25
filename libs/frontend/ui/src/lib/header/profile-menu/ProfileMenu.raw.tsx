@@ -23,7 +23,7 @@ export const ProfileMenuRaw = ({
 }: Props) => {
     return (
         <Menu>
-            <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0} disabled={!isEnabled}>
+            <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} disabled={!isEnabled}>
                 <Avatar size={'md'} src={profilePictureSrc} />
             </MenuButton>
             <MenuList alignItems={'center'}>

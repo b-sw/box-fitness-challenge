@@ -3,7 +3,7 @@ import { useAuthStore } from '@box-fc/frontend/store';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { TrainingsTable } from '../dashboard/tables/recent-trainings/Trainings.table';
+import { TrainingsTable } from './Trainings.table';
 
 enum Listing {
     MINE = 'My trainings',
@@ -44,8 +44,9 @@ export const TrainingsDashboard = () => {
                         aria-label={'left'}
                         icon={<ArrowBackIcon />}
                         onClick={switchListing}
-                        borderRadius={50}
+                        rounded={'full'}
                         size={'md'}
+                        backgroundColor={'primary.50'}
                     />
                 </Flex>
                 <Spacer />
@@ -60,8 +61,9 @@ export const TrainingsDashboard = () => {
                         aria-label={'left'}
                         icon={<ArrowForwardIcon />}
                         onClick={switchListing}
-                        borderRadius={50}
+                        rounded={'full'}
                         size={'md'}
+                        backgroundColor={'primary.50'}
                     />
                     <Spacer />
                 </Flex>

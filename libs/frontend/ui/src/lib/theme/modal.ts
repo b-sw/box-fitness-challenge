@@ -15,6 +15,7 @@ export const Modal = {
         defaultModal: defaultModalVariant,
     },
     defaultProps: {
+        size: 'md',
         variant: 'defaultModal',
     },
 };

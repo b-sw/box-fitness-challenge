@@ -53,10 +53,10 @@ export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) 
                 <ModalCloseButton />
                 <ModalBody>
                     <Text fontWeight="bold" mb="1rem">
-                        Are you sure you want to delete the following referee?
+                        Are you sure you want to delete the following training?
                     </Text>
                     <Flex p={3} borderRadius={20} alignItems={'center'} backgroundColor={'gray.50'}>
-                        {personalActivityItem(user, activity, isMobile)}
+                        {personalActivityItem(user, activity)}
                     </Flex>
                     <Text fontWeight="bold" mt="1rem">
                         You can't undo this action afterwards.

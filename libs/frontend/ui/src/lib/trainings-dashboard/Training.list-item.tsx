@@ -5,39 +5,32 @@ import { Avatar, Badge, CircularProgress, CircularProgressLabel, Flex, Text, Too
 import dayjs from 'dayjs';
 import 'dayjs/plugin/isBetween';
 import 'dayjs/plugin/utc';
-import { DATETIME_FORMAT } from '../../../utils/datetime/datetime.format';
-import { ListItem } from '../../../utils/list-item/ListItem';
+import { DATETIME_FORMAT } from '../utils/datetime/datetime.format';
+import { ListItem } from '../utils/list-item/ListItem';
 
 type Props = {
     training: Training;
     user: User;
     readonly: boolean;
     handleDelete: (activity: Training) => void;
-    isMobile: boolean;
 };
 
-export const TrainingListItem = ({ training, user, readonly, handleDelete, isMobile }: Props) => {
+export const TrainingListItem = ({ training, user, readonly, handleDelete }: Props) => {
+    const handleClicked = () => {
+        if (readonly) {
+            return;
+        }
+        handleDelete(training);
+    };
+
     return (
-        <ListItem>
-            {personalActivityItem(user, training, isMobile)}
-
-            {/*<Spacer />*/}
-
-            {/*{!readonly && (*/}
-            {/*    <Flex>*/}
-            {/*        <IconButton*/}
-            {/*            aria-label="IconButton2"*/}
-            {/*            icon={<DeleteIcon />}*/}
-            {/*            variant={'ghost'}*/}
-            {/*            onClick={() => handleDelete(training)}*/}
-            {/*        />*/}
-            {/*    </Flex>*/}
-            {/*)}*/}
+        <ListItem options={{ onClick: handleClicked, cursor: readonly ? 'default' : 'pointer' }}>
+            {personalActivityItem(user, training)}
         </ListItem>
     );
 };
 
-export const personalActivityItem = (user: User, activity: Training, isMobile: boolean) => {
+export const personalActivityItem = (user: User, activity: Training) => {
     const trainingDate = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('DD MMM YYYY');
     const trainingTime = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('HH:mm');
 
@@ -70,24 +63,27 @@ export const personalActivityItem = (user: User, activity: Training, isMobile: b
                 </Flex>
 
                 <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
-                    <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'50px'}>
-                        <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>
-                    </CircularProgress>
+                    <Flex w={'20%'}>
+                        <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'50px'}>
+                            <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>
+                        </CircularProgress>
+                    </Flex>
 
-                    <Flex direction={'column'} gap={0} w={'100%'}>
+                    <Flex direction={'column'} w={'80%'} overflow={'hidden'}>
                         <Badge
                             variant={'solid'}
                             backgroundColor={'gray.300'}
                             textColor={'gray.800'}
                             alignSelf={'center'}
                             w={'100%'}
-                            maxW={'100%'}
                             borderRadius={15}
                             letterSpacing={'.5px'}
                         >
-                            <Text p={1} px={2}>
-                                {activity.type}
-                            </Text>
+                            <Tooltip label={`${activity.type}`}>
+                                <Text p={1} px={2} textOverflow={'ellipsis'} overflow={'hidden'}>
+                                    {activity.type}
+                                </Text>
+                            </Tooltip>
                         </Badge>
                         <Flex fontSize={'xs'} opacity={'0.6'} alignItems={'center'} gap={1} w={'100%'} p={1}>
                             <CalendarIcon />

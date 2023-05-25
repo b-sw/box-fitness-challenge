@@ -10,7 +10,6 @@ export const ListItem = ({ children, options }: Props) => {
         <Flex
             direction={['column', 'row']}
             p={4}
-            borderRadius={0}
             alignItems={'center'}
             backgroundColor={'gray.50'}
             gap={[1, 0]}

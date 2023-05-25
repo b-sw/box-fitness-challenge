@@ -14,8 +14,8 @@ import {
 } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { TrainingListItem } from '../../../trainings-dashboard/Training.list-item';
 import { NoRecords } from '../../../utils/no-records/NoRecords';
-import { TrainingListItem } from '../recent-trainings/Training.list-item';
 
 type Props = {
     isOpen: boolean;
@@ -53,7 +53,6 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range, users }: P
                 user={users.get(training.userId) as User}
                 readonly={true}
                 handleDelete={() => null}
-                isMobile={isMobile}
             />
         ));
     };
