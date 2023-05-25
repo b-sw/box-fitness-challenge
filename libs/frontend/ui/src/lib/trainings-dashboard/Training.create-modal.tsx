@@ -1,10 +1,9 @@
 import { useTrainingMutation } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
-import { AddIcon, CloseIcon } from '@chakra-ui/icons';
 import {
+    Button,
     Flex,
     FormControl,
-    IconButton,
     Input,
     Modal,
     ModalBody,
@@ -14,6 +13,7 @@ import {
     NumberInput,
     NumberInputField,
     Spacer,
+    Text,
     useToast,
 } from '@chakra-ui/react';
 import dayjs from 'dayjs';
@@ -62,16 +62,16 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                 <Formik
                     initialValues={{
                         type: '',
-                        duration: 30,
-                        trainingDate: dayjs.utc().toDate(),
+                        duration: 0,
+                        trainingDate: dayjs(),
                     }}
                     onSubmit={(values) => {
                         createMutation.mutate({
                             ...values,
+                            duration: Number(values.duration),
                             trainingDate: dayjs(values.trainingDate, DATETIME_FORMAT).toDate(),
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                             userId: currentUserId,
-                            registrationDate: dayjs.utc().toDate(),
                         });
                     }}
                 >
@@ -113,6 +113,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                                     name="trainingDate"
                                                     id="trainingDate"
                                                     type="datetime-local"
+                                                    value={dayjs().format('YYYY-MM-DDTHH:mm')}
                                                 />
                                             </FormControl>
                                         </Flex>
@@ -141,22 +142,18 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                 <Flex w={'100%'} gap={5}>
                                     <Spacer />
 
-                                    <IconButton
-                                        aria-label={'add-training'}
-                                        icon={<AddIcon />}
-                                        backgroundColor={'boxBlue.500'}
-                                        textColor={'primary.50'}
+                                    <Button
                                         type="submit"
                                         isLoading={createMutation.isLoading}
-                                    />
+                                        bg={'boxBlue.500'}
+                                        textColor={'primary.50'}
+                                    >
+                                        <Text>Add</Text>
+                                    </Button>
 
-                                    <IconButton
-                                        aria-label={'cancel-add-training'}
-                                        icon={<CloseIcon />}
-                                        backgroundColor={'primary.50'}
-                                        textColor={'gray.800'}
-                                        onClick={handleClose}
-                                    />
+                                    <Button onClick={handleClose}>
+                                        <Text>Cancel</Text>
+                                    </Button>
 
                                     <Spacer />
                                 </Flex>

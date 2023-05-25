@@ -7,7 +7,6 @@ import { Sidebar } from '../sidebar/Sidebar';
 import { TrainingsDashboard } from '../trainings-dashboard/Trainings.dashboard';
 import { LoadingOverlay } from '../utils/loading-overlay/LoadingOverlay';
 import { Page } from '../utils/page/Page';
-import { UsersActivitiesTable } from './tables/individual-standings/UsersActivities.table';
 import { TeamsStandingsTable } from './tables/teams-standings/TeamsStandings.table';
 
 export const Dashboard = () => {
@@ -18,7 +17,7 @@ export const Dashboard = () => {
             <Routes>
                 <Route path={Path.TRAININGS} element={<TrainingsDashboard />} />
                 <Route path={Path.STANDINGS} element={<TeamsStandingsTable />} />
-                <Route path={Path.WINNERS} element={<UsersActivitiesTable />} />
+                {/*<Route path={Path.WINNERS} element={<UsersActivitiesTable />} />*/}
                 <Route path="*" element={<Navigate to={Path.LANDING_PAGE} replace />} />
             </Routes>
         ),

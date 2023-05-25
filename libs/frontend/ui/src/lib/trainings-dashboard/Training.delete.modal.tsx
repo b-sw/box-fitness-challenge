@@ -11,6 +11,7 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
+    Spacer,
     Text,
     useToast,
 } from '@chakra-ui/react';
@@ -64,10 +65,20 @@ export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) 
                 </ModalBody>
 
                 <ModalFooter>
+                    <Spacer />
+
                     <Button onClick={onClose}>Cancel</Button>
-                    <Button colorScheme="red" onClick={deleteActivity} isLoading={deleteMutation.isLoading} ml={3}>
+                    <Button
+                        bg={'red.500'}
+                        textColor={'gray.50'}
+                        onClick={deleteActivity}
+                        isLoading={deleteMutation.isLoading}
+                        ml={3}
+                    >
                         Delete
                     </Button>
+
+                    <Spacer />
                 </ModalFooter>
             </ModalContent>
         </Modal>

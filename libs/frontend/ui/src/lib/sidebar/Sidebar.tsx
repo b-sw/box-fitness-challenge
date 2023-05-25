@@ -81,7 +81,13 @@ export const Sidebar = () => {
                 </Flex>
 
                 <Spacer />
-                <IconButton aria-label={'logout'} variant={'ghost'} icon={<MdLogout />} onClick={logout} />
+                <IconButton
+                    aria-label={'logout'}
+                    variant={'ghost'}
+                    icon={<MdLogout />}
+                    onClick={logout}
+                    rounded={'full'}
+                />
             </Flex>
         </Flex>
     );
