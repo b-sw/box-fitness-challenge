@@ -39,8 +39,8 @@ export const personalActivityItem = (user: User, activity: Training) => {
 
     return (
         <Flex direction={'column'} w={'100%'}>
-            <Flex direction={['column', 'row']} w={'100%'}>
-                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
+            <Flex direction={'row'} w={'100%'}>
+                <Flex w={'50%'} alignItems={'center'} gap={3}>
                     <Avatar size={'md'} src={user.imageUrl} />
 
                     <Flex direction={'column'} gap={1}>
@@ -62,9 +62,9 @@ export const personalActivityItem = (user: User, activity: Training) => {
                     </Flex>
                 </Flex>
 
-                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
+                <Flex w={'50%'} alignItems={'center'} gap={3}>
                     <Flex w={'20%'}>
-                        <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'50px'}>
+                        <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'55px'}>
                             <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>
                         </CircularProgress>
                     </Flex>
@@ -80,7 +80,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                             letterSpacing={'.5px'}
                         >
                             <Tooltip label={`${activity.type}`}>
-                                <Text p={1} px={2} textOverflow={'ellipsis'} overflow={'hidden'}>
+                                <Text px={2} py={1} textOverflow={'ellipsis'} overflow={'hidden'}>
                                     {activity.type}
                                 </Text>
                             </Tooltip>

@@ -1,5 +1,5 @@
 import { User, UserActivity } from '@box-fc/shared/types';
-import { Avatar, Badge, Flex, Progress, Text, Tooltip } from '@chakra-ui/react';
+import { Avatar, Badge, CircularProgress, Flex, Progress, Spacer, Text, Tooltip } from '@chakra-ui/react';
 import { ListItem } from '../utils/list-item/ListItem';
 
 type Props = {
@@ -10,11 +10,13 @@ type Props = {
 };
 
 export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: Props) => {
+    const HEIGHT_REGULATOR = <CircularProgress size={'55px'} visibility={'hidden'} w={'0%'} />;
+
     return (
         <ListItem>
             <Flex direction={['column', 'row']} w={'100%'}>
                 {/*copy paste */}
-                <Flex w={['100%', '60%']} alignItems={'center'} gap={3}>
+                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
                     <Avatar size={'md'} src={user.imageUrl} />
 
                     <Flex direction={'column'} gap={1}>
@@ -36,18 +38,31 @@ export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: 
                     </Flex>
                 </Flex>
 
-                <Tooltip label={userActivity.score}>
-                    <Flex w={'40%'} alignItems={'center'}>
+                {HEIGHT_REGULATOR}
+
+                <Tooltip label={`score: ${userActivity.score}`}>
+                    <Flex w={'50%'} alignItems={'center'} position={'relative'}>
                         <Progress
                             value={userActivity.score}
                             max={topScore}
                             w={'100%'}
                             h={'50%'}
                             rounded={'full'}
-                            backgroundColor={'gray.200'}
-                        >
-                            <Text>{userActivity.score}</Text>
-                        </Progress>
+                            bgColor={'gray.300'}
+                            colorScheme={'boxBlue'}
+                            position={'absolute'}
+                        ></Progress>
+                        <Flex zIndex={999} w={'100%'}>
+                            <Spacer />
+                            <Text
+                                borderColor={'gray.900'}
+                                textShadow={'-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'}
+                                textColor={'gray.50'}
+                            >
+                                {userActivity.score}
+                            </Text>
+                            <Spacer />
+                        </Flex>
                     </Flex>
                 </Tooltip>
             </Flex>

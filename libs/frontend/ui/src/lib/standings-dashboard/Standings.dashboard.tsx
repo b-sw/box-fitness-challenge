@@ -1,13 +1,12 @@
 import { Week, WEEKS } from '@box-fc/frontend/domain';
-import { useUsersQuery } from '@box-fc/frontend/query';
+import { useActivitiesQuery } from '@box-fc/frontend/query';
 import { switchCase } from '@box-fc/shared/util';
-import { Spacer } from '@chakra-ui/react';
 import dayjs from 'dayjs';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { getWeek } from '../utils/datetime/week';
 import { Dashboard } from '../utils/generic-components/Dashboard';
 import { ListingSwitcher, SwitchDirection } from '../utils/generic-components/listing-switcher/ListingSwitcher';
-import { IndividualStandingsTable } from './IndividualStandings.table';
+import { IndividualStandingsTableWrapper } from './IndividualStandings.table-wrapper';
 import { TeamsStandingsTable } from './TeamsStandings.table';
 
 enum Listing {
@@ -18,7 +17,19 @@ enum Listing {
 export const StandingsDashboard = () => {
     const [activeStandings, setActiveStandings] = useState<Listing>(Listing.INDIVIDUAL);
     const [activeWeek, setActiveWeek] = useState<Week>(getWeek(dayjs()));
-    const { users } = useUsersQuery();
+    const [standingsWeek, setStandingsWeek] = useState<Week>(getWeek(dayjs()));
+    const [isLoadingLeft, setIsLoadingLeft] = useState<boolean>(false);
+    const [isLoadingRight, setIsLoadingRight] = useState<boolean>(false);
+    const { usersActivitiesAreLoading } = useActivitiesQuery({ ...activeWeek });
+
+    useEffect(() => {
+        if (!usersActivitiesAreLoading) {
+            setIsLoadingLeft(false);
+            setIsLoadingRight(false);
+
+            setStandingsWeek(activeWeek);
+        }
+    }, [activeWeek, usersActivitiesAreLoading]);
 
     const switchStandings = () => {
         if (activeStandings === Listing.INDIVIDUAL) {
@@ -37,12 +48,18 @@ export const StandingsDashboard = () => {
 
             return WEEKS.get(newWeekId) as Week;
         });
+
+        if (direction === SwitchDirection.LEFT) {
+            setIsLoadingLeft(true);
+        } else {
+            setIsLoadingRight(true);
+        }
     };
 
     const getStandings = (): ReactNode => {
         return switchCase({
-            [Listing.INDIVIDUAL]: <IndividualStandingsTable week={activeWeek} users={users} />,
-            [Listing.TEAMS]: <TeamsStandingsTable week={activeWeek} />,
+            [Listing.INDIVIDUAL]: <IndividualStandingsTableWrapper week={standingsWeek} />,
+            [Listing.TEAMS]: <TeamsStandingsTable week={standingsWeek} />,
         })(activeStandings);
     };
 
@@ -50,13 +67,15 @@ export const StandingsDashboard = () => {
         <Dashboard>
             <ListingSwitcher activeListing={activeStandings} switchListing={switchStandings} />
 
-            <Spacer />
-
             {getStandings()}
 
-            <Spacer />
-
-            <ListingSwitcher activeListing={`Week ${activeWeek.id}`} switchListing={switchWeek} size={'sm'} />
+            <ListingSwitcher
+                activeListing={`Week ${activeWeek.id}`}
+                switchListing={switchWeek}
+                size={'sm'}
+                isLoadingLeft={isLoadingLeft}
+                isLoadingRight={isLoadingRight}
+            />
         </Dashboard>
     );
 };

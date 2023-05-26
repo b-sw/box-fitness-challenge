@@ -11,9 +11,11 @@ type Props = {
     activeListing: string;
     switchListing: (direction: SwitchDirection) => void;
     size?: 'sm' | 'lg';
+    isLoadingLeft?: boolean;
+    isLoadingRight?: boolean;
 };
 
-export const ListingSwitcher = ({ activeListing, switchListing, size }: Props) => {
+export const ListingSwitcher = ({ activeListing, switchListing, size, isLoadingLeft, isLoadingRight }: Props) => {
     const buttonSize = size ?? 'md';
     const textSize = size === 'sm' ? '2xl' : '4xl';
 
@@ -26,6 +28,7 @@ export const ListingSwitcher = ({ activeListing, switchListing, size }: Props) =
             size={buttonSize}
             backgroundColor={'primary.50'}
             shadow={'md'}
+            isLoading={direction === SwitchDirection.LEFT ? isLoadingLeft : isLoadingRight}
         />
     );
 

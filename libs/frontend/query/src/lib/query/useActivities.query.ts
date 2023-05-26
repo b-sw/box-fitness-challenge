@@ -12,7 +12,7 @@ type Props = {
 export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
     // todo: move this to a shared file
     const TRAININGS_ENDPOINT = 'activities';
-    const DEFAULT_QUERY_OPTIONS = { enabled: true, initialData: [] };
+    const DEFAULT_QUERY_OPTIONS = { enabled: true };
 
     const getAccumulatedTeamsActivities = async (): Promise<TeamActivity[]> => {
         const response = await axios.post(`${TRAININGS_ENDPOINT}/teams`, { startDate, endDate });
