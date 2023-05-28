@@ -1,5 +1,4 @@
 import { User, UserActivity } from '@box-fc/shared/types';
-// import { PodiumPlace, User, UserActivity } from '@box-fc/shared/types';
 import { Flex } from '@chakra-ui/react';
 import { ReactNode, useEffect, useState } from 'react';
 import { NoRecords } from '../utils/no-records/NoRecords';
@@ -10,9 +9,10 @@ import { UserActivityListItem } from './UserActivity.list-item';
 type Props = {
     users: Map<User['id'], User>;
     usersActivities: UserActivity[];
+    handleActivityClicked: (activity: UserActivity) => void;
 };
 
-export const IndividualStandingsTable = ({ users, usersActivities }: Props) => {
+export const IndividualStandingsTable = ({ users, usersActivities, handleActivityClicked }: Props) => {
     const [filter, setFilter] = useState<string>('');
     const [filteredActivities, setFilteredActivities] = useState<UserActivity[]>(usersActivities);
 
@@ -32,7 +32,7 @@ export const IndividualStandingsTable = ({ users, usersActivities }: Props) => {
                 key={`user-activity-${index}`}
                 userActivity={activity}
                 user={users.get(activity.userId) as User}
-                onClick={() => null}
+                onClick={handleActivityClicked}
                 topScore={usersActivities[0].score}
             />
         ));

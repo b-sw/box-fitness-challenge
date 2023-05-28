@@ -14,7 +14,7 @@ export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: 
 
     return (
         <ListItem>
-            <Flex direction={['column', 'row']} w={'100%'}>
+            <Flex direction={['column', 'row']} w={'100%'} onClick={() => onClick(userActivity)} cursor={'pointer'}>
                 {/*copy paste */}
                 <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
                     <Avatar size={'md'} src={user.imageUrl} />

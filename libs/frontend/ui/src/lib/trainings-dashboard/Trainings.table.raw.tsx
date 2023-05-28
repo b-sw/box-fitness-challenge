@@ -1,34 +1,22 @@
 import { Training } from '@box-fc/frontend/query';
-import { Optional, OptionalArray, User } from '@box-fc/shared/types';
+import { OptionalArray, User } from '@box-fc/shared/types';
 import { AddIcon } from '@chakra-ui/icons';
 import { Flex, IconButton, Tooltip } from '@chakra-ui/react';
-import { jsx } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { NoRecords } from '../utils/no-records/NoRecords';
 import { SearchInput } from '../utils/search/SearchInput';
 import { TablePanel } from '../utils/table-panel/TablePanel';
 import { TrainingListItem } from './Training.list-item';
-import JSX = jsx.JSX;
 
 type Props = {
     trainings: Training[];
     users: Map<User['id'], User>;
-    currentUserId: Optional<User['id']>;
     readonly: boolean;
     handleDelete: (training: Training) => void;
     handleCreate: () => void;
-    isMobile: boolean;
 };
 
-export const TrainingsTableRaw = ({
-    trainings,
-    users,
-    readonly,
-    handleDelete,
-    handleCreate,
-    currentUserId,
-    isMobile,
-}: Props) => {
+export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, handleCreate }: Props) => {
     const [filteredTrainings, setFilteredTrainings] = useState<Training[]>(trainings);
     const [filter, setFilter] = useState<string>('');
 
@@ -39,7 +27,7 @@ export const TrainingsTableRaw = ({
 
         setFilteredTrainings(getFilteredTrainings(trainings));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter, trainings, users, currentUserId]);
+    }, [filter, trainings, users]);
 
     const getFilteredTrainings = (trainings: Training[]): Training[] => {
         return trainings.filter((training) => {

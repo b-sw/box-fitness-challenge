@@ -1,34 +1,24 @@
-import { DatesRange } from '@box-fc/frontend/domain';
-import { Training, useMobileQuery, useUserTrainingsQuery } from '@box-fc/frontend/query';
+import { Week } from '@box-fc/frontend/domain';
+import { Training, useUserTrainingsQuery } from '@box-fc/frontend/query';
 import { User, UserActivity } from '@box-fc/shared/types';
-import {
-    Button,
-    Flex,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-} from '@chakra-ui/react';
+import { Button, Flex, Modal, ModalBody, ModalContent, ModalFooter, ModalOverlay, Spacer } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { TrainingListItem } from '../../../trainings-dashboard/Training.list-item';
-import { NoRecords } from '../../../utils/no-records/NoRecords';
+import { TrainingListItem } from '../trainings-dashboard/Training.list-item';
+import { TrainingsTable } from '../trainings-dashboard/Trainings.table';
+import { NoRecords } from '../utils/no-records/NoRecords';
 
 type Props = {
     isOpen: boolean;
     onClose: () => void;
     activity: UserActivity;
-    range: DatesRange;
+    range: Week;
     users: Map<User['id'], User>;
 };
 
 export const UserActivityModal = ({ isOpen, onClose, activity, range, users }: Props) => {
     const { userTrainings } = useUserTrainingsQuery({ userId: activity.userId });
     const [trainingsInRange, setTrainingsInRange] = useState<Training[]>([]);
-    const { isMobile } = useMobileQuery();
 
     useEffect(() => {
         const trainingsInRange = userTrainings.filter(({ trainingDate }) => {
@@ -43,6 +33,7 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range, users }: P
 
     const getTrainings = () => {
         if (trainingsInRange.length === 0) {
+            // todo: await before opening
             return <NoRecords />;
         }
 
@@ -58,18 +49,20 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range, users }: P
     };
 
     return (
-        <Modal onClose={onClose} isOpen={isOpen} isCentered size={'lg'}>
+        <Modal onClose={onClose} isOpen={isOpen} isCentered size={'xl'}>
             <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>User's trainings</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    <Flex direction={'column'} gap={2} overflowY={'scroll'} maxH={'70vh'}>
-                        {getTrainings()}
+            <ModalContent pb={5}>
+                <ModalBody p={0}>
+                    <Flex h={'70vh'}>
+                        <TrainingsTable trainings={trainingsInRange} />
                     </Flex>
                 </ModalBody>
-                <ModalFooter>
-                    <Button onClick={onClose}>Close</Button>
+                <ModalFooter p={0}>
+                    <Flex w={'100%'}>
+                        <Spacer />
+                        <Button onClick={onClose}>Close</Button>
+                        <Spacer />
+                    </Flex>
                 </ModalFooter>
             </ModalContent>
         </Modal>

@@ -1,5 +1,4 @@
-import { Training, useAuthQuery, useMobileQuery, useUsersQuery } from '@box-fc/frontend/query';
-import { useAuthStore } from '@box-fc/frontend/store';
+import { Training, useAuthQuery, useUsersQuery } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { useDisclosure } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -14,8 +13,6 @@ type Props = {
 export const TrainingsTable = ({ trainings }: Props) => {
     const { users } = useUsersQuery();
     const { isAdmin } = useAuthQuery();
-    const { isMobile } = useMobileQuery();
-    const { user } = useAuthStore();
 
     const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
     const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
@@ -35,14 +32,12 @@ export const TrainingsTable = ({ trainings }: Props) => {
             <TrainingsTableRaw
                 trainings={trainings}
                 users={users}
-                currentUserId={user.id}
                 readonly={!isAdmin}
                 handleDelete={(activity: Training) => {
                     setSelectedActivity(activity);
                     onDeleteOpen();
                 }}
                 handleCreate={onCreateOpen}
-                isMobile={isMobile}
             />
         </>
     );
