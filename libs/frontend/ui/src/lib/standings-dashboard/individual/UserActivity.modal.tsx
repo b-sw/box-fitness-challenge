@@ -4,7 +4,7 @@ import { UserActivity } from '@box-fc/shared/types';
 import { Flex, Modal, ModalBody, ModalContent, ModalOverlay } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { TrainingsTable } from '../trainings-dashboard/Trainings.table';
+import { TrainingsTable } from '../../trainings-dashboard/Trainings.table';
 
 type Props = {
     isOpen: boolean;
@@ -30,7 +30,7 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range }: Props) =
 
     return (
         <Modal onClose={onClose} isOpen={isOpen} isCentered size={'xl'}>
-            <ModalOverlay />
+            <ModalOverlay />1
             <ModalContent pb={5} bg={'boxBlue.123'}>
                 <ModalBody p={0}>
                     <Flex h={'70vh'}>

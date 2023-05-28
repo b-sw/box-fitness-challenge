@@ -1,6 +1,6 @@
 import { User, UserActivity } from '@box-fc/shared/types';
 import { Avatar, Badge, CircularProgress, Flex, Progress, Spacer, Text, Tooltip } from '@chakra-ui/react';
-import { ListItem } from '../utils/list-item/ListItem';
+import { ListItem } from '../../utils/list-item/ListItem';
 
 type Props = {
     userActivity: UserActivity;

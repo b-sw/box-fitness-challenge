@@ -6,8 +6,8 @@ import { ReactNode, useEffect, useState } from 'react';
 import { getWeek } from '../utils/datetime/week';
 import { Dashboard } from '../utils/generic-components/Dashboard';
 import { ListingSwitcher, SwitchDirection } from '../utils/generic-components/listing-switcher/ListingSwitcher';
-import { IndividualStandingsTableWrapper } from './IndividualStandings.table-wrapper';
-import { TeamsStandingsTable } from './TeamsStandings.table';
+import { IndividualStandingsTableWrapper } from './individual/IndividualStandings.table-wrapper';
+import { TeamsStandingsTableWrapper } from './teams/TeamsStandings.table-wrapper';
 
 enum Listing {
     INDIVIDUAL = 'Individual standings',
@@ -59,7 +59,7 @@ export const StandingsDashboard = () => {
     const getStandings = (): ReactNode => {
         return switchCase({
             [Listing.INDIVIDUAL]: <IndividualStandingsTableWrapper week={standingsWeek} />,
-            [Listing.TEAMS]: <TeamsStandingsTable week={standingsWeek} />,
+            [Listing.TEAMS]: <TeamsStandingsTableWrapper week={standingsWeek} />,
         })(activeStandings);
     };
 

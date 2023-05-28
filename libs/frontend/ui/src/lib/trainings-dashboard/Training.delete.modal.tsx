@@ -1,5 +1,4 @@
-import { Training, useMobileQuery, useTrainingMutation } from '@box-fc/frontend/query';
-import { toastError, toastSuccess } from '@box-fc/frontend/ui';
+import { Training, useTrainingMutation } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import {
     Button,
@@ -9,13 +8,13 @@ import {
     ModalCloseButton,
     ModalContent,
     ModalFooter,
-    ModalHeader,
     ModalOverlay,
     Spacer,
     Text,
     useToast,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
+import { toastError, toastSuccess } from '../utils/toast/toast-info';
 import { personalActivityItem } from './Training.list-item';
 
 type Props = {
@@ -28,7 +27,6 @@ type Props = {
 export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) => {
     const { deleteMutation } = useTrainingMutation();
     const toast = useToast();
-    const { isMobile } = useMobileQuery();
 
     const deleteActivity = () => {
         deleteMutation.mutate(activity.id);
@@ -47,10 +45,9 @@ export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) 
     }, [deleteMutation.status]);
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} isCentered size={'lg'}>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered size={'xl'}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Delete referee</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     <Text fontWeight="bold" mb="1rem">

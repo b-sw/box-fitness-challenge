@@ -1,9 +1,9 @@
 import { User, UserActivity } from '@box-fc/shared/types';
 import { Flex } from '@chakra-ui/react';
 import { ReactNode, useEffect, useState } from 'react';
-import { NoRecords } from '../utils/no-records/NoRecords';
-import { SearchInput } from '../utils/search/SearchInput';
-import { TablePanel } from '../utils/table-panel/TablePanel';
+import { NoRecords } from '../../utils/no-records/NoRecords';
+import { SearchInput } from '../../utils/search/SearchInput';
+import { TablePanel } from '../../utils/table-panel/TablePanel';
 import { UserActivityListItem } from './UserActivity.list-item';
 
 type Props = {

@@ -39,7 +39,7 @@ export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
 
     return {
         teamsActivities: teamsActivitiesQuery.data as TeamActivity[],
-        teamsActivitiesStatus: teamsActivitiesQuery.status,
+        teamsActivitiesAreLoading: teamsActivitiesQuery.isLoading,
         usersActivities: usersActivitiesQuery.data as UserActivity[],
         usersActivitiesAreLoading: usersActivitiesQuery.isLoading,
     };

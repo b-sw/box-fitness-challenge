@@ -1,27 +1,19 @@
-import { Badge, Flex, Spacer, Text } from '@chakra-ui/react';
+import { CircularProgress, Flex, Spacer, Text } from '@chakra-ui/react';
 import { VscSearchStop } from 'react-icons/vsc';
+import { ListItem } from '../list-item/ListItem';
 
 type Props = {
     message?: string;
 };
 
 export const NoRecords = ({ message }: Props) => {
-    const heightRegulator = (
-        <Flex direction={'column'} w={'0%'} visibility={'hidden'}>
-            <Badge>
-                <Text p={1}>a</Text>
-            </Badge>
-            <Flex fontSize={'xs'} p={1}>
-                <Text>a</Text>
-            </Flex>
-        </Flex>
-    );
+    const HEIGHT_REGULATOR = <CircularProgress size={'55px'} visibility={'hidden'} w={'0%'} />;
 
     return (
-        <Flex p={4} alignItems={'center'}>
-            {heightRegulator}
+        <ListItem>
+            {HEIGHT_REGULATOR}
             <Spacer />
-            <Flex direction={'row'}>
+            <Flex>
                 <Spacer />
                 <Flex direction={'column'} align={'center'} borderRadius={20}>
                     <VscSearchStop opacity={0.5} size={'25'} />
@@ -30,6 +22,6 @@ export const NoRecords = ({ message }: Props) => {
                 <Spacer />
             </Flex>
             <Spacer />
-        </Flex>
+        </ListItem>
     );
 };
