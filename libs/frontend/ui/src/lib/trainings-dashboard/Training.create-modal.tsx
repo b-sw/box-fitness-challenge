@@ -60,7 +60,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                     initialValues={{
                         type: '',
                         duration: 0,
-                        trainingDate: dayjs(),
+                        trainingDate: dayjs().format('YYYY-MM-DDTHH:mm'),
                     }}
                     onSubmit={(values) => {
                         createMutation.mutate({
@@ -110,7 +110,6 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                                     name="trainingDate"
                                                     id="trainingDate"
                                                     type="datetime-local"
-                                                    value={dayjs().format('YYYY-MM-DDTHH:mm')}
                                                 />
                                             </FormControl>
                                         </Flex>
