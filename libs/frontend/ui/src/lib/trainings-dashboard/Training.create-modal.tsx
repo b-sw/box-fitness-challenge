@@ -55,7 +55,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
     return (
         <Modal isOpen={isOpen} onClose={handleClose} isCentered>
             <ModalOverlay />
-            <ModalContent p={5}>
+            <ModalContent p={5} borderRadius={25}>
                 <Formik
                     initialValues={{
                         type: '',

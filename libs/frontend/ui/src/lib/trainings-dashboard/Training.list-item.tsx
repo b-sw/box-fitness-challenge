@@ -35,7 +35,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
     const trainingTime = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('HH:mm');
 
     const durationPercentage = (activity.duration / 180) * 100;
-    const displayedDuration = `${Math.floor(activity.duration / 60)}:${activity.duration % 60}`;
+    const displayedDuration = formatMinutes(activity.duration);
 
     return (
         <Flex direction={'column'} w={'100%'}>
@@ -96,4 +96,13 @@ export const personalActivityItem = (user: User, activity: Training) => {
             </Flex>
         </Flex>
     );
+};
+
+const formatMinutes = (minutes: number): string => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    const formattedMinutes = String(remainingMinutes).padStart(2, '0');
+
+    return `${hours}:${formattedMinutes}`;
 };
