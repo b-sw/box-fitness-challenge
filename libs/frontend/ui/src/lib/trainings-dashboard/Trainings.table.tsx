@@ -8,9 +8,10 @@ import { TrainingsTableRaw } from './Trainings.table.raw';
 
 type Props = {
     trainings: Training[];
+    hideCreate?: boolean;
 };
 
-export const TrainingsTable = ({ trainings }: Props) => {
+export const TrainingsTable = ({ trainings, hideCreate }: Props) => {
     const { users } = useUsersQuery();
     const { isAdmin } = useAuthQuery();
 
@@ -38,6 +39,7 @@ export const TrainingsTable = ({ trainings }: Props) => {
                     onDeleteOpen();
                 }}
                 handleCreate={onCreateOpen}
+                showCreate={!hideCreate}
             />
         </>
     );

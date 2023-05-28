@@ -34,7 +34,6 @@ export const IndividualStandingsTableWrapper = ({ week }: Props) => {
                     isOpen={isDetailsOpen}
                     activity={selectedActivity as UserActivity}
                     range={week}
-                    users={users}
                 />
             )}
             <IndividualStandingsTable

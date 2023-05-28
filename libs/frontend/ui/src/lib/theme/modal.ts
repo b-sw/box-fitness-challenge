@@ -1,7 +1,8 @@
 const defaultModalVariant = () => {
     return {
         dialog: {
-            bg: 'gray.400',
+            bg: 'gray.300',
+            shadow: 'none',
         },
         overlay: {
             backdropFilter: 'auto',

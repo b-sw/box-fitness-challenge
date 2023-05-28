@@ -14,9 +14,10 @@ type Props = {
     readonly: boolean;
     handleDelete: (training: Training) => void;
     handleCreate: () => void;
+    showCreate: boolean;
 };
 
-export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, handleCreate }: Props) => {
+export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, handleCreate, showCreate }: Props) => {
     const [filteredTrainings, setFilteredTrainings] = useState<Training[]>(trainings);
     const [filter, setFilter] = useState<string>('');
 
@@ -58,16 +59,18 @@ export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, ha
         <TablePanel>
             <Flex gap={5}>
                 <SearchInput handleChange={setFilter} placeholder={'Search trainings'} />
-                <Tooltip label={'Register training'}>
-                    <IconButton
-                        aria-label={'register-training'}
-                        size={'lg'}
-                        rounded={'full'}
-                        onClick={handleCreate}
-                        icon={<AddIcon />}
-                        backgroundColor={'primary.50'}
-                    />
-                </Tooltip>
+                {showCreate && (
+                    <Tooltip label={'Register training'}>
+                        <IconButton
+                            aria-label={'register-training'}
+                            size={'lg'}
+                            rounded={'full'}
+                            onClick={handleCreate}
+                            icon={<AddIcon />}
+                            backgroundColor={'primary.50'}
+                        />
+                    </Tooltip>
+                )}
             </Flex>
 
             <Flex
