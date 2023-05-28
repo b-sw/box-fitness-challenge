@@ -1,5 +1,6 @@
 import { TeamActivity } from '@box-fc/shared/types';
-import { Badge, CircularProgress, Flex, Progress, Spacer, Text, Tooltip } from '@chakra-ui/react';
+import { Badge, Flex, Progress, Spacer, Text, Tooltip } from '@chakra-ui/react';
+import { HeightRegulator } from '../../utils/generic-components/HeightRegulator';
 import { ListItem } from '../../utils/list-item/ListItem';
 
 type Props = {
@@ -9,11 +10,9 @@ type Props = {
 };
 
 export const TeamActivityListItem = ({ teamActivity, maxScore, maxAverageMemberScore }: Props) => {
-    const HEIGHT_REGULATOR = <CircularProgress size={'55px'} visibility={'hidden'} w={'0%'} />;
-
     return (
         <ListItem>
-            {HEIGHT_REGULATOR}
+            <HeightRegulator />
             <Flex w={'50%'}>
                 <Badge
                     fontSize={'15'}

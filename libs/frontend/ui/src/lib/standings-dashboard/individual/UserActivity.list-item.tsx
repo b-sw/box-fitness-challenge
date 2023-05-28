@@ -1,5 +1,6 @@
 import { User, UserActivity } from '@box-fc/shared/types';
-import { Avatar, Badge, CircularProgress, Flex, Progress, Spacer, Text, Tooltip } from '@chakra-ui/react';
+import { Avatar, Badge, Flex, Progress, Spacer, Text, Tooltip } from '@chakra-ui/react';
+import { HeightRegulator } from '../../utils/generic-components/HeightRegulator';
 import { ListItem } from '../../utils/list-item/ListItem';
 
 type Props = {
@@ -10,8 +11,6 @@ type Props = {
 };
 
 export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: Props) => {
-    const HEIGHT_REGULATOR = <CircularProgress size={'55px'} visibility={'hidden'} w={'0%'} />;
-
     return (
         <ListItem>
             <Flex direction={['column', 'row']} w={'100%'} onClick={() => onClick(userActivity)} cursor={'pointer'}>
@@ -38,7 +37,7 @@ export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: 
                     </Flex>
                 </Flex>
 
-                {HEIGHT_REGULATOR}
+                <HeightRegulator />
 
                 <Tooltip label={`score: ${userActivity.score}`}>
                     <Flex w={'50%'} alignItems={'center'} position={'relative'}>

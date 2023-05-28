@@ -1,5 +1,6 @@
-import { CircularProgress, Flex, Spacer, Text } from '@chakra-ui/react';
+import { Flex, Spacer, Text } from '@chakra-ui/react';
 import { VscSearchStop } from 'react-icons/vsc';
+import { HeightRegulator } from '../generic-components/HeightRegulator';
 import { ListItem } from '../list-item/ListItem';
 
 type Props = {
@@ -7,11 +8,9 @@ type Props = {
 };
 
 export const NoRecords = ({ message }: Props) => {
-    const HEIGHT_REGULATOR = <CircularProgress size={'55px'} visibility={'hidden'} w={'0%'} />;
-
     return (
         <ListItem>
-            {HEIGHT_REGULATOR}
+            <HeightRegulator />
             <Spacer />
             <Flex>
                 <Spacer />

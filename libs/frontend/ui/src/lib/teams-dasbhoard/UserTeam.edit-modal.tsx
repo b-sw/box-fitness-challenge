@@ -2,21 +2,21 @@ import { useUserMutation } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import {
     Button,
+    Flex,
     FormControl,
-    FormLabel,
     Input,
     Modal,
     ModalBody,
-    ModalCloseButton,
     ModalContent,
     ModalFooter,
-    ModalHeader,
     ModalOverlay,
+    Spacer,
+    Text,
     useToast,
 } from '@chakra-ui/react';
 import { Field, Formik } from 'formik';
 import { useEffect } from 'react';
-import { toastError, toastSuccess } from '../../utils/toast/toast-info';
+import { toastError, toastSuccess } from '../utils/toast/toast-info';
 
 type Props = {
     isOpen: boolean;
@@ -41,18 +41,12 @@ export const UserTeamEditModal = ({ isOpen, handleClose, user }: Props) => {
     }, [updateMutation.status]);
 
     return (
-        <Modal isOpen={isOpen} onClose={handleClose} isCentered>
+        <Modal isOpen={isOpen} onClose={handleClose} isCentered size={'xs'}>
             <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>
-                    {user.firstName} {user.lastName}'s assignments
-                </ModalHeader>
-                <ModalCloseButton />
-
+            <ModalContent p={5}>
                 <Formik
                     initialValues={{
                         team: user.team || '',
-                        division: user.division || '',
                     }}
                     onSubmit={(values) => {
                         updateMutation.mutate({
@@ -63,37 +57,38 @@ export const UserTeamEditModal = ({ isOpen, handleClose, user }: Props) => {
                 >
                     {({ handleSubmit }: { handleSubmit: any }) => (
                         <form onSubmit={handleSubmit}>
-                            <ModalBody>
+                            <ModalBody p={0} mb={5}>
                                 <FormControl>
-                                    <FormLabel>Team</FormLabel>
                                     <Field
+                                        rounded={'full'}
                                         as={Input}
                                         id="team"
                                         name="team"
                                         type="team"
-                                        variant="filled"
                                         placeholder="canvas, notes, etc."
-                                    />
-                                </FormControl>
-
-                                <FormControl>
-                                    <FormLabel>Division</FormLabel>
-                                    <Field
-                                        as={Input}
-                                        id="division"
-                                        name="division"
-                                        type="division"
-                                        variant="filled"
-                                        placeholder="engineering, hr, etc."
                                     />
                                 </FormControl>
                             </ModalBody>
 
-                            <ModalFooter>
-                                <Button colorScheme="blue" mr={'3'} type="submit" isLoading={updateMutation.isLoading}>
-                                    Edit
-                                </Button>
-                                <Button onClick={handleClose}>Cancel</Button>
+                            <ModalFooter p={0}>
+                                <Flex w={'100%'} gap={5}>
+                                    <Spacer />
+
+                                    <Button
+                                        type="submit"
+                                        isLoading={updateMutation.isLoading}
+                                        bg={'boxBlue.500'}
+                                        textColor={'primary.50'}
+                                    >
+                                        <Text>Edit</Text>
+                                    </Button>
+
+                                    <Button onClick={handleClose}>
+                                        <Text>Cancel</Text>
+                                    </Button>
+
+                                    <Spacer />
+                                </Flex>
                             </ModalFooter>
                         </form>
                     )}

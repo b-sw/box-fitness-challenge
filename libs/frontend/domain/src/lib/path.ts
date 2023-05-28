@@ -4,4 +4,5 @@ export const Path = {
     TRAININGS: '/trainings',
     STANDINGS: '/standings',
     WINNERS: '/winners',
+    TEAMS: '/teams',
 };

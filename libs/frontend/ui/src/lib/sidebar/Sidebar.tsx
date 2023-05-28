@@ -1,13 +1,15 @@
 import { Path } from '@box-fc/frontend/domain';
-import { useAuthMutation } from '@box-fc/frontend/query';
+import { useAuthMutation, useAuthQuery } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
 import { Avatar, Badge, Button, Divider, Flex, Icon, IconButton, Spacer, Text } from '@chakra-ui/react';
 import { FaTrophy, MdBarChart, MdLogout } from 'react-icons/all';
 import { FaDumbbell } from 'react-icons/fa';
+import { MdPeople } from 'react-icons/md';
 import { NavigationButton } from './Navigation.button';
 
 export const Sidebar = () => {
     const { user } = useAuthStore();
+    const { isAdmin } = useAuthQuery();
     const { logout } = useAuthMutation({});
 
     return (
@@ -26,6 +28,7 @@ export const Sidebar = () => {
                 <NavigationButton path={Path.TRAININGS} icon={FaDumbbell} description={'Trainings'} />
                 <NavigationButton path={Path.STANDINGS} icon={MdBarChart} description={'Standings'} />
                 {/*<NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} />*/}
+                {isAdmin && <NavigationButton path={Path.TEAMS} icon={MdPeople} description={'[Admin] Teams'} />}
 
                 <Flex alignItems={'center'}>
                     <Button
