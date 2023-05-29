@@ -27,32 +27,6 @@ export const TeamActivityListItem = ({ teamActivity, maxScore, maxAverageMemberS
             </Flex>
 
             <Flex w={'50%'} direction={'column'} gap={1}>
-                <Tooltip label={`total score: ${teamActivity.score}`}>
-                    <Flex position={'relative'} w={'100%'} alignItems={'center'}>
-                        <Progress
-                            value={teamActivity.score}
-                            max={maxScore}
-                            w={'100%'}
-                            h={'100%'}
-                            rounded={'full'}
-                            bgColor={'gray.300'}
-                            colorScheme={'boxBlue'}
-                            position={'absolute'}
-                        ></Progress>
-                        <Flex zIndex={999} w={'100%'}>
-                            <Spacer />
-                            <Text
-                                borderColor={'gray.900'}
-                                textShadow={'-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'}
-                                textColor={'gray.50'}
-                            >
-                                {teamActivity.score}
-                            </Text>
-                            <Spacer />
-                        </Flex>
-                    </Flex>
-                </Tooltip>
-
                 <Tooltip label={`average member score: ${teamActivity.meanScore}`}>
                     <Flex position={'relative'} w={'100%'} alignItems={'center'}>
                         <Progress
@@ -74,6 +48,32 @@ export const TeamActivityListItem = ({ teamActivity, maxScore, maxAverageMemberS
                                 textColor={'gray.50'}
                             >
                                 {teamActivity.meanScore}
+                            </Text>
+                            <Spacer />
+                        </Flex>
+                    </Flex>
+                </Tooltip>
+
+                <Tooltip label={`total score: ${teamActivity.score}`}>
+                    <Flex position={'relative'} w={'100%'} alignItems={'center'}>
+                        <Progress
+                            value={teamActivity.score}
+                            max={maxScore}
+                            w={'100%'}
+                            h={'100%'}
+                            rounded={'full'}
+                            bgColor={'gray.300'}
+                            colorScheme={'boxBlue'}
+                            position={'absolute'}
+                        ></Progress>
+                        <Flex zIndex={999} w={'100%'}>
+                            <Spacer />
+                            <Text
+                                borderColor={'gray.900'}
+                                textShadow={'-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'}
+                                textColor={'gray.50'}
+                            >
+                                {teamActivity.score}
                             </Text>
                             <Spacer />
                         </Flex>

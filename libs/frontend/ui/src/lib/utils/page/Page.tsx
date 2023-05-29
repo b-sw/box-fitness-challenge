@@ -7,7 +7,7 @@ type Props = {
 export const Page = ({ children }: Props) => {
     return (
         <Flex
-            p={[2, 4]}
+            p={[1, 4]}
             h={'100vh'}
             w={'100vw'}
             direction={['column', 'row']}

@@ -7,7 +7,7 @@ type Props = {
 
 export const Dashboard = ({ children }: Props) => {
     return (
-        <Flex direction={'column'} gap={5} p={5} alignItems={'center'}>
+        <Flex direction={'column'} gap={[2, 5]} p={[0, 5]} alignItems={'center'}>
             {children}
         </Flex>
     );

@@ -55,7 +55,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
     return (
         <Modal isOpen={isOpen} onClose={handleClose} isCentered>
             <ModalOverlay />
-            <ModalContent p={5} borderRadius={25}>
+            <ModalContent p={[5]} borderRadius={25}>
                 <Formik
                     initialValues={{
                         type: '',
@@ -89,7 +89,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                                         as={NumberInputField}
                                                         name="duration"
                                                         id="duration"
-                                                        placeholder={'minutes'}
+                                                        placeholder={'mins'}
                                                         bg={'gray.50'}
                                                         _hover={{
                                                             background: 'gray.100',

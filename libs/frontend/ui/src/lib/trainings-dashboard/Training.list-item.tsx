@@ -39,8 +39,8 @@ export const personalActivityItem = (user: User, activity: Training) => {
 
     return (
         <Flex direction={'column'} w={'100%'}>
-            <Flex direction={'row'} w={'100%'}>
-                <Flex w={'50%'} alignItems={'center'} gap={3}>
+            <Flex direction={['column', 'row']} w={'100%'} gap={[3, 0]}>
+                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
                     <Avatar size={'md'} src={user.imageUrl} shadow={'md'} />
 
                     <Flex direction={'column'} gap={1}>
@@ -62,7 +62,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                     </Flex>
                 </Flex>
 
-                <Flex w={'50%'} alignItems={'center'} gap={3}>
+                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
                     <Flex w={'20%'}>
                         <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'55px'}>
                             <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>

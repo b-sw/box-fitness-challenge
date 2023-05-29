@@ -38,7 +38,7 @@ export const Dashboard = () => {
     return (
         <Page>
             {isMobile ? <MobileMenu /> : <Sidebar />}
-            <Flex w={'100%'}>
+            <Flex w={'100%'} mt={['10vh', 0]}>
                 <Spacer />
                 {routes}
                 <Spacer />

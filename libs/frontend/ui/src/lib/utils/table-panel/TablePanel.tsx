@@ -7,7 +7,7 @@ type Props = {
 
 export const TablePanel = ({ children, options }: Props) => {
     return (
-        <Flex direction={'column'} w={'600px'} overflow={'hidden'} flexGrow={1} {...options}>
+        <Flex direction={'column'} w={['100%', '600px']} overflow={'hidden'} flexGrow={1} {...options}>
             <Flex
                 direction={'column'}
                 borderRadius={20}
@@ -16,7 +16,7 @@ export const TablePanel = ({ children, options }: Props) => {
                 overflow={'hidden'}
                 flexGrow={1}
                 w={'100%'}
-                maxH={['90vh', '100%']}
+                maxH={['80vh', '100%']}
             >
                 {children}
             </Flex>

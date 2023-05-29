@@ -13,7 +13,7 @@ export class CreateTrainingDto {
 
     @ApiProperty()
     @Min(1)
-    @Max(180)
+    @Max(1440)
     duration: number;
 
     @ApiProperty({ type: Date, nullable: false })

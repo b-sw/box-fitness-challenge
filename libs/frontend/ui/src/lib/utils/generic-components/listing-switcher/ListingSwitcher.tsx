@@ -33,8 +33,8 @@ export const ListingSwitcher = ({ activeListing, switchListing, size, isLoadingL
     );
 
     return (
-        <Flex alignItems={'center'} w={'500px'}>
-            <Flex w={size === 'sm' ? '25%' : '10%'}>
+        <Flex alignItems={'center'} w={['90%', '500px']}>
+            <Flex>
                 <Spacer />
                 {iconButton(<ArrowBackIcon />, SwitchDirection.LEFT)}
             </Flex>
@@ -42,14 +42,14 @@ export const ListingSwitcher = ({ activeListing, switchListing, size, isLoadingL
 
             <Flex w={size === 'sm' ? '50%' : '80%'}>
                 <Spacer />
-                <Text fontSize={textSize} fontWeight={'bold'} color={'gray.50'}>
+                <Text fontSize={['2xl', textSize]} fontWeight={'bold'} color={'gray.50'}>
                     {activeListing}
                 </Text>
                 <Spacer />
             </Flex>
 
             <Spacer />
-            <Flex w={size === 'sm' ? '25%' : '10%'}>
+            <Flex>
                 {iconButton(<ArrowForwardIcon />, SwitchDirection.RIGHT)}
                 <Spacer />
             </Flex>
