@@ -61,6 +61,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                         type: '',
                         duration: 0,
                         trainingDate: dayjs().format('YYYY-MM-DDTHH:mm'),
+                        registrationDate: dayjs().format('YYYY-MM-DDTHH:mm'),
                     }}
                     onSubmit={(values) => {
                         createMutation.mutate({
