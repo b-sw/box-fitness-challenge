@@ -8,6 +8,7 @@ import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import './styles.css';
 
 dayjs.extend(utc);
 dayjs.extend(isBetween);
