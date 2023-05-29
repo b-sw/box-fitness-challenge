@@ -1,11 +1,11 @@
 import { useUsersQuery } from '@box-fc/frontend/query';
-import { ListItem } from '@box-fc/frontend/ui';
 import { User } from '@box-fc/shared/types';
 import { EditIcon } from '@chakra-ui/icons';
 import { Avatar, Badge, Flex, IconButton, Spacer, Text, Tooltip, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Dashboard } from '../utils/generic-components/Dashboard';
 import { HeightRegulator } from '../utils/generic-components/HeightRegulator';
+import { ListItem } from '../utils/list-item/ListItem';
 import { NoRecords } from '../utils/no-records/NoRecords';
 import { SearchInput } from '../utils/search/SearchInput';
 import { TablePanel } from '../utils/table-panel/TablePanel';
@@ -43,7 +43,7 @@ export const TeamsDashboard = () => {
             <HeightRegulator />
             <Flex direction={'row'} w={'100%'}>
                 <Flex w={'70%'} alignItems={'center'} gap={3}>
-                    <Avatar size={'md'} src={user.imageUrl} />
+                    <Avatar size={'md'} src={user.imageUrl} shadow={'md'} />
 
                     <Flex direction={'column'} gap={1}>
                         <Tooltip label={`${user.email}`}>

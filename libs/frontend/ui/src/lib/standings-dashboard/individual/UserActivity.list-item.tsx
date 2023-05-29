@@ -16,7 +16,7 @@ export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: 
             <Flex direction={['column', 'row']} w={'100%'} onClick={() => onClick(userActivity)} cursor={'pointer'}>
                 {/*copy paste */}
                 <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
-                    <Avatar size={'md'} src={user.imageUrl} />
+                    <Avatar size={'md'} src={user.imageUrl} shadow={'md'} />
 
                     <Flex direction={'column'} gap={1}>
                         <Tooltip label={`${user.firstName} ${user.lastName}`}>

@@ -64,7 +64,7 @@ export const Sidebar = () => {
             <Spacer />
 
             <Flex gap={2} alignItems={'center'}>
-                <Avatar size={'lg'} src={user.imageUrl} />
+                <Avatar size={'lg'} src={user.imageUrl} shadow={'md'} />
                 <Flex direction={'column'}>
                     <Flex alignItems={'center'} gap={1}>
                         <Text fontSize={'lg'}>

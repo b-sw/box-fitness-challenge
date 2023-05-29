@@ -41,7 +41,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
         <Flex direction={'column'} w={'100%'}>
             <Flex direction={'row'} w={'100%'}>
                 <Flex w={'50%'} alignItems={'center'} gap={3}>
-                    <Avatar size={'md'} src={user.imageUrl} />
+                    <Avatar size={'md'} src={user.imageUrl} shadow={'md'} />
 
                     <Flex direction={'column'} gap={1}>
                         <Tooltip label={`${user.firstName} ${user.lastName}`}>

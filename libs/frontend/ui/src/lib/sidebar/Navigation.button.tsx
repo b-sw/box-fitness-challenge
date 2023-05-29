@@ -1,5 +1,6 @@
 import { Path } from '@box-fc/frontend/domain';
-import { Button, Flex, Icon, Spacer, Text } from '@chakra-ui/react';
+import { useMobileQuery } from '@box-fc/frontend/query';
+import { Button, Flex, Icon, MenuItem, Spacer, Text } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,14 +13,34 @@ type Props = {
 export const NavigationButton = ({ path, icon, description }: Props) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
+    const { isMobile } = useMobileQuery();
 
     const isActiveRoute = (routeName: string): boolean => {
         return pathname.includes(routeName);
     };
 
-    const textColor = isActiveRoute(path) ? 'gray.900' : 'gray.400';
+    const textColor = isActiveRoute(path) ? 'gray.900' : 'gray.500';
     const iconColor = isActiveRoute(path) ? 'boxBlue.500' : 'gray.400';
     const fontWeight = isActiveRoute(path) ? 'bold' : 'normal';
+
+    if (isMobile) {
+        return (
+            <MenuItem
+                icon={
+                    <Flex alignItems={'center'}>
+                        <Icon as={icon} color={iconColor} />
+                    </Flex>
+                }
+                onClick={() => navigate(`${Path.DASHBOARD}${path}`)}
+                rounded={'full'}
+                alignItems={'center'}
+            >
+                <Text color={textColor} fontWeight={fontWeight}>
+                    {description}
+                </Text>
+            </MenuItem>
+        );
+    }
 
     return (
         <Button

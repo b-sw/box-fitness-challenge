@@ -5,7 +5,7 @@ import { LoginButton } from './LoginButton';
 export const LandingPage = () => {
     return (
         <Page>
-            <Flex alignItems={'center'} w={'100vw'}>
+            <Flex direction={['column', 'row']} alignItems={'center'} w={'100vw'} h={'100vh'}>
                 <Spacer />
 
                 <Flex direction={'row'} alignItems={'center'}>

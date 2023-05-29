@@ -1,9 +1,10 @@
 import { Path } from '@box-fc/frontend/domain';
-import { useUsersQuery } from '@box-fc/frontend/query';
+import { useMobileQuery, useUsersQuery } from '@box-fc/frontend/query';
 import { Flex, Spacer } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuthRouteAdmin } from '../auth/RequireAuthRouteAdmin';
+import { MobileMenu } from '../mobile-menu/MobileMenu';
 import { Sidebar } from '../sidebar/Sidebar';
 import { StandingsDashboard } from '../standings-dashboard/Standings.dashboard';
 import { TeamsDashboard } from '../teams-dasbhoard/Teams.dashboard';
@@ -13,6 +14,7 @@ import { Page } from '../utils/page/Page';
 
 export const Dashboard = () => {
     const { isLoading } = useUsersQuery();
+    const { isMobile } = useMobileQuery();
 
     const routes = useMemo(
         () => (
@@ -35,7 +37,7 @@ export const Dashboard = () => {
 
     return (
         <Page>
-            <Sidebar />
+            {isMobile ? <MobileMenu /> : <Sidebar />}
             <Flex w={'100%'}>
                 <Spacer />
                 {routes}
