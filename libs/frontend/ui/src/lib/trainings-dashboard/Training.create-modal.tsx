@@ -83,7 +83,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                             </Flex>
 
                                             <FormControl w={'75%'}>
-                                                <NumberInput min={0} max={180} variant="filled">
+                                                <NumberInput min={1} max={1440} variant="filled">
                                                     <Field
                                                         rounded={'full'}
                                                         as={NumberInputField}
