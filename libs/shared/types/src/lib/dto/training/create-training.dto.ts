@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsUUID, Length, Max, Min } from 'class-validator';
+import { IsDateString, IsUUID, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { uuid } from '../../uuid.type';
 
 export class CreateTrainingDto {
@@ -8,7 +8,8 @@ export class CreateTrainingDto {
     userId: uuid;
 
     @ApiProperty()
-    @Length(3, 20)
+    @MinLength(3)
+    @MaxLength(20, { message: 'F you Sasha' })
     type: string;
 
     @ApiProperty()
