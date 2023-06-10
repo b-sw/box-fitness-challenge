@@ -1,16 +1,14 @@
 import { useMobileQuery } from '@box-fc/frontend/query';
 import { Divider, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
-import { useViewportScroll } from 'framer-motion';
-import 'react-device-frameset/dist/styles/marvel-devices.min.css';
+import { motion } from 'framer-motion';
 import { MdKeyboardDoubleArrowDown } from 'react-icons/md';
 import { Parallax } from 'react-parallax';
 import { Parallax as ScrollParallax } from 'react-scroll-parallax';
-import 'react-slideshow-image/dist/styles.css';
+import { scrollToPercentage } from '../../../utils/effects/scroll';
 import { LoginButton } from '../LoginButton';
 
 export const Hero = () => {
     const { isMobile } = useMobileQuery();
-    const { scrollYProgress } = useViewportScroll();
 
     return (
         <Parallax
@@ -45,25 +43,29 @@ export const Hero = () => {
                         <Spacer />
                     </Flex>
 
-                    <Flex w={'100%'} h={'40%'} alignItems={'flex-end'}>
-                        <Spacer />
-                        <ScrollParallax speed={-15}>
-                            <Flex>
-                                <Spacer />
-                                <IconButton
-                                    aria-label={'scroll down'}
-                                    icon={<MdKeyboardDoubleArrowDown size={'50'} color={'#FFF'} />}
-                                    variant={'ghost'}
-                                    size={'lg'}
-                                    _hover={{ backgroundColor: 'transparent' }}
-                                    _active={{ backgroundColor: 'transparent' }}
-                                    onClick={() => scrollYProgress.set(0.5)}
-                                />
-                                <Spacer />
-                            </Flex>
-                        </ScrollParallax>
-                        <Spacer />
-                    </Flex>
+                    {!isMobile && (
+                        <Flex w={'100%'} h={'40%'} alignItems={'flex-end'}>
+                            <Spacer />
+                            <ScrollParallax speed={-15}>
+                                <Flex>
+                                    <Spacer />
+                                    <IconButton
+                                        as={motion.div}
+                                        whileHover={{ bottom: 5 }}
+                                        aria-label={'scroll down'}
+                                        icon={<MdKeyboardDoubleArrowDown size={'50'} color={'#FFF'} />}
+                                        variant={'ghost'}
+                                        size={'lg'}
+                                        _hover={{ backgroundColor: 'transparent' }}
+                                        _active={{ backgroundColor: 'transparent' }}
+                                        onClick={() => scrollToPercentage(0.5)}
+                                    />
+                                    <Spacer />
+                                </Flex>
+                            </ScrollParallax>
+                            <Spacer />
+                        </Flex>
+                    )}
                 </Flex>
             </Flex>
         </Parallax>

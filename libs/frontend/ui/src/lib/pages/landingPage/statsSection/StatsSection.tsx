@@ -1,8 +1,10 @@
-import { Box, Fade, Flex, Heading, SimpleGrid, Spacer, Text } from '@chakra-ui/react';
-import { useViewportScroll } from 'framer-motion';
+import { Box, Fade, Flex, Heading, IconButton, SimpleGrid, Spacer, Text } from '@chakra-ui/react';
+import { motion, useViewportScroll } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
-import { Parallax } from 'react-scroll-parallax';
+import { MdKeyboardDoubleArrowDown } from 'react-icons/md';
+import { Parallax, Parallax as ScrollParallax } from 'react-scroll-parallax';
 import { useCountUp } from 'use-count-up';
+import { scrollToPercentage } from '../../../utils/effects/scroll';
 
 const REGISTERED_TRAININGS = 543;
 const UNIQUE_PARTICIPANTS = 99;
@@ -46,48 +48,81 @@ export const StatsSection = () => {
     return (
         <Flex p={4} h={'100vh'} direction={'column'} align={'center'} backgroundColor={'gray.400'}>
             <Spacer />
-            <Parallax speed={-10}>
-                <Heading fontSize={'7xl'} color={'gray.50'} mb={10} fontFamily={'gotham'}>
-                    Our scale
-                </Heading>
-            </Parallax>
 
-            <SimpleGrid columns={[1, 3]} spacing={'100'}>
-                <Parallax speed={-15}>
-                    <Box>
-                        <Fade in={countStarted}>
-                            <Heading fontSize={'8xl'}>{leaguesCount}</Heading>
-                        </Fade>
-                        <Text fontSize={'4xl'} fontFamily={'gotham'}>
-                            Registered trainings
-                        </Text>
-                    </Box>
-                </Parallax>
+            <Flex h={'60%'} direction={'column'}>
+                <Spacer />
 
-                <Parallax speed={-15}>
-                    <Box>
-                        <Fade in={countStarted}>
-                            <Heading fontSize={'8xl'}>{countriesCount}</Heading>
-                        </Fade>
-                        <Text fontSize={'4xl'} fontFamily={'gotham'}>
-                            Unique participants
-                        </Text>
-                    </Box>
-                </Parallax>
+                <Flex direction={'column'}>
+                    <Flex>
+                        <Spacer />
 
-                <Parallax speed={-15}>
-                    <Box>
-                        <Fade in={countStarted}>
-                            <Heading fontSize={'8xl'}>{gradesCount}</Heading>
-                        </Fade>
-                        <Text fontSize={'4xl'} fontFamily={'gotham'}>
-                            Trained hours
-                        </Text>
-                    </Box>
-                </Parallax>
-            </SimpleGrid>
+                        <Parallax speed={-10}>
+                            <Heading fontSize={'7xl'} color={'gray.50'} mb={10} fontFamily={'gotham'}>
+                                Our scale
+                            </Heading>
+                        </Parallax>
 
-            <Spacer />
+                        <Spacer />
+                    </Flex>
+
+                    <SimpleGrid columns={[1, 3]} spacing={'100'}>
+                        <Parallax speed={-15}>
+                            <Box>
+                                <Fade in={countStarted}>
+                                    <Heading fontSize={'8xl'}>{leaguesCount}</Heading>
+                                </Fade>
+                                <Text fontSize={'4xl'} fontFamily={'gotham'}>
+                                    Registered trainings
+                                </Text>
+                            </Box>
+                        </Parallax>
+
+                        <Parallax speed={-15}>
+                            <Box>
+                                <Fade in={countStarted}>
+                                    <Heading fontSize={'8xl'}>{countriesCount}</Heading>
+                                </Fade>
+                                <Text fontSize={'4xl'} fontFamily={'gotham'}>
+                                    Unique participants
+                                </Text>
+                            </Box>
+                        </Parallax>
+
+                        <Parallax speed={-15}>
+                            <Box>
+                                <Fade in={countStarted}>
+                                    <Heading fontSize={'8xl'}>{gradesCount}</Heading>
+                                </Fade>
+                                <Text fontSize={'4xl'} fontFamily={'gotham'}>
+                                    Trained hours
+                                </Text>
+                            </Box>
+                        </Parallax>
+                    </SimpleGrid>
+                </Flex>
+            </Flex>
+
+            <Flex w={'100%'} h={'40%'} alignItems={'flex-end'}>
+                <Spacer />
+                <ScrollParallax speed={-15}>
+                    <Flex>
+                        <Spacer />
+                        <IconButton
+                            as={motion.div}
+                            whileHover={{ bottom: 5 }}
+                            aria-label={'scroll down'}
+                            icon={<MdKeyboardDoubleArrowDown size={'50'} color={'#1a202c'} />}
+                            variant={'ghost'}
+                            size={'lg'}
+                            _hover={{ backgroundColor: 'transparent' }}
+                            _active={{ backgroundColor: 'transparent' }}
+                            onClick={() => scrollToPercentage(1)}
+                        />
+                        <Spacer />
+                    </Flex>
+                </ScrollParallax>
+                <Spacer />
+            </Flex>
         </Flex>
     );
 };
