@@ -1,8 +1,8 @@
 import { useAuthMutation } from '@box-fc/frontend/query';
-import { Button, useToast } from '@chakra-ui/react';
+import { Button, Text, useToast } from '@chakra-ui/react';
 import { useGoogleLogin } from '@react-oauth/google';
 import { FcGoogle } from 'react-icons/fc';
-import { defaultToastErrorOptions } from '../utils/toast/toast-info';
+import { defaultToastErrorOptions } from '../../utils/toast/toast-info';
 
 export const LoginButton = () => {
     const toast = useToast();
@@ -14,8 +14,10 @@ export const LoginButton = () => {
     const { loginMutation } = useAuthMutation({ onLoginError });
 
     return (
-        <Button isLoading={loginMutation.isLoading} onClick={() => googleLogin()} leftIcon={<FcGoogle />}>
-            Sign in
+        <Button isLoading={loginMutation.isLoading} onClick={() => googleLogin()} leftIcon={<FcGoogle />} size={'lg'}>
+            <Text fontSize={'md'} fontFamily={'gotham'} color={'gray.600'}>
+                SIGN IN
+            </Text>
         </Button>
     );
 };
