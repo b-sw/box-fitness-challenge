@@ -19,7 +19,7 @@ export const NavigationButton = ({ path, icon, description }: Props) => {
         return pathname.includes(routeName);
     };
 
-    const textColor = isActiveRoute(path) ? 'gray.900' : 'gray.500';
+    const textColor = isActiveRoute(path) ? 'gray.700' : 'gray.500';
     const iconColor = isActiveRoute(path) ? 'boxBlue.500' : 'gray.400';
     const fontWeight = isActiveRoute(path) ? 'bold' : 'normal';
 

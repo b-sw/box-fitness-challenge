@@ -1,7 +1,7 @@
 import { Week } from '@box-fc/frontend/domain';
 import { Training, useUserTrainingsQuery } from '@box-fc/frontend/query';
 import { UserActivity } from '@box-fc/shared/types';
-import { Flex, Modal, ModalBody, ModalContent, ModalOverlay } from '@chakra-ui/react';
+import { Flex, Modal, ModalBody, ModalContent, ModalOverlay, Spacer } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { TrainingsTable } from '../../trainings-dashboard/Trainings.table';
@@ -33,8 +33,9 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range }: Props) =
             <ModalOverlay />1
             <ModalContent pb={5} bg={'boxBlue.123'}>
                 <ModalBody p={0}>
-                    <Flex h={'70vh'}>
+                    <Flex h={'70vh'} border={'1px solid'} alignItems={'flex-start'}>
                         <TrainingsTable trainings={trainingsInRange} hideCreate={true} />
+                        <Spacer pointerEvents={'none'} />
                     </Flex>
                 </ModalBody>
             </ModalContent>

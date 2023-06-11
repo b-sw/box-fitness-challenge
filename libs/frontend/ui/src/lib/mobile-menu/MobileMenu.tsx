@@ -20,7 +20,7 @@ export const MobileMenu = () => {
             pl={6}
             rounded={'full'}
             alignItems={'center'}
-            shadow={'xl'}
+            shadow={'md'}
             position={'absolute'}
             zIndex={999}
             top={0}

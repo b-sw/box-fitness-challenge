@@ -63,7 +63,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                 </Flex>
 
                 <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
-                    <Flex w={'20%'}>
+                    <Flex w={'40%'}>
                         <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'55px'}>
                             <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>
                         </CircularProgress>

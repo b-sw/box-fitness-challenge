@@ -7,12 +7,11 @@ type Props = {
 
 export const TablePanel = ({ children, options }: Props) => {
     return (
-        <Flex direction={'column'} w={['100%', '600px']} overflow={'hidden'} flexGrow={1} {...options}>
+        <Flex direction={'column'} w={['100%', '800px']} overflow={'hidden'} flexGrow={1} {...options}>
             <Flex
                 direction={'column'}
                 borderRadius={20}
                 p={5}
-                shadow={'md'}
                 overflow={'hidden'}
                 flexGrow={1}
                 w={'100%'}

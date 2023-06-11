@@ -13,7 +13,7 @@ export const Sidebar = () => {
     const { logout } = useAuthMutation({});
 
     return (
-        <Flex direction={'column'} w={'350px'} backgroundColor={'gray.50'} borderRadius={25} shadow={'md'} mr={5} p={5}>
+        <Flex direction={'column'} w={'500px'} backgroundColor={'gray.50'} borderRadius={25} shadow={'md'} p={5} m={5}>
             <Flex>
                 <Spacer />
                 <Text fontSize={'3xl'} color={'boxBlue.500'} fontWeight={'bold'}>
@@ -72,7 +72,14 @@ export const Sidebar = () => {
                         </Text>
                     </Flex>
                     <Flex>
-                        <Badge colorScheme="linkedin" fontSize={'xs'} variant={'subtle'}>
+                        <Badge
+                            fontSize={'10'}
+                            fontWeight={'italic'}
+                            textColor={'boxBlue.500'}
+                            backgroundColor={'blue.50'}
+                            border={'1px'}
+                            borderRadius={15}
+                        >
                             {user.team ?? 'N/A team'}
                         </Badge>
                     </Flex>

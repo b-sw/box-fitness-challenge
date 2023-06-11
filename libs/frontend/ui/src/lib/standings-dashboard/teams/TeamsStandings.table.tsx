@@ -54,6 +54,7 @@ export const TeamsStandingsTable = ({ teamsActivities }: Props) => {
             <Flex
                 w={'100%'}
                 direction={'column'}
+                shadow={'md'}
                 h={'fit-content'}
                 overflowY={'scroll'}
                 backgroundColor={'gray.50'}

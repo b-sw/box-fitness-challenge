@@ -68,6 +68,7 @@ export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, ha
                             onClick={handleCreate}
                             icon={<AddIcon />}
                             backgroundColor={'primary.50'}
+                            shadow={'md'}
                         />
                     </Tooltip>
                 )}
@@ -75,6 +76,7 @@ export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, ha
 
             <Flex
                 direction={'column'}
+                shadow={'md'}
                 h={'fit-content'}
                 overflowY={'scroll'}
                 backgroundColor={'gray.50'}
