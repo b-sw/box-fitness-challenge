@@ -12,7 +12,7 @@ export const Page = ({ children }: Props) => {
             w={'100vw'}
             direction={['column', 'row']}
             overflow={'hidden'}
-            backgroundColor={'boxBlue.500'}
+            backgroundColor={'gray.200'}
             position={['relative', 'static']}
         >
             {children}

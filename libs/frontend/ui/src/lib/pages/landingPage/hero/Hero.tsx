@@ -31,7 +31,7 @@ export const Hero = () => {
                                 gap={4}
                                 p={4}
                             >
-                                <Text fontSize={'2xl'} color={'gray.800'} fontFamily={'gotham'} lineHeight={1} px={10}>
+                                <Text fontSize={'2xl'} color={'gray.800'} fontWeight={'bold'} lineHeight={1} px={10}>
                                     FITNESS CHALLENGE
                                 </Text>
 

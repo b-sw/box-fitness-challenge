@@ -57,7 +57,7 @@ export const StatsSection = () => {
                         <Spacer />
 
                         <Parallax speed={-10}>
-                            <Heading fontSize={'7xl'} color={'gray.50'} mb={10} fontFamily={'gotham'}>
+                            <Heading fontSize={'7xl'} color={'gray.50'} mb={10}>
                                 Our scale
                             </Heading>
                         </Parallax>
@@ -71,9 +71,7 @@ export const StatsSection = () => {
                                 <Fade in={countStarted}>
                                     <Heading fontSize={'8xl'}>{leaguesCount}</Heading>
                                 </Fade>
-                                <Text fontSize={'4xl'} fontFamily={'gotham'}>
-                                    Registered trainings
-                                </Text>
+                                <Text fontSize={'4xl'}>Registered trainings</Text>
                             </Box>
                         </Parallax>
 
@@ -82,9 +80,7 @@ export const StatsSection = () => {
                                 <Fade in={countStarted}>
                                     <Heading fontSize={'8xl'}>{countriesCount}</Heading>
                                 </Fade>
-                                <Text fontSize={'4xl'} fontFamily={'gotham'}>
-                                    Unique participants
-                                </Text>
+                                <Text fontSize={'4xl'}>Unique participants</Text>
                             </Box>
                         </Parallax>
 
@@ -93,9 +89,7 @@ export const StatsSection = () => {
                                 <Fade in={countStarted}>
                                     <Heading fontSize={'8xl'}>{gradesCount}</Heading>
                                 </Fade>
-                                <Text fontSize={'4xl'} fontFamily={'gotham'}>
-                                    Trained hours
-                                </Text>
+                                <Text fontSize={'4xl'}>Trained hours</Text>
                             </Box>
                         </Parallax>
                     </SimpleGrid>

@@ -6,7 +6,7 @@ export const PagesSection = () => {
     return (
         <Parallax
             strength={500}
-            bgImage={`https://box-fitness-challenge.s3.eu-west-2.amazonaws.com/pexels-photo-12169032.png`}
+            bgImage={`https://box-fitness-challenge.s3.eu-west-2.amazonaws.com/pexels-koolshooters-6495062.jpg`}
             bgImageSizes={'cover'}
             bgImageStyle={{ objectFit: 'cover' }}
         >
