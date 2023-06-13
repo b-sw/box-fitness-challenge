@@ -15,7 +15,7 @@ export const LoginButton = () => {
 
     return (
         <Button isLoading={loginMutation.isLoading} onClick={() => googleLogin()} leftIcon={<FcGoogle />} size={'lg'}>
-            <Text fontSize={'md'} color={'gray.600'} fontWeight={'semibold'}>
+            <Text fontSize={'md'} color={'gray.900'} fontWeight={'semibold'}>
                 Sign in
             </Text>
         </Button>

@@ -26,16 +26,16 @@ export const Hero = () => {
                                 direction={'column'}
                                 w={['100%']}
                                 align={'center'}
-                                backgroundColor={'whiteAlpha.500'}
+                                backgroundColor={'whiteAlpha.600'}
                                 rounded={'full'}
                                 gap={4}
                                 p={4}
                             >
-                                <Text fontSize={'2xl'} color={'gray.800'} fontWeight={'bold'} lineHeight={1} px={10}>
+                                <Text fontSize={'2xl'} color={'gray.900'} fontWeight={'bold'} lineHeight={1} px={10}>
                                     FITNESS CHALLENGE
                                 </Text>
 
-                                <Divider borderColor={'gray.800'} />
+                                <Divider borderColor={'gray.900'} />
 
                                 <LoginButton />
                             </Flex>

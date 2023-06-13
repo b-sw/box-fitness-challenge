@@ -1,7 +1,8 @@
 import { Flex } from '@chakra-ui/react';
+import { ReactNode } from 'react';
 
 type Props = {
-    children?: (JSX.Element | false)[] | (JSX.Element | false);
+    children?: ReactNode;
 };
 
 export const Page = ({ children }: Props) => {

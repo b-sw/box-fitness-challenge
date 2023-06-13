@@ -11,6 +11,7 @@ import { TeamsDashboard } from '../teams-dasbhoard/Teams.dashboard';
 import { TrainingsDashboard } from '../trainings-dashboard/Trainings.dashboard';
 import { LoadingOverlay } from '../utils/loading-overlay/LoadingOverlay';
 import { Page } from '../utils/page/Page';
+import { WinnersDashboard } from '../winners-dashboard/Winners.dashboard';
 
 export const Dashboard = () => {
     const { isLoading } = useUsersQuery();
@@ -21,7 +22,7 @@ export const Dashboard = () => {
             <Routes>
                 <Route path={Path.TRAININGS} element={<TrainingsDashboard />} />
                 <Route path={Path.STANDINGS} element={<StandingsDashboard />} />
-                {/*<Route path={Path.WINNERS} element={<UsersActivitiesTable />} />*/}
+                <Route path={Path.WINNERS} element={<WinnersDashboard />} />
                 <Route element={<RequireAuthRouteAdmin />}>
                     <Route path={Path.TEAMS} element={<TeamsDashboard />} />
                 </Route>
@@ -38,7 +39,8 @@ export const Dashboard = () => {
     return (
         <Page>
             {isMobile ? <MobileMenu /> : <Sidebar />}
-            <Flex w={'100%'} mt={['12vh', 0]}>
+
+            <Flex mt={['12vh', 0]} flexGrow={1}>
                 <Spacer />
                 {routes}
                 <Spacer />

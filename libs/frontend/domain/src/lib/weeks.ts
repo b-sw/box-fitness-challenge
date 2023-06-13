@@ -6,8 +6,6 @@ export type Week = {
     endDate: Dayjs;
 };
 
-export type DatesRange = { startDate: Dayjs; endDate: Dayjs };
-
 export const WEEKS: Map<Week['id'], Week> = new Map([
     [1, { id: 1, startDate: dayjs('2023-05-15T21:59:59Z'), endDate: dayjs('2023-05-21T22:00:00Z') }],
     [2, { id: 2, startDate: dayjs('2023-05-21T21:59:59Z'), endDate: dayjs('2023-05-28T22:00:00Z') }],

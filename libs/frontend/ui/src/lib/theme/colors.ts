@@ -5,4 +5,13 @@ export const colors = {
     primary: {
         50: '#f7fafc',
     },
+    gold: {
+        500: '#FFD700',
+    },
+    silver: {
+        500: '#c0c0c0',
+    },
+    bronze: {
+        500: '#cd7f32',
+    },
 };
