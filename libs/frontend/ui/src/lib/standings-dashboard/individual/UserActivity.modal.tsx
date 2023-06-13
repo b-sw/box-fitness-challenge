@@ -33,7 +33,7 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range }: Props) =
             <ModalOverlay />1
             <ModalContent pb={5} bg={'boxBlue.123'}>
                 <ModalBody p={0}>
-                    <Flex h={'70vh'} border={'1px solid'} alignItems={'flex-start'}>
+                    <Flex h={'70vh'} alignItems={'flex-start'}>
                         <TrainingsTable trainings={trainingsInRange} hideCreate={true} />
                         <Spacer pointerEvents={'none'} />
                     </Flex>
