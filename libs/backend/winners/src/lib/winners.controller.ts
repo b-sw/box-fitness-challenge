@@ -10,14 +10,14 @@ import { WinnersService } from './winners.service';
 export class WinnersController {
     constructor(private readonly winnersService: WinnersService) {}
 
-    @Post('trainings')
+    @Post('winners')
     @UseGuards(JwtGuard, AdminGuard)
     @ApiOperation({ summary: 'Create a winner' })
     create(@Body() dto: CreateWinnerDto): Promise<Winner> {
         return this.winnersService.create(dto);
     }
 
-    @Post('winners')
+    @Post('winners/date')
     @HttpCode(200)
     @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get winners' })

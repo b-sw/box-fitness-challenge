@@ -14,7 +14,7 @@ import { Page } from '../utils/page/Page';
 import { WinnersDashboard } from '../winners-dashboard/Winners.dashboard';
 
 export const Dashboard = () => {
-    const { isLoading } = useUsersQuery();
+    const { usersAreLoading } = useUsersQuery();
     const { isMobile } = useMobileQuery();
 
     const routes = useMemo(
@@ -32,7 +32,7 @@ export const Dashboard = () => {
         [],
     );
 
-    if (isLoading) {
+    if (usersAreLoading) {
         return <LoadingOverlay />;
     }
 

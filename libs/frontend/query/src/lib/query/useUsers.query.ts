@@ -21,6 +21,6 @@ export const useUsersQuery = () => {
 
     return {
         users: usersQuery.data,
-        isLoading: usersQuery.isLoading,
-    } as { users: Map<User['id'], User>; isLoading: boolean };
+        usersAreLoading: usersQuery.isLoading,
+    } as { users: Map<User['id'], User>; usersAreLoading: boolean };
 };

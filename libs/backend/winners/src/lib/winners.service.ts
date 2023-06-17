@@ -8,7 +8,17 @@ import { CreateWinnerDto } from '../../../../shared/types/src/lib/dto/winners/cr
 export class WinnersService {
     constructor(@InjectRepository(Winner) private readonly winnersRepository: Repository<Winner>) {}
 
-    create(dto: CreateWinnerDto): Promise<Winner> {
+    async create(dto: CreateWinnerDto): Promise<Winner> {
+        const existingWinner = await this.winnersRepository.findOne({
+            where: {
+                date: dto.date,
+                podiumPlace: dto.podiumPlace,
+            },
+        });
+        if (existingWinner) {
+            await this.winnersRepository.delete(existingWinner.id);
+        }
+
         const winner = this.winnersRepository.create(dto);
 
         return this.winnersRepository.save(winner);

@@ -1,6 +1,5 @@
-// todo: move to shared
 export enum PodiumPlace {
-    FIRST = 1,
-    SECOND = 2,
-    THIRD = 3,
+    First = 'First',
+    Second = 'Second',
+    Third = 'Third',
 }

@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import './styles.css';
@@ -21,7 +22,7 @@ export const App = () => {
             <ParallaxProvider>
                 <ChakraProvider theme={theme}>
                     <QueryClientProvider client={queryClient}>
-                        {/*<ReactQueryDevtools initialIsOpen={false} />*/}
+                        <ReactQueryDevtools initialIsOpen={false} />
                         <Router basename="/">
                             <UnauthorizedHandler />
                             <Routes>

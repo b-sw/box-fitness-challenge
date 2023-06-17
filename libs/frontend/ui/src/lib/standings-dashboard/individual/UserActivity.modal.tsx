@@ -30,7 +30,7 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range }: Props) =
 
     return (
         <Modal onClose={onClose} isOpen={isOpen} isCentered size={'xl'}>
-            <ModalOverlay />1
+            <ModalOverlay />
             <ModalContent pb={5} bg={'boxBlue.123'}>
                 <ModalBody p={0}>
                     <Flex h={'70vh'} alignItems={'flex-start'}>

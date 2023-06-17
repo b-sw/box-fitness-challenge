@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { getWeek } from '../utils/datetime/week';
 import { Dashboard } from '../utils/generic-components/Dashboard';
 import { ListingSwitcher, SwitchDirection } from '../utils/generic-components/listing-switcher/ListingSwitcher';
-import { WinnersTable } from './Winners.table';
+import { WinnersTableWrapper } from './Winners.table-wrapper';
 
 enum Listing {
     INDIVIDUAL = 'Individual winners',
@@ -55,7 +55,7 @@ export const WinnersDashboard = () => {
                 <Spacer />
             </Flex>
 
-            <WinnersTable week={winnersWeek} />
+            <WinnersTableWrapper week={winnersWeek} />
 
             <ListingSwitcher
                 activeListing={`Week ${activeWeek.id}`}

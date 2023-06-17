@@ -12,6 +12,12 @@ export const Sidebar = () => {
     const { isAdmin } = useAuthQuery();
     const { logout } = useAuthMutation({});
 
+    const newBadge = (
+        <Badge fontSize={'10'} textColor={'yellow.800'} backgroundColor={'yellow.50'} border={'1px'} borderRadius={15}>
+            <Text px={1}>New</Text>
+        </Badge>
+    );
+
     return (
         <Flex direction={'column'} w={'400px'} backgroundColor={'gray.50'} borderRadius={25} shadow={'md'} p={5} m={5}>
             <Flex>
@@ -27,7 +33,7 @@ export const Sidebar = () => {
             <Flex direction={'column'} gap={5}>
                 <NavigationButton path={Path.TRAININGS} icon={FaDumbbell} description={'Trainings'} />
                 <NavigationButton path={Path.STANDINGS} icon={MdBarChart} description={'Standings'} />
-                <NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} />
+                <NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} badge={newBadge} />
                 {isAdmin && <NavigationButton path={Path.TEAMS} icon={MdPeople} description={'[Admin] Teams'} />}
             </Flex>
 
