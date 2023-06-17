@@ -5,7 +5,6 @@ import {
     Flex,
     Modal,
     ModalBody,
-    ModalCloseButton,
     ModalContent,
     ModalFooter,
     ModalOverlay,
@@ -47,18 +46,19 @@ export const TrainingDeleteModal = ({ user, activity, isOpen, onClose }: Props) 
     return (
         <Modal isOpen={isOpen} onClose={onClose} isCentered size={'xl'}>
             <ModalOverlay />
-            <ModalContent>
-                <ModalCloseButton />
+            <ModalContent pb={5} bg={'boxBlue.123'}>
                 <ModalBody>
-                    <Text fontWeight="bold" mb="1rem">
-                        Are you sure you want to delete the following training?
-                    </Text>
-                    <Flex p={3} borderRadius={20} alignItems={'center'} backgroundColor={'gray.50'}>
-                        {personalActivityItem(user, activity)}
+                    <Flex direction={'column'} gap={3}>
+                        <Text fontWeight={'bold'} color={'gray.50'}>
+                            Are you sure you want to delete the following training?
+                        </Text>
+                        <Flex p={3} borderRadius={20} alignItems={'center'} backgroundColor={'gray.50'}>
+                            {personalActivityItem(user, activity)}
+                        </Flex>
+                        <Text fontWeight={'bold'} color={'gray.50'}>
+                            You can't undo this action afterwards.
+                        </Text>
                     </Flex>
-                    <Text fontWeight="bold" mt="1rem">
-                        You can't undo this action afterwards.
-                    </Text>
                 </ModalBody>
 
                 <ModalFooter>
