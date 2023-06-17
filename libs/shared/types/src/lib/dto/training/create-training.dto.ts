@@ -9,7 +9,7 @@ export class CreateTrainingDto {
 
     @ApiProperty()
     @MinLength(3)
-    @MaxLength(20, { message: 'F you Sasha' })
+    @MaxLength(20)
     type: string;
 
     @ApiProperty()

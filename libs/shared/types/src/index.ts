@@ -6,6 +6,7 @@ export * from './lib/controller-params';
 
 export * from './lib/user-credentials.type';
 export * from './lib/role.type';
+export * from './lib/podium-place';
 export * from './lib/uuid.type';
 export * from './lib/optional.type';
 export * from './lib/optional-array.type';

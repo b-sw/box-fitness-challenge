@@ -42,6 +42,9 @@
         "backend-users": {
             "tags": []
         },
+        "backend-winners": {
+            "tags": []
+        },
         "client": {
             "tags": ["frontend"]
         },
