@@ -22,7 +22,7 @@ export const useWinnersQuery = ({ date }: Props) => {
     const winnersQuery = useQuery<Winner[]>([WINNERS_QUERY_KEY, date.toISOString()], getWinners, DEFAULT_QUERY_OPTIONS);
 
     return {
-        winners: winnersQuery.data as Winner[],
-        winnersAreLoading: winnersQuery.isLoading,
+        winners: winnersQuery.data || ([] as Winner[]),
+        isLoading: winnersQuery.isLoading,
     };
 };

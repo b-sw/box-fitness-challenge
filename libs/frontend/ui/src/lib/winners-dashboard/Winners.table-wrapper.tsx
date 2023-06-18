@@ -11,10 +11,10 @@ type Props = {
 };
 
 export const WinnersTableWrapper = ({ week }: Props) => {
-    const { users, usersAreLoading } = useUsersQuery();
+    const { users } = useUsersQuery();
     const { isAdmin } = useAuthQuery();
-    const { usersActivities, usersActivitiesAreLoading } = useActivitiesQuery(week);
-    const { winners, winnersAreLoading } = useWinnersQuery({ date: week.endDate });
+    const { usersActivities } = useActivitiesQuery(week);
+    const { winners, isLoading } = useWinnersQuery({ date: week.endDate });
 
     const [selectedPodiumPlace, setSelectedPodiumPlace] = useState<PodiumPlace | undefined>(undefined);
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,10 +23,6 @@ export const WinnersTableWrapper = ({ week }: Props) => {
         setSelectedPodiumPlace(podiumPlace);
         onOpen();
     };
-
-    if (winnersAreLoading || usersActivitiesAreLoading || usersAreLoading) {
-        return null;
-    }
 
     return (
         <>
@@ -49,6 +45,7 @@ export const WinnersTableWrapper = ({ week }: Props) => {
                         },
                     };
                 }, {} as Record<PodiumPlace, User & UserActivity>)}
+                isLoading={isLoading}
                 onClick={isAdmin ? handleClicked : undefined}
             />
         </>

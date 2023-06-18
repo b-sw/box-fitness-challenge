@@ -2,7 +2,7 @@ import { Training, useTrainingsQuery } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
 import { useEffect, useState } from 'react';
 import { Dashboard } from '../utils/generic-components/Dashboard';
-import { ListingSwitcher } from '../utils/generic-components/listing-switcher/ListingSwitcher';
+import { ListingSwitcher } from '../utils/generic-components/ListingSwitcher';
 import { TrainingsTable } from './Trainings.table';
 
 enum Listing {

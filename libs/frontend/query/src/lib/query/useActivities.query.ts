@@ -38,9 +38,9 @@ export const useActivitiesQuery = ({ startDate, endDate }: Props) => {
     );
 
     return {
-        teamsActivities: teamsActivitiesQuery.data as TeamActivity[],
+        teamsActivities: teamsActivitiesQuery.data || ([] as TeamActivity[]),
         teamsActivitiesAreLoading: teamsActivitiesQuery.isLoading,
-        usersActivities: usersActivitiesQuery.data as UserActivity[],
+        usersActivities: usersActivitiesQuery.data || ([] as UserActivity[]),
         usersActivitiesAreLoading: usersActivitiesQuery.isLoading,
     };
 };

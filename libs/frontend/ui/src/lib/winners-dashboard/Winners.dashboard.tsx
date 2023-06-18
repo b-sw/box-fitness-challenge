@@ -1,52 +1,24 @@
-import { Week, WEEKS } from '@box-fc/frontend/domain';
-import { useActivitiesQuery } from '@box-fc/frontend/query';
+import { Week } from '@box-fc/frontend/domain';
 import { Flex, Spacer, Text } from '@chakra-ui/react';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useSetState } from '../hooks';
 import { getWeek } from '../utils/datetime/week';
-import { Dashboard } from '../utils/generic-components/Dashboard';
-import { ListingSwitcher, SwitchDirection } from '../utils/generic-components/listing-switcher/ListingSwitcher';
+import { WeekDashboard } from '../utils/generic-components/Week.dashboard';
 import { WinnersTableWrapper } from './Winners.table-wrapper';
 
 enum Listing {
     INDIVIDUAL = 'Individual winners',
 }
 
+type State = {
+    week: Week;
+};
+
 export const WinnersDashboard = () => {
-    const [activeWeek, setActiveWeek] = useState<Week>(getWeek(dayjs()));
-    const [winnersWeek, setWinnersWeek] = useState<Week>(getWeek(dayjs()));
-    const [isLoadingLeft, setIsLoadingLeft] = useState<boolean>(false);
-    const [isLoadingRight, setIsLoadingRight] = useState<boolean>(false);
-    const { usersActivitiesAreLoading } = useActivitiesQuery({ ...activeWeek });
-
-    useEffect(() => {
-        if (!usersActivitiesAreLoading) {
-            setIsLoadingLeft(false);
-            setIsLoadingRight(false);
-
-            setWinnersWeek(activeWeek);
-        }
-    }, [activeWeek, usersActivitiesAreLoading]);
-
-    const switchWeek = (direction: SwitchDirection) => {
-        setActiveWeek((oldWeek) => {
-            const weeksIds = [...WEEKS.keys()];
-            const oldWeekId = weeksIds.indexOf(oldWeek.id);
-            const shift = direction === SwitchDirection.LEFT ? -1 : 1;
-            const newWeekId = weeksIds[(((oldWeekId + shift) % 5) + 5) % 5];
-
-            return WEEKS.get(newWeekId) as Week;
-        });
-
-        if (direction === SwitchDirection.LEFT) {
-            setIsLoadingLeft(true);
-        } else {
-            setIsLoadingRight(true);
-        }
-    };
+    const [{ week }, setState] = useSetState<State>({ week: getWeek(dayjs()) });
 
     return (
-        <Dashboard>
+        <WeekDashboard week={week} setWeek={(newWeek) => setState({ week: newWeek })}>
             <Flex alignItems={'center'} w={['90%', '500px']} p={5}>
                 <Spacer />
                 <Text fontSize={'4xl'} fontWeight={'bold'} color={'gray.700'}>
@@ -55,15 +27,7 @@ export const WinnersDashboard = () => {
                 <Spacer />
             </Flex>
 
-            <WinnersTableWrapper week={winnersWeek} />
-
-            <ListingSwitcher
-                activeListing={`Week ${activeWeek.id}`}
-                switchListing={switchWeek}
-                size={'sm'}
-                isLoadingLeft={isLoadingLeft}
-                isLoadingRight={isLoadingRight}
-            />
-        </Dashboard>
+            <WinnersTableWrapper week={week} />
+        </WeekDashboard>
     );
 };

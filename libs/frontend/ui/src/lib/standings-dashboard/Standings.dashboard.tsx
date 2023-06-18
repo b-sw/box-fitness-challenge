@@ -1,11 +1,11 @@
-import { Week, WEEKS } from '@box-fc/frontend/domain';
-import { useActivitiesQuery } from '@box-fc/frontend/query';
+import { Week } from '@box-fc/frontend/domain';
 import { switchCase } from '@box-fc/shared/util';
 import dayjs from 'dayjs';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
+import { useSetState } from '../hooks';
 import { getWeek } from '../utils/datetime/week';
-import { Dashboard } from '../utils/generic-components/Dashboard';
-import { ListingSwitcher, SwitchDirection } from '../utils/generic-components/listing-switcher/ListingSwitcher';
+import { ListingSwitcher } from '../utils/generic-components/ListingSwitcher';
+import { WeekDashboard } from '../utils/generic-components/Week.dashboard';
 import { IndividualStandingsTableWrapper } from './individual/IndividualStandings.table-wrapper';
 import { TeamsStandingsTableWrapper } from './teams/TeamsStandings.table-wrapper';
 
@@ -14,68 +14,32 @@ enum Listing {
     TEAMS = 'Teams standings',
 }
 
+type State = {
+    listing: Listing;
+    week: Week;
+};
+
 export const StandingsDashboard = () => {
-    const [activeStandings, setActiveStandings] = useState<Listing>(Listing.INDIVIDUAL);
-    const [activeWeek, setActiveWeek] = useState<Week>(getWeek(dayjs()));
-    const [standingsWeek, setStandingsWeek] = useState<Week>(getWeek(dayjs()));
-    const [isLoadingLeft, setIsLoadingLeft] = useState<boolean>(false);
-    const [isLoadingRight, setIsLoadingRight] = useState<boolean>(false);
-    const { usersActivitiesAreLoading } = useActivitiesQuery({ ...activeWeek });
+    const [{ listing, week }, setState] = useSetState<State>({
+        listing: Listing.INDIVIDUAL,
+        week: getWeek(dayjs()),
+    });
 
-    useEffect(() => {
-        if (!usersActivitiesAreLoading) {
-            setIsLoadingLeft(false);
-            setIsLoadingRight(false);
-
-            setStandingsWeek(activeWeek);
-        }
-    }, [activeWeek, usersActivitiesAreLoading]);
-
-    const switchStandings = () => {
-        if (activeStandings === Listing.INDIVIDUAL) {
-            setActiveStandings(Listing.TEAMS);
-        } else {
-            setActiveStandings(Listing.INDIVIDUAL);
-        }
-    };
-
-    const switchWeek = (direction: SwitchDirection) => {
-        setActiveWeek((oldWeek) => {
-            const weeksIds = [...WEEKS.keys()];
-            const oldWeekId = weeksIds.indexOf(oldWeek.id);
-            const shift = direction === SwitchDirection.LEFT ? -1 : 1;
-            const newWeekId = weeksIds[(((oldWeekId + shift) % 5) + 5) % 5];
-
-            return WEEKS.get(newWeekId) as Week;
-        });
-
-        if (direction === SwitchDirection.LEFT) {
-            setIsLoadingLeft(true);
-        } else {
-            setIsLoadingRight(true);
-        }
-    };
+    const switchStandings = () =>
+        setState({ listing: listing === Listing.INDIVIDUAL ? Listing.TEAMS : Listing.INDIVIDUAL });
 
     const getStandings = (): ReactNode => {
         return switchCase({
-            [Listing.INDIVIDUAL]: <IndividualStandingsTableWrapper week={standingsWeek} />,
-            [Listing.TEAMS]: <TeamsStandingsTableWrapper week={standingsWeek} />,
-        })(activeStandings);
+            [Listing.INDIVIDUAL]: <IndividualStandingsTableWrapper week={week} />,
+            [Listing.TEAMS]: <TeamsStandingsTableWrapper week={week} />,
+        })(listing);
     };
 
     return (
-        <Dashboard>
-            <ListingSwitcher activeListing={activeStandings} switchListing={switchStandings} />
+        <WeekDashboard week={week} setWeek={(newWeek) => setState({ week: newWeek })}>
+            <ListingSwitcher activeListing={listing} switchListing={switchStandings} />
 
             {getStandings()}
-
-            <ListingSwitcher
-                activeListing={`Week ${activeWeek.id}`}
-                switchListing={switchWeek}
-                size={'sm'}
-                isLoadingLeft={isLoadingLeft}
-                isLoadingRight={isLoadingRight}
-            />
-        </Dashboard>
+        </WeekDashboard>
     );
 };
