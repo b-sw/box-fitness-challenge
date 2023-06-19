@@ -70,7 +70,7 @@ export class AuthService {
     }
 
     private _requireChallengeStarted(email: string): void {
-        const isChallengeStarted = dayjs().isBetween('2023-05-15', '2023-06-18');
+        const isChallengeStarted = dayjs().isBetween('2023-05-15', '2023-07-18');
 
         if (!isChallengeStarted && !this._isMeOrKuba(email)) {
             throw new BadRequestException(AuthService.CHALLENGE_NOT_STARTED_MESSAGE);
