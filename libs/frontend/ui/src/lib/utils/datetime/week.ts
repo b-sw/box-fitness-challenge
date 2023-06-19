@@ -9,9 +9,5 @@ export const getWeek = (date: Dayjs): Week => {
         return date.isBetween(weekStart, weekEnd, 'second', '[]');
     });
 
-    if (!week) {
-        throw new Error('Week not found');
-    }
-
-    return week[1];
+    return week?.[1] ?? WEEKS.get(5) as Week;
 };
