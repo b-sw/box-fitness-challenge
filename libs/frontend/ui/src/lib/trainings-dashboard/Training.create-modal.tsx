@@ -75,7 +75,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                     {({ handleSubmit }: { handleSubmit: any }) => (
                         <form onSubmit={handleSubmit}>
                             <ModalBody p={0} mb={5}>
-                                <Flex direction={'column'} gap={3}>
+                                <Flex direction={'column'} gap={3} textColor={'primary.500'}>
                                     <Flex w={'100%'} gap={3}>
                                         <Flex alignItems={'center'} gap={1} w={'40%'}>
                                             <Flex w={'25%'}>
@@ -83,7 +83,12 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                             </Flex>
 
                                             <FormControl w={'75%'}>
-                                                <NumberInput min={1} max={1440} variant="filled">
+                                                <NumberInput
+                                                    min={1}
+                                                    max={1440}
+                                                    variant="filled"
+                                                    textColor={'primary.500'}
+                                                >
                                                     <Field
                                                         rounded={'full'}
                                                         as={NumberInputField}
@@ -96,6 +101,9 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                                         }}
                                                         _focus={{
                                                             background: 'gray.50',
+                                                        }}
+                                                        _placeholder={{
+                                                            color: 'gray.400',
                                                         }}
                                                     />
                                                 </NumberInput>

@@ -20,7 +20,9 @@ export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: 
 
                     <Flex direction={'column'} gap={1}>
                         <Tooltip label={`${user.firstName} ${user.lastName}`}>
-                            <Text fontSize={'lg'}>{user.firstName}</Text>
+                            <Text fontSize={'lg'} color={'primary.500'}>
+                                {user.firstName}
+                            </Text>
                         </Tooltip>
                         <Flex>
                             <Badge

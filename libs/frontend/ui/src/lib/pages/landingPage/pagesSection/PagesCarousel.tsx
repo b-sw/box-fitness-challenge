@@ -65,17 +65,24 @@ export const PagesCarousel = () => {
                                 <Flex direction={'column'} w={'50%'}>
                                     <Flex h={'45%'} alignItems={'flex-end'}>
                                         <Parallax speed={-5}>
-                                            <Heading fontSize={'5xl'}>{card.heading}</Heading>
+                                            <Heading fontSize={'5xl'} textColor={'primary.500'}>
+                                                {card.heading}
+                                            </Heading>
                                         </Parallax>
                                     </Flex>
 
                                     <Parallax speed={-5}>
                                         <Flex direction={'column'}>
-                                            <Text fontSize={'2xl'} fontWeight={'light'}>
+                                            <Text fontSize={'2xl'} fontWeight={'light'} textColor={'primary.500'}>
                                                 {card.shortText}
                                             </Text>
 
-                                            <Text fontSize={'2xl'} opacity={0.6} fontWeight={'light'}>
+                                            <Text
+                                                fontSize={'2xl'}
+                                                opacity={0.6}
+                                                fontWeight={'light'}
+                                                textColor={'primary.500'}
+                                            >
                                                 {card.text}
                                             </Text>
 

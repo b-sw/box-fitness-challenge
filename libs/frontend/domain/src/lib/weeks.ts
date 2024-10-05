@@ -12,4 +12,5 @@ export const WEEKS: Map<Week['id'], Week> = new Map([
     [3, { id: 3, startDate: dayjs('2023-05-28T21:59:59Z'), endDate: dayjs('2023-06-04T22:00:00Z') }],
     [4, { id: 4, startDate: dayjs('2023-06-04T21:59:59Z'), endDate: dayjs('2023-06-11T22:00:00Z') }],
     [5, { id: 5, startDate: dayjs('2023-06-11T21:59:59Z'), endDate: dayjs('2023-06-18T22:00:00Z') }],
+    [99, { id: 6, startDate: dayjs('2024-10-01T21:59:59Z'), endDate: dayjs('2024-10-06T22:00:00Z') }],
 ]);

@@ -14,7 +14,7 @@ export const NoRecords = ({ message }: Props) => {
             <Spacer />
             <Flex>
                 <Spacer />
-                <Flex direction={'column'} align={'center'} borderRadius={20}>
+                <Flex direction={'column'} textColor={'primary.500'} align={'center'} borderRadius={20}>
                     <VscSearchStop opacity={0.5} size={'25'} />
                     <Text opacity={0.5}>{message ?? 'No records'}</Text>
                 </Flex>

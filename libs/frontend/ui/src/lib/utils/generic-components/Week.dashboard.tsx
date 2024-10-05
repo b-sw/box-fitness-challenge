@@ -38,7 +38,7 @@ export const WeekDashboard = ({ week, setWeek, children }: Props) => {
         const weeksIds = [...WEEKS.keys()];
         const oldWeekId = weeksIds.indexOf(queryWeek.id);
         const shift = direction === SwitchDirection.LEFT ? -1 : 1;
-        const newWeekId = weeksIds[(((oldWeekId + shift) % 5) + 5) % 5];
+        const newWeekId = weeksIds[(((oldWeekId + shift) % WEEKS.size) + WEEKS.size) % WEEKS.size];
 
         return WEEKS.get(newWeekId) as Week;
     };

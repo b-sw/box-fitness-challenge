@@ -11,7 +11,7 @@ export const SearchInput = ({ handleChange, placeholder }: Props) => {
 
     return (
         <InputGroup size={'lg'} pb={5}>
-            <InputLeftElement pointerEvents={'none'} children={<MdSearch />} fontSize={25} />
+            <InputLeftElement pointerEvents={'none'} textColor={'primary.500'} children={<MdSearch />} fontSize={25} />
             <Input
                 placeholder={PLACEHOLDER}
                 onChange={(event) => handleChange(event.target.value)}

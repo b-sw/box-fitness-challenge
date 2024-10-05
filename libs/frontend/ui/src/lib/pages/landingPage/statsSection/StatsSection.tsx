@@ -65,7 +65,7 @@ export const StatsSection = () => {
                         <Spacer />
                     </Flex>
 
-                    <SimpleGrid columns={[1, 3]} spacing={'100'}>
+                    <SimpleGrid columns={[1, 3]} spacing={'100'} textColor={'primary.500'}>
                         <Parallax speed={-15}>
                             <Box>
                                 <Fade in={countStarted}>
@@ -105,7 +105,8 @@ export const StatsSection = () => {
                             as={motion.div}
                             whileHover={{ bottom: 5 }}
                             aria-label={'scroll down'}
-                            icon={<MdKeyboardDoubleArrowDown size={'50'} color={'#1a202c'} />}
+                            color={'primary.500'}
+                            icon={<MdKeyboardDoubleArrowDown size={'50'} />}
                             variant={'ghost'}
                             size={'lg'}
                             _hover={{ backgroundColor: 'transparent' }}

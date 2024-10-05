@@ -11,6 +11,7 @@ const config = {
 };
 
 const components = {
+    // Text,
     Input,
     Modal,
     Tooltip,

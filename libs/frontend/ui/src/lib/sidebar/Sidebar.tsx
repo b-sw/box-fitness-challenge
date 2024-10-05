@@ -12,6 +12,8 @@ export const Sidebar = () => {
     const { isAdmin } = useAuthQuery();
     const { logout } = useAuthMutation({});
 
+    console.log('user', user);
+
     const newBadge = (
         <Badge fontSize={'10'} textColor={'yellow.800'} backgroundColor={'yellow.50'} border={'1px'} borderRadius={15}>
             <Text px={1}>New</Text>
@@ -43,7 +45,7 @@ export const Sidebar = () => {
                 <Avatar size={'lg'} src={user.imageUrl} shadow={'md'} />
                 <Flex direction={'column'}>
                     <Flex alignItems={'center'} gap={1}>
-                        <Text fontSize={'lg'}>
+                        <Text fontSize={'lg'} color={'primary.500'}>
                             {user.firstName} {user.lastName}
                         </Text>
                     </Flex>
@@ -68,11 +70,13 @@ export const Sidebar = () => {
 
                 <Spacer />
                 <IconButton
+                    textColor={'primary.500'}
                     aria-label={'logout'}
                     variant={'ghost'}
                     icon={<MdLogout />}
                     onClick={logout}
                     rounded={'full'}
+                    _hover={{ backgroundColor: 'gray.100' }}
                 />
             </Flex>
         </Flex>

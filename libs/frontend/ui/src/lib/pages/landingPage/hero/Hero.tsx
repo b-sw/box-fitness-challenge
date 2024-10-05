@@ -31,7 +31,7 @@ export const Hero = () => {
                                 gap={4}
                                 p={4}
                             >
-                                <Text fontSize={'2xl'} color={'gray.900'} fontWeight={'bold'} lineHeight={1} px={10}>
+                                <Text fontSize={'2xl'} color={'primary.500'} fontWeight={'bold'} lineHeight={1} px={10}>
                                     FITNESS CHALLENGE
                                 </Text>
 
@@ -53,7 +53,8 @@ export const Hero = () => {
                                         as={motion.div}
                                         whileHover={{ bottom: 5 }}
                                         aria-label={'scroll down'}
-                                        icon={<MdKeyboardDoubleArrowDown size={'50'} color={'#FFF'} />}
+                                        color={'primary.500'}
+                                        icon={<MdKeyboardDoubleArrowDown size={'50'} />}
                                         variant={'ghost'}
                                         size={'lg'}
                                         _hover={{ backgroundColor: 'transparent' }}

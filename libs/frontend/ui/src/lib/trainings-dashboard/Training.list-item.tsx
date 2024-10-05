@@ -45,7 +45,9 @@ export const personalActivityItem = (user: User, activity: Training) => {
 
                     <Flex direction={'column'} gap={1}>
                         <Tooltip label={`${user.firstName} ${user.lastName}`}>
-                            <Text fontSize={'lg'}>{user.firstName}</Text>
+                            <Text fontSize={'lg'} color={'primary.500'}>
+                                {user.firstName}
+                            </Text>
                         </Tooltip>
                         <Flex>
                             <Badge
@@ -63,7 +65,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                 </Flex>
 
                 <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
-                    <Flex w={'40%'}>
+                    <Flex w={'40%'} textColor={'primary.500'}>
                         <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'55px'}>
                             <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>
                         </CircularProgress>
@@ -85,7 +87,15 @@ export const personalActivityItem = (user: User, activity: Training) => {
                                 </Text>
                             </Tooltip>
                         </Badge>
-                        <Flex fontSize={'xs'} opacity={'0.6'} alignItems={'center'} gap={1} w={'100%'} p={1}>
+                        <Flex
+                            fontSize={'xs'}
+                            opacity={'0.6'}
+                            alignItems={'center'}
+                            gap={1}
+                            w={'100%'}
+                            p={1}
+                            textColor={'primary.500'}
+                        >
                             <CalendarIcon />
                             <Text>
                                 {trainingDate} {trainingTime}
