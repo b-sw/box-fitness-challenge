@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuthRouteAdmin } from '../auth/RequireAuthRouteAdmin';
 import { MobileMenu } from '../mobile-menu/MobileMenu';
-import { Sidebar } from '../sidebar/Sidebar';
+import { Navbar } from '../sidebar/Navbar';
 import { StandingsDashboard } from '../standings-dashboard/Standings.dashboard';
 import { TeamsDashboard } from '../teams-dasbhoard/Teams.dashboard';
 import { TrainingsDashboard } from '../trainings-dashboard/Trainings.dashboard';
@@ -38,7 +38,7 @@ export const Dashboard = () => {
 
     return (
         <Page>
-            {isMobile ? <MobileMenu /> : <Sidebar />}
+            {isMobile ? <MobileMenu /> : <Navbar />}
 
             <Flex mt={['12vh', 0]} flexGrow={1}>
                 <Spacer />

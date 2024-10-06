@@ -1,18 +1,16 @@
 import { Path } from '@box-fc/frontend/domain';
 import { useAuthMutation, useAuthQuery } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
-import { Avatar, Badge, Divider, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
+import { Avatar, Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
 import { FaTrophy, MdBarChart, MdLogout } from 'react-icons/all';
 import { FaDumbbell } from 'react-icons/fa';
 import { MdPeople } from 'react-icons/md';
 import { NavigationButton } from './Navigation.button';
 
-export const Sidebar = () => {
+export const Navbar = () => {
     const { user } = useAuthStore();
     const { isAdmin } = useAuthQuery();
     const { logout } = useAuthMutation({});
-
-    console.log('user', user);
 
     const newBadge = (
         <Badge fontSize={'10'} textColor={'yellow.800'} backgroundColor={'yellow.50'} border={'1px'} borderRadius={15}>
@@ -21,18 +19,14 @@ export const Sidebar = () => {
     );
 
     return (
-        <Flex direction={'column'} w={'400px'} backgroundColor={'gray.50'} borderRadius={25} shadow={'md'} p={5} m={5}>
-            <Flex>
-                <Spacer />
-                <Text fontSize={'3xl'} color={'boxBlue.500'} fontWeight={'bold'}>
-                    Fitness Challenge
-                </Text>
-                <Spacer />
-            </Flex>
+        <Flex w={'full'} backgroundColor={'gray.50'} shadow={'md'} p={2} alignItems={'center'}>
+            <Text mx={2} fontSize={'3xl'} color={'boxBlue.500'} fontWeight={'bold'}>
+                Fitness Challenge
+            </Text>
 
-            <Divider style={{ borderWidth: '2px' }} my={5} />
+            <Spacer />
 
-            <Flex direction={'column'} gap={5}>
+            <Flex gap={5}>
                 <NavigationButton path={Path.TRAININGS} icon={FaDumbbell} description={'Trainings'} />
                 <NavigationButton path={Path.STANDINGS} icon={MdBarChart} description={'Standings'} />
                 <NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} badge={newBadge} />

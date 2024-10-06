@@ -8,10 +8,9 @@ type Props = {
 export const Page = ({ children }: Props) => {
     return (
         <Flex
-            p={[1, 4]}
             h={'100vh'}
             w={'100vw'}
-            direction={['column', 'row']}
+            direction={'column'}
             overflow={'hidden'}
             backgroundColor={'gray.200'}
             position={['relative', 'static']}
