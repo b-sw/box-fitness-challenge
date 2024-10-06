@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react';
+import '@fontsource-variable/inter';
 import { Button } from './button';
 import { colors } from './colors';
 import { Input } from './input';
@@ -18,4 +19,9 @@ const components = {
     Button,
 };
 
-export const theme = extendTheme({ config, components, colors });
+export const theme = extendTheme({
+    config,
+    components,
+    colors,
+    fonts: { heading: 'Inter, sans-serif', body: 'Inter, sans-serif' },
+});
