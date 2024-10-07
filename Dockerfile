@@ -1,4 +1,4 @@
-FROM node:16-alpine AS development
+FROM node:20-alpine AS development
 
 WORKDIR /usr/src/app
 
@@ -6,7 +6,7 @@ COPY package*.json .
 
 RUN apk add --no-cache python3 g++ make
 
-RUN yarn global add rimraf
+RUN yarn global add rimraf@3
 
 RUN yarn install --only=development
 
@@ -14,7 +14,7 @@ COPY . .
 
 RUN yarn build:api
 
-FROM node:16-alpine as production
+FROM node:20-alpine as production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
