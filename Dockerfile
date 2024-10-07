@@ -23,7 +23,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json .
 
-RUN yarn install --only=production --ingore-scripts
+RUN yarn install --only=production --ignore-scripts
 
 COPY . .
 
