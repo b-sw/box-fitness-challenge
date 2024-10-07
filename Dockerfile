@@ -8,7 +8,7 @@ RUN apk add --no-cache python3 g++ make
 
 RUN yarn global add rimraf@3
 
-RUN yarn install --only=development
+RUN yarn install --only=development --ignore-scripts
 
 COPY . .
 
