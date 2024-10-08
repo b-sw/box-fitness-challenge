@@ -8,7 +8,7 @@ RUN apk add --no-cache python3 g++ make
 
 RUN yarn global add rimraf@3
 
-RUN yarn install --ignore-scripts
+RUN yarn install --ignore-scripts --ignore-engines
 
 COPY . .
 
@@ -23,7 +23,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json .
 
-RUN yarn install --ignore-scripts
+RUN yarn install --ignore-scripts --ignore-engines
 
 COPY . .
 
