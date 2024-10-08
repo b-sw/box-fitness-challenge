@@ -94,11 +94,17 @@ export class AuthService {
 
     // todo: remove later on
     private _isMeOrKuba(email: string): boolean {
-        return (
-            email === 'bswitalski.misc@gmail.com' ||
-            email === 'bswitalski.main@gmail.com' ||
-            email === 'bswitalski@box.com' ||
-            email === 'jwincewicz@box.com'
-        );
+        return [
+            'bswitalski.misc@gmail.com',
+            'bswitalski.main@gmail.com',
+            'bswitalski@box.com',
+            'jwincewicz@box.com',
+            'aalieksieieva@box.com',
+            'kolejnik@box.com',
+            'abondar@box.com',
+            'ilukisha@box.com',
+            'nbaidalava@box.com',
+            'adabrowska@box.com',
+        ].some((e) => e === email);
     }
 }
