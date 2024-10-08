@@ -20,8 +20,15 @@ export const Navbar = () => {
 
     return (
         <Flex w={'full'} backgroundColor={'gray.50'} shadow={'md'} p={2} alignItems={'center'}>
-            <Text mx={2} fontSize={'3xl'} color={'boxBlue.500'} fontWeight={'bold'}>
-                Fitness Challenge
+            <Text
+                mx={2}
+                fontSize={'3xl'}
+                color={'boxBlue.500'}
+                fontWeight={'bold'}
+                bgGradient={'linear(to-b, blue.500, yellow.500)'}
+                bgClip="text"
+            >
+                Move for Ukraine
             </Text>
 
             <Spacer />

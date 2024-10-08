@@ -28,8 +28,14 @@ export const MobileMenu = () => {
             right={0}
             margin={4}
         >
-            <Text fontSize={'2xl'} color={'boxBlue.500'} fontWeight={'bold'}>
-                Fitness Challenge
+            <Text
+                fontSize={'2xl'}
+                color={'boxBlue.500'}
+                fontWeight={'bold'}
+                bgGradient={'linear(to-b, blue.500, yellow.500)'}
+                bgClip="text"
+            >
+                Move for Ukraine
             </Text>
 
             <Spacer />

@@ -32,7 +32,7 @@ export const Hero = () => {
                                 p={4}
                             >
                                 <Text fontSize={'2xl'} color={'primary.500'} fontWeight={'bold'} lineHeight={1} px={10}>
-                                    FITNESS CHALLENGE
+                                    Move for Ukraine
                                 </Text>
 
                                 <Divider borderColor={'gray.900'} />
