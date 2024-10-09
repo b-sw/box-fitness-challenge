@@ -1,6 +1,5 @@
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
-import { Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import { Tab, TabIndicator, TabList } from '@chakra-ui/react';
+import { TabText } from './TabText';
 
 export enum SwitchDirection {
     LEFT = 'left',
@@ -19,40 +18,17 @@ export const ListingSwitcher = ({ activeListing, switchListing, size, isLoadingL
     const buttonSize = size ?? 'md';
     const textSize = size === 'sm' ? '2xl' : '4xl';
 
-    const iconButton = (icon: ReactElement, direction: SwitchDirection) => (
-        <IconButton
-            aria-label={'listing-icon'}
-            icon={icon}
-            onClick={() => switchListing(direction)}
-            rounded={'full'}
-            size={buttonSize}
-            backgroundColor={'primary.50'}
-            shadow={'md'}
-            isLoading={direction === SwitchDirection.LEFT ? isLoadingLeft : isLoadingRight}
-        />
-    );
-
     return (
-        <Flex alignItems={'center'} w={['90%', '500px']} p={5}>
-            <Flex>
-                <Spacer />
-                {iconButton(<ArrowBackIcon />, SwitchDirection.LEFT)}
-            </Flex>
-            <Spacer />
-
-            <Flex w={size === 'sm' ? '50%' : '80%'}>
-                <Spacer />
-                <Text fontSize={['2xl', textSize]} fontWeight={'bold'} color={'gray.700'}>
-                    {activeListing}
-                </Text>
-                <Spacer />
-            </Flex>
-
-            <Spacer />
-            <Flex>
-                {iconButton(<ArrowForwardIcon />, SwitchDirection.RIGHT)}
-                <Spacer />
-            </Flex>
-        </Flex>
+        <>
+            <TabList>
+                <Tab _focus={{ boxShadow: 'none' }}>
+                    <TabText text={'My activities'} size={textSize} />
+                </Tab>
+                <Tab _focus={{ boxShadow: 'none' }}>
+                    <TabText text={'Boxers activities'} size={textSize} />
+                </Tab>
+            </TabList>
+            <TabIndicator height="2px" bg="boxBlue.500" borderRadius="1px" />
+        </>
     );
 };

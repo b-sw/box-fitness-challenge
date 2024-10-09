@@ -20,7 +20,7 @@ export const Dashboard = () => {
     const routes = useMemo(
         () => (
             <Routes>
-                <Route path={Path.TRAININGS} element={<TrainingsDashboard />} />
+                <Route path={Path.ACTIVITIES} element={<TrainingsDashboard />} />
                 <Route path={Path.STANDINGS} element={<StandingsDashboard />} />
                 <Route path={Path.WINNERS} element={<WinnersDashboard />} />
                 <Route element={<RequireAuthRouteAdmin />}>

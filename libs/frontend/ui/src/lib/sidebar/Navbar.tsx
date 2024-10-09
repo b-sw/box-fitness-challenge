@@ -34,34 +34,34 @@ export const Navbar = () => {
             <Spacer />
 
             <Flex gap={5}>
-                <NavigationButton path={Path.TRAININGS} icon={FaDumbbell} description={'Trainings'} />
+                <NavigationButton path={Path.ACTIVITIES} icon={FaDumbbell} description={'Activities'} />
                 <NavigationButton path={Path.STANDINGS} icon={MdBarChart} description={'Standings'} />
-                <NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} badge={newBadge} />
+                <NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} />
                 {isAdmin && <NavigationButton path={Path.TEAMS} icon={MdPeople} description={'[Admin] Teams'} />}
             </Flex>
 
             <Spacer />
 
             <Flex gap={2} alignItems={'center'}>
-                <Avatar size={'lg'} src={user.imageUrl} shadow={'md'} />
+                <Avatar size={'md'} src={user.imageUrl} shadow={'md'} />
                 <Flex direction={'column'}>
                     <Flex alignItems={'center'} gap={1}>
                         <Text fontSize={'lg'} color={'primary.500'}>
                             {user.firstName} {user.lastName}
                         </Text>
                     </Flex>
-                    <Flex>
-                        <Badge
-                            fontSize={'10'}
-                            fontWeight={'italic'}
-                            textColor={'boxBlue.500'}
-                            backgroundColor={'blue.50'}
-                            border={'1px'}
-                            borderRadius={15}
-                        >
-                            {user.team ?? 'N/A team'}
-                        </Badge>
-                    </Flex>
+                    {/*<Flex>*/}
+                    {/*    <Badge*/}
+                    {/*        fontSize={'10'}*/}
+                    {/*        fontWeight={'italic'}*/}
+                    {/*        textColor={'boxBlue.500'}*/}
+                    {/*        backgroundColor={'blue.50'}*/}
+                    {/*        border={'1px'}*/}
+                    {/*        borderRadius={15}*/}
+                    {/*    >*/}
+                    {/*        {user.team ?? 'N/A team'}*/}
+                    {/*    </Badge>*/}
+                    {/*</Flex>*/}
                     <Flex direction={'column'}>
                         <Text fontSize={'sm'} color={'gray.400'}>
                             {user.email}

@@ -1,10 +1,9 @@
 import { Training } from '@box-fc/frontend/query';
 import { OptionalArray, User } from '@box-fc/shared/types';
 import { AddIcon } from '@chakra-ui/icons';
-import { Flex, IconButton, Tooltip } from '@chakra-ui/react';
+import { Button, Flex, Spacer } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { NoRecords } from '../utils/no-records/NoRecords';
-import { SearchInput } from '../utils/search/SearchInput';
 import { TablePanel } from '../utils/table-panel/TablePanel';
 import { TrainingListItem } from './Training.list-item';
 
@@ -57,21 +56,33 @@ export const TrainingsTableRaw = ({ trainings, users, readonly, handleDelete, ha
 
     return (
         <TablePanel>
-            <Flex gap={5}>
-                <SearchInput handleChange={setFilter} placeholder={'Search trainings'} />
+            <Flex gap={5} pb={5}>
+                <Spacer />
+                {/*<SearchInput handleChange={setFilter} placeholder={'Search trainings'} />*/}
                 {showCreate && (
-                    <Tooltip label={'Register training'}>
-                        <IconButton
-                            aria-label={'register-training'}
-                            size={'lg'}
-                            rounded={'full'}
-                            onClick={handleCreate}
-                            icon={<AddIcon />}
-                            backgroundColor={'primary.50'}
-                            shadow={'md'}
-                        />
-                    </Tooltip>
+                    // <Tooltip label={'Register training'}>
+                    <Button
+                        size={'lg'}
+                        rounded={'full'}
+                        onClick={handleCreate}
+                        leftIcon={<AddIcon />}
+                        backgroundColor={'primary.50'}
+                        shadow={'md'}
+                    >
+                        Add activity
+                    </Button>
+                    // <IconButton
+                    //     aria-label={'register-training'}
+                    //     size={'lg'}
+                    //     rounded={'full'}
+                    //     onClick={handleCreate}
+                    //     icon={<AddIcon />}
+                    //     backgroundColor={'primary.50'}
+                    //     shadow={'md'}
+                    // />
+                    // </Tooltip>
                 )}
+                <Spacer />
             </Flex>
 
             <Flex

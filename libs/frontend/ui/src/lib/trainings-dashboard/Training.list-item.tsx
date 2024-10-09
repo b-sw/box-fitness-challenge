@@ -1,10 +1,11 @@
 import { Training } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { CalendarIcon } from '@chakra-ui/icons';
-import { Avatar, Badge, CircularProgress, CircularProgressLabel, Flex, Text, Tooltip } from '@chakra-ui/react';
+import { Avatar, Badge, Flex, Spacer, Tag, TagLabel, Text, Tooltip } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import 'dayjs/plugin/isBetween';
 import 'dayjs/plugin/utc';
+import { FaBolt } from 'react-icons/fa';
 import { DATETIME_FORMAT } from '../utils/datetime/datetime.format';
 import { ListItem } from '../utils/list-item/ListItem';
 
@@ -40,8 +41,8 @@ export const personalActivityItem = (user: User, activity: Training) => {
     return (
         <Flex direction={'column'} w={'100%'}>
             <Flex direction={['column', 'row']} w={'100%'} gap={[3, 0]}>
-                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
-                    <Avatar size={'md'} src={user.imageUrl} shadow={'md'} />
+                <Flex w={['100%', '25%']} alignItems={'center'} gap={3}>
+                    <Avatar size={'sm'} src={user.imageUrl} shadow={'md'} />
 
                     <Flex direction={'column'} gap={1}>
                         <Tooltip label={`${user.firstName} ${user.lastName}`}>
@@ -49,35 +50,61 @@ export const personalActivityItem = (user: User, activity: Training) => {
                                 {user.firstName}
                             </Text>
                         </Tooltip>
-                        <Flex>
-                            <Badge
-                                fontSize={'10'}
-                                fontWeight={'italic'}
-                                textColor={'boxBlue.500'}
-                                backgroundColor={'blue.50'}
-                                border={'1px'}
-                                borderRadius={15}
-                            >
-                                <Text px={1}>{user.team ?? 'N/A team'}</Text>
-                            </Badge>
-                        </Flex>
+                        {/*<Flex>*/}
+                        {/*    <Badge*/}
+                        {/*        fontSize={'10'}*/}
+                        {/*        fontWeight={'italic'}*/}
+                        {/*        textColor={'boxBlue.500'}*/}
+                        {/*        backgroundColor={'blue.50'}*/}
+                        {/*        border={'1px'}*/}
+                        {/*        borderRadius={15}*/}
+                        {/*    >*/}
+                        {/*        <Text px={1}>{user.team ?? 'N/A team'}</Text>*/}
+                        {/*    </Badge>*/}
+                        {/*</Flex>*/}
                     </Flex>
                 </Flex>
 
-                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
-                    <Flex w={'40%'} textColor={'primary.500'}>
-                        <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'55px'}>
-                            <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>
-                        </CircularProgress>
-                    </Flex>
+                <Flex w={['100%', '25%']} alignItems={'center'} gap={3}>
+                    <Tag
+                        size="lg"
+                        colorScheme="boxBlue"
+                        borderRadius="full"
+                        gap={1}
+                        w={'70%'}
+                        // bgGradient={'linear(to-b, blue.500, yellow.500)'}
+                        // bgClip="text"
+                    >
+                        <Flex textColor={'boxBlue.500'}>
+                            <FaBolt size={'20'} />
+                        </Flex>
+                        <TagLabel w={'100%'}>
+                            <Flex w={'100%'}>
+                                <Text as="b">{Math.round((Math.random() * 10 + 5) * 100) / 100}</Text>
+                                <Spacer />
+                                <Text as="b">km</Text>
+                            </Flex>
+                        </TagLabel>
+                    </Tag>
+                    {/*<Text fontSize={'xl'} color={'gray.800'} as='b'>*/}
+                    {/*    10.3 km*/}
+                    {/*</Text>*/}
+                </Flex>
 
-                    <Flex direction={'column'} w={'80%'} overflow={'hidden'}>
+                <Flex w={['100%', '50%']} alignItems={'center'} gap={3}>
+                    {/*<Flex w={'40%'} textColor={'primary.500'}>*/}
+                    {/*    <CircularProgress value={durationPercentage} color={'boxBlue.500'} size={'55px'}>*/}
+                    {/*        <CircularProgressLabel>{displayedDuration}</CircularProgressLabel>*/}
+                    {/*    </CircularProgress>*/}
+                    {/*</Flex>*/}
+
+                    <Flex w={'100%'} overflow={'hidden'} gap={3}>
                         <Badge
                             variant={'solid'}
                             backgroundColor={'gray.300'}
                             textColor={'gray.800'}
                             alignSelf={'center'}
-                            w={'100%'}
+                            w={'60%'}
                             borderRadius={15}
                             letterSpacing={'.5px'}
                         >
@@ -92,7 +119,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                             opacity={'0.6'}
                             alignItems={'center'}
                             gap={1}
-                            w={'100%'}
+                            w={'40%'}
                             p={1}
                             textColor={'primary.500'}
                         >

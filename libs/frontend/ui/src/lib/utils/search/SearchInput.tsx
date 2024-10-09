@@ -10,7 +10,7 @@ export const SearchInput = ({ handleChange, placeholder }: Props) => {
     const PLACEHOLDER = placeholder ?? 'Search here';
 
     return (
-        <InputGroup size={'lg'} pb={5}>
+        <InputGroup size={'lg'}>
             <InputLeftElement pointerEvents={'none'} textColor={'primary.500'} children={<MdSearch />} fontSize={25} />
             <Input
                 placeholder={PLACEHOLDER}

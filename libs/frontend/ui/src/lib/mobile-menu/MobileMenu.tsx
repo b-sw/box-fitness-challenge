@@ -49,7 +49,7 @@ export const MobileMenu = () => {
                     rounded={'full'}
                 />
                 <MenuList borderRadius={25} p={3}>
-                    <NavigationButton path={Path.TRAININGS} icon={FaDumbbell} description={'Trainings'} />
+                    <NavigationButton path={Path.ACTIVITIES} icon={FaDumbbell} description={'Trainings'} />
 
                     <NavigationButton path={Path.STANDINGS} icon={MdBarChart} description={'Standings'} />
 
