@@ -1,30 +1,46 @@
 import { PodiumPlace } from '@box-fc/frontend/domain';
+import { useActivitiesQuery, useUsersQuery } from '@box-fc/frontend/query';
 import { User, UserActivity } from '@box-fc/shared/types';
 import { Avatar, Flex, Progress, SkeletonCircle, Spacer, Text, Tooltip } from '@chakra-ui/react';
+import dayjs from 'dayjs';
+import { getWeek } from '../utils/datetime/week';
 import { TablePanel } from '../utils/table-panel/TablePanel';
 
 type Props = {
-    winners: Partial<Record<PodiumPlace, User & UserActivity>>;
+    winners: [UserActivity, UserActivity, UserActivity];
     isLoading: boolean;
     onClick?: (podiumPlace: PodiumPlace) => void;
 };
 
-export const WinnersTable = ({ winners, isLoading, onClick }: Props) => {
-    const winner = winners[PodiumPlace.First];
-    const runnerUp = winners[PodiumPlace.Second];
-    const thirdPlace = winners[PodiumPlace.Third];
-
+export const WinnersTable = () => {
+    const week = getWeek(dayjs());
     const avatarSize = {
         [PodiumPlace.First]: '240px',
         [PodiumPlace.Second]: '190px',
         [PodiumPlace.Third]: '165px',
     };
 
+    const { usersActivities, usersActivitiesAreLoading } = useActivitiesQuery({ ...week });
+    const { users } = useUsersQuery();
+
+    const winner = usersActivities.length
+        ? { ...(users.get(usersActivities[0].userId) as User), ...usersActivities[0] }
+        : undefined;
+    const runnerUp =
+        usersActivities.length > 1
+            ? { ...(users.get(usersActivities[1].userId) as User), ...usersActivities[1] }
+            : undefined;
+    const thirdPlace =
+        usersActivities.length > 2
+            ? { ...(users.get(usersActivities[2].userId) as User), ...usersActivities[2] }
+            : undefined;
+
+    console.log('score', winner?.score);
     const individualScore = (points: number, color: string, tbd?: boolean) => (
         <Flex w={'100%'} direction={'column'}>
             <Tooltip label={`score: ${points}`}>
                 <Flex position={'relative'} w={'100%'} h={'48px'} alignItems={'center'}>
-                    {isLoading ? (
+                    {usersActivitiesAreLoading ? (
                         <Progress
                             w={'100%'}
                             h={'100%'}
@@ -40,7 +56,9 @@ export const WinnersTable = ({ winners, isLoading, onClick }: Props) => {
                         <>
                             <Progress
                                 value={points}
+                                // value={50}
                                 max={winner?.score || points}
+                                // max={100}
                                 w={'100%'}
                                 h={'100%'}
                                 rounded={'full'}
@@ -65,7 +83,7 @@ export const WinnersTable = ({ winners, isLoading, onClick }: Props) => {
     );
 
     const avatar = (user: (User & UserActivity) | undefined, podiumPlace: PodiumPlace, borderColor: string) => {
-        if (isLoading) {
+        if (usersActivitiesAreLoading) {
             return (
                 <SkeletonCircle
                     size={'full'}
@@ -85,14 +103,14 @@ export const WinnersTable = ({ winners, isLoading, onClick }: Props) => {
                     border={`5px solid ${borderColor}`}
                     shadow={'md'}
                     src={user?.imageUrl}
-                    onClick={() => onClick?.(podiumPlace)}
-                    _hover={{
-                        cursor: onClick && 'pointer',
-                        opacity: onClick && 0.8,
-                    }}
-                    _active={{
-                        opacity: onClick && 0.9,
-                    }}
+                    // onClick={() => onClick?.(podiumPlace)}
+                    // _hover={{
+                    //     cursor: onClick && 'pointer',
+                    //     opacity: onClick && 0.8,
+                    // }}
+                    // _active={{
+                    //     opacity: onClick && 0.9,
+                    // }}
                     style={{
                         width: avatarSize[podiumPlace],
                         height: avatarSize[podiumPlace],

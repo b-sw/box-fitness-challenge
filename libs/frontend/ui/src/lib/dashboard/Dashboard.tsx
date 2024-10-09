@@ -11,7 +11,6 @@ import { TeamsDashboard } from '../teams-dasbhoard/Teams.dashboard';
 import { TrainingsDashboard } from '../trainings-dashboard/Trainings.dashboard';
 import { LoadingOverlay } from '../utils/loading-overlay/LoadingOverlay';
 import { Page } from '../utils/page/Page';
-import { WinnersDashboard } from '../winners-dashboard/Winners.dashboard';
 
 export const Dashboard = () => {
     const { usersAreLoading } = useUsersQuery();
@@ -22,7 +21,7 @@ export const Dashboard = () => {
             <Routes>
                 <Route path={Path.ACTIVITIES} element={<TrainingsDashboard />} />
                 <Route path={Path.STANDINGS} element={<StandingsDashboard />} />
-                <Route path={Path.WINNERS} element={<WinnersDashboard />} />
+                {/*<Route path={Path.WINNERS} element={<WinnersDashboard />} />*/}
                 <Route element={<RequireAuthRouteAdmin />}>
                     <Route path={Path.TEAMS} element={<TeamsDashboard />} />
                 </Route>

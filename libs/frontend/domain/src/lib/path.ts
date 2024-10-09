@@ -3,6 +3,6 @@ export const Path = {
     DASHBOARD: '/dashboard',
     ACTIVITIES: '/activities',
     STANDINGS: '/standings',
-    WINNERS: '/winners',
+    // WINNERS: '/winners',
     TEAMS: '/teams',
 };

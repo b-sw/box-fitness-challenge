@@ -29,7 +29,7 @@ export const UserActivityModal = ({ isOpen, onClose, activity, range }: Props) =
     }, [userTrainings]);
 
     return (
-        <Modal onClose={onClose} isOpen={isOpen} isCentered size={'xl'}>
+        <Modal onClose={onClose} isOpen={isOpen} isCentered size={'3xl'}>
             <ModalOverlay />
             <ModalContent pb={5} bg={'boxBlue.123'}>
                 <ModalBody p={0}>

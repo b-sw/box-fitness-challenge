@@ -2,7 +2,6 @@ import { User, UserActivity } from '@box-fc/shared/types';
 import { Flex } from '@chakra-ui/react';
 import { ReactNode, useEffect, useState } from 'react';
 import { NoRecords } from '../../utils/no-records/NoRecords';
-import { SearchInput } from '../../utils/search/SearchInput';
 import { TablePanel } from '../../utils/table-panel/TablePanel';
 import { UserActivityListItem } from './UserActivity.list-item';
 
@@ -27,7 +26,12 @@ export const IndividualStandingsTable = ({ users, usersActivities, handleActivit
             return <NoRecords />;
         }
 
-        return filteredActivities.map((activity, index) => (
+        const multipliedTrainings = Array.from({ length: 30 }, () => filteredActivities).reduce(
+            (acc, val) => acc.concat(val),
+            [],
+        );
+
+        return multipliedTrainings.map((activity, index) => (
             <UserActivityListItem
                 key={`user-activity-${index}`}
                 userActivity={activity}
@@ -39,9 +43,7 @@ export const IndividualStandingsTable = ({ users, usersActivities, handleActivit
     };
 
     return (
-        <TablePanel>
-            <SearchInput handleChange={setFilter} placeholder={'Search people'} />
-
+        <TablePanel options={{ maxH: '55vh', maxW: '600px' }}>
             <Flex
                 w={'100%'}
                 direction={'column'}

@@ -8,12 +8,15 @@ export const colors = {
         500: '#1A202C',
     },
     gold: {
+        200: '#FFD700',
         500: '#FFD700',
     },
     silver: {
+        200: '#c0c0c0',
         500: '#c0c0c0',
     },
     bronze: {
+        200: '#cd7f32',
         500: '#cd7f32',
     },
 };

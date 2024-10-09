@@ -2,7 +2,7 @@ import { Path } from '@box-fc/frontend/domain';
 import { useAuthMutation, useAuthQuery } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
 import { Avatar, Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
-import { FaTrophy, MdBarChart, MdLogout } from 'react-icons/all';
+import { MdBarChart, MdLogout } from 'react-icons/all';
 import { FaDumbbell } from 'react-icons/fa';
 import { MdPeople } from 'react-icons/md';
 import { NavigationButton } from './Navigation.button';
@@ -36,7 +36,7 @@ export const Navbar = () => {
             <Flex gap={5}>
                 <NavigationButton path={Path.ACTIVITIES} icon={FaDumbbell} description={'Activities'} />
                 <NavigationButton path={Path.STANDINGS} icon={MdBarChart} description={'Standings'} />
-                <NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} />
+                {/*<NavigationButton path={Path.WINNERS} icon={FaTrophy} description={'Winners'} />*/}
                 {isAdmin && <NavigationButton path={Path.TEAMS} icon={MdPeople} description={'[Admin] Teams'} />}
             </Flex>
 
