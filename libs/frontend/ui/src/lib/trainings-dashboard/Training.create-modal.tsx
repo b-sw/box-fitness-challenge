@@ -19,8 +19,8 @@ import {
 import dayjs from 'dayjs';
 import { Field, Formik } from 'formik';
 import { useEffect } from 'react';
+import { RiPinDistanceLine } from 'react-icons/all';
 import { BiRun } from 'react-icons/bi';
-import { MdOutlineTimer } from 'react-icons/md';
 import { DATETIME_FORMAT } from '../utils/datetime/datetime.format';
 import { toastError, toastSuccess } from '../utils/toast/toast-info';
 
@@ -59,13 +59,13 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                 <Formik
                     initialValues={{
                         type: '',
-                        duration: 0,
+                        distance: 0,
                         trainingDate: dayjs().format('YYYY-MM-DDTHH:mm'),
                     }}
                     onSubmit={(values) => {
                         createMutation.mutate({
                             ...values,
-                            duration: Number(values.duration),
+                            distance: Number(values.distance),
                             trainingDate: dayjs(values.trainingDate, DATETIME_FORMAT).toDate(),
                             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                             userId: currentUserId,
@@ -79,22 +79,22 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                     <Flex w={'100%'} gap={3}>
                                         <Flex alignItems={'center'} gap={1} w={'40%'}>
                                             <Flex w={'25%'}>
-                                                <MdOutlineTimer size={'30'} />
+                                                <RiPinDistanceLine size={'30'} />
                                             </Flex>
 
                                             <FormControl w={'75%'}>
                                                 <NumberInput
-                                                    min={1}
-                                                    max={1440}
+                                                    min={0.1}
+                                                    max={999}
                                                     variant="filled"
                                                     textColor={'primary.500'}
                                                 >
                                                     <Field
                                                         rounded={'full'}
                                                         as={NumberInputField}
-                                                        name="duration"
-                                                        id="duration"
-                                                        placeholder={'mins'}
+                                                        name="distance"
+                                                        id="distance"
+                                                        placeholder={'km' + ''}
                                                         bg={'gray.50'}
                                                         _hover={{
                                                             background: 'gray.100',
@@ -135,7 +135,7 @@ export const TrainingCreateModal = ({ isOpen, handleClose }: Props) => {
                                                 id="type"
                                                 name="type"
                                                 type="type"
-                                                placeholder="e.g. running, cycling, etc."
+                                                placeholder="activity name"
                                             />
                                         </FormControl>
                                     </Flex>

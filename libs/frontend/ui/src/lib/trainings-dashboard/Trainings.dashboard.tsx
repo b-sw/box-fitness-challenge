@@ -19,12 +19,7 @@ export const TrainingsDashboard = () => {
 
     useEffect(() => {
         const actualTrainings = trainingsQuery.data?.filter((training) => training.userId === user.id) ?? [];
-        // copy and paste trainings 10 times
-        const multipliedTrainings = Array.from({ length: 30 }, () => actualTrainings).reduce(
-            (acc, val) => acc.concat(val),
-            [],
-        );
-        setMyTrainings(multipliedTrainings);
+        setMyTrainings(actualTrainings);
     }, [trainingsQuery.data, user.id]);
 
     const switchListing = () => {

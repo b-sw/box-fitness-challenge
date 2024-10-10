@@ -35,8 +35,8 @@ export const personalActivityItem = (user: User, activity: Training) => {
     const trainingDate = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('DD MMM YYYY');
     const trainingTime = dayjs.utc(activity.trainingDate, DATETIME_FORMAT).local().format('HH:mm');
 
-    const durationPercentage = (activity.duration / 180) * 100;
-    const displayedDuration = formatMinutes(activity.duration);
+    const durationPercentage = (activity.distance / 180) * 100;
+    const displayedDuration = formatMinutes(activity.distance);
 
     return (
         <Flex direction={'column'} w={'100%'}>
@@ -71,7 +71,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                         colorScheme="boxBlue"
                         borderRadius="full"
                         gap={1}
-                        w={'70%'}
+                        w={'60%'}
                         // bgGradient={'linear(to-b, blue.500, yellow.500)'}
                         // bgClip="text"
                     >
@@ -80,7 +80,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                         </Flex>
                         <TagLabel w={'100%'}>
                             <Flex w={'100%'}>
-                                <Text as="b">{Math.round((Math.random() * 10 + 5) * 100) / 100}</Text>
+                                <Text as="b">{(Math.round(activity.distance * 100) / 100).toFixed(1)}</Text>
                                 <Spacer />
                                 <Text as="b">km</Text>
                             </Flex>

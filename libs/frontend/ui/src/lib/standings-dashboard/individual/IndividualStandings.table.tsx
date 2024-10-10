@@ -26,12 +26,7 @@ export const IndividualStandingsTable = ({ users, usersActivities, handleActivit
             return <NoRecords />;
         }
 
-        const multipliedTrainings = Array.from({ length: 30 }, () => filteredActivities).reduce(
-            (acc, val) => acc.concat(val),
-            [],
-        );
-
-        return multipliedTrainings.map((activity, index) => (
+        return filteredActivities.map((activity, index) => (
             <UserActivityListItem
                 key={`user-activity-${index}`}
                 userActivity={activity}

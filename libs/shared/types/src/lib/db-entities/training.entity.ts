@@ -15,7 +15,7 @@ export class Training {
     type: string;
 
     @Column()
-    duration: number;
+    distance: number;
 
     @Column({ type: 'datetime' })
     @Type(() => Date)

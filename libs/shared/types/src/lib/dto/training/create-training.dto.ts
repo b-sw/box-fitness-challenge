@@ -13,9 +13,9 @@ export class CreateTrainingDto {
     type: string;
 
     @ApiProperty()
-    @Min(1)
-    @Max(1440)
-    duration: number;
+    @Min(0.1)
+    @Max(999)
+    distance: number;
 
     @ApiProperty({ type: Date, nullable: false })
     @IsDateString()

@@ -118,10 +118,10 @@ export class TrainingsService implements CreatesTraining, GetsTrainings, Updates
 
     private _getTrainingsScore(trainings: Training[]): { score: number; meanScore: number } {
         const uniqueUsersCount = new Set(trainings.map(({ userId }) => userId)).size;
-        const dailyActiveTimes = trainings.reduce((acc, { trainingDate, duration }) => {
+        const dailyActiveTimes = trainings.reduce((acc, { trainingDate, distance }) => {
             const date = trainingDate.toISOString().split('T')[0];
 
-            acc.set(date, (acc.get(date) ?? 0) + duration);
+            acc.set(date, (acc.get(date) ?? 0) + distance);
 
             return acc;
         }, new Map<string, number>());

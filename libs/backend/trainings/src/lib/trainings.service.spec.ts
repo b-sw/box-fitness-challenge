@@ -18,7 +18,7 @@ describe('TrainingsService', () => {
     const trainingDtoStub: CreateTrainingDto = {
         userId: userIdStub,
         trainingDate: new Date(),
-        duration: durationStub,
+        distance: durationStub,
         type: 'type',
     };
     const trainingStub = { ...trainingDtoStub, id: trainingIdStub };
@@ -162,7 +162,7 @@ describe('TrainingsService', () => {
     it('should update training', async () => {
         await trainingRepository.insert(trainingStub);
 
-        const updatedTraining = await service.updateTraining(trainingIdStub, { duration: durationStub + 1 });
+        const updatedTraining = await service.updateTraining(trainingIdStub, { distance: durationStub + 1 });
 
         expect(updatedTraining).toEqual({ ...trainingStub, duration: durationStub + 1 });
     });
@@ -170,13 +170,13 @@ describe('TrainingsService', () => {
     it('should persist updated training', async () => {
         await trainingRepository.insert(trainingStub);
 
-        await service.updateTraining(trainingIdStub, { duration: durationStub + 1 });
+        await service.updateTraining(trainingIdStub, { distance: durationStub + 1 });
 
         expect(await trainingRepository.find()).toEqual([{ ...trainingStub, duration: durationStub + 1 }]);
     });
 
     it('should not update non-existent training', async () => {
-        const updatedTraining = await service.updateTraining(trainingIdStub, { duration: durationStub + 1 });
+        const updatedTraining = await service.updateTraining(trainingIdStub, { distance: durationStub + 1 });
 
         expect(updatedTraining).toEqual(null);
     });
@@ -333,7 +333,7 @@ export class Training implements TestTraining {
     type: string;
 
     @Column()
-    duration: number;
+    distance: number;
 
     @Column({ type: 'datetime' })
     @Type(() => Date)

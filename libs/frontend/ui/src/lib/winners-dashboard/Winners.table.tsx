@@ -35,7 +35,6 @@ export const WinnersTable = () => {
             ? { ...(users.get(usersActivities[2].userId) as User), ...usersActivities[2] }
             : undefined;
 
-    console.log('score', winner?.score);
     const individualScore = (points: number, color: string, tbd?: boolean) => (
         <Flex w={'100%'} direction={'column'}>
             <Tooltip label={`score: ${points}`}>
