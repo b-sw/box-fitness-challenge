@@ -79,7 +79,7 @@ export const personalActivityItem = (user: User, activity: Training) => {
                             <FaBolt size={'20'} />
                         </Flex>
                         <TagLabel w={'100%'}>
-                            <Flex w={'100%'}>
+                            <Flex w={'100%'} lineHeight={1}>
                                 <Text as="b">{(Math.round(activity.distance * 100) / 100).toFixed(1)}</Text>
                                 <Spacer />
                                 <Text as="b">km</Text>
