@@ -1,7 +1,7 @@
 import { Training } from '@box-fc/frontend/query';
 import { User } from '@box-fc/shared/types';
 import { CalendarIcon } from '@chakra-ui/icons';
-import { Avatar, Badge, Flex, Spacer, Tag, TagLabel, Text, Tooltip } from '@chakra-ui/react';
+import { Avatar, Badge, Flex, Spacer, Text, Tooltip } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import 'dayjs/plugin/isBetween';
 import 'dayjs/plugin/utc';
@@ -66,11 +66,15 @@ export const personalActivityItem = (user: User, activity: Training) => {
                 </Flex>
 
                 <Flex w={['100%', '25%']} alignItems={'center'} gap={3}>
-                    <Tag
-                        size="lg"
-                        colorScheme="boxBlue"
+                    <Flex
+                        // size="lg"
+                        // colorScheme="boxBlue"
+                        justifyContent={'center'}
+                        bgColor={'customBlue.100'}
                         borderRadius="full"
                         gap={1}
+                        p={1.5}
+                        px={2.5}
                         w={'60%'}
                         // bgGradient={'linear(to-b, blue.500, yellow.500)'}
                         // bgClip="text"
@@ -78,14 +82,16 @@ export const personalActivityItem = (user: User, activity: Training) => {
                         <Flex textColor={'boxBlue.500'}>
                             <FaBolt size={'20'} />
                         </Flex>
-                        <TagLabel w={'100%'}>
-                            <Flex w={'100%'} lineHeight={1}>
-                                <Text as="b">{(Math.round(activity.distance * 100) / 100).toFixed(1)}</Text>
-                                <Spacer />
-                                <Text as="b">km</Text>
-                            </Flex>
-                        </TagLabel>
-                    </Tag>
+                        <Flex w={'100%'} lineHeight={1} textColor={'boxBlue.500'}>
+                            <Text lineHeight={1} as="b" alignContent={'center'}>
+                                {(Math.round(activity.distance * 100) / 100).toFixed(1)}
+                            </Text>
+                            <Spacer />
+                            <Text lineHeight={1} as="b" alignContent={'center'}>
+                                km
+                            </Text>
+                        </Flex>
+                    </Flex>
                     {/*<Text fontSize={'xl'} color={'gray.800'} as='b'>*/}
                     {/*    10.3 km*/}
                     {/*</Text>*/}

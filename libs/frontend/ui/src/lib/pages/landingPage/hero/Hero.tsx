@@ -1,9 +1,10 @@
-import { useKmQuery } from '@box-fc/frontend/query';
+import { useKmQuery, useMobileQuery } from '@box-fc/frontend/query';
 import { Flex, Spacer, Text } from '@chakra-ui/react';
 import { useCountUp } from 'use-count-up';
 import { LoginButton } from '../LoginButton';
 
 export const Hero = () => {
+    const { isMobile } = useMobileQuery();
     const { kmQuery } = useKmQuery();
 
     const { value: totalKmCount } = useCountUp({
@@ -12,6 +13,16 @@ export const Hero = () => {
         end: kmQuery.data,
         duration: 3,
     });
+
+    if (isMobile) {
+        return (
+            <Flex h={'100vh'} w={'100vw'} direction={'column'} justifyContent={'center'}>
+                <Flex justifyContent="center">
+                    <LoginButton />
+                </Flex>
+            </Flex>
+        );
+    }
 
     return (
         <Flex h="100vh" w="100vw">
