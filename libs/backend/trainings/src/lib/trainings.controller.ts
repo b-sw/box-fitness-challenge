@@ -34,6 +34,14 @@ export class TrainingsController {
         return this.trainingsService.getAllTrainings();
     }
 
+    @Get('totalKm')
+    @ApiOperation({ summary: 'Get total km' })
+    async getTotalKm(): Promise<number> {
+        return this.trainingsService.getAllTrainings().then((trainings) => {
+            return trainings.reduce((acc, training) => acc + training.distance, 0);
+        });
+    }
+
     @Get('trainings/:trainingId')
     @UseGuards(JwtGuard)
     @ApiOperation({ summary: 'Get training by id' })

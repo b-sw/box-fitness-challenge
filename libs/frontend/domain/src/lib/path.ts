@@ -1,5 +1,5 @@
 export const Path = {
-    LANDING_PAGE: '/landing-page',
+    LANDING_PAGE: '/',
     DASHBOARD: '/dashboard',
     ACTIVITIES: '/activities',
     STANDINGS: '/standings',

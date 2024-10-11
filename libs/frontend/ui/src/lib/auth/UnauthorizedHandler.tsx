@@ -1,4 +1,3 @@
-import { Path } from '@box-fc/frontend/domain';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 
@@ -16,7 +15,7 @@ export const UnauthorizedHandler = () => {
                 const errorMessage: string = error.response ? (error.response.data as any).message : 'Error';
 
                 if (statusCode === StatusCodes.UNAUTHORIZED) {
-                    navigate(Path.LANDING_PAGE, { state: { customMessage: 'You have been logged out.' } });
+                    navigate('/', { state: { customMessage: 'You have been logged out.' } });
                 }
 
                 return Promise.reject(new Error(errorMessage));

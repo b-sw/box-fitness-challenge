@@ -3,6 +3,18 @@ export const colors = {
         200: '#0161d5',
         500: '#0161d5',
     },
+    customBlue: {
+        500: '#0061d5',
+    },
+    customYellow: {
+        500: '#ffde59',
+    },
+    customPurple: {
+        500: '#5355e6',
+    },
+    customGreen: {
+        500: '#22af74',
+    },
     primary: {
         50: '#f7fafc',
         500: '#1A202C',

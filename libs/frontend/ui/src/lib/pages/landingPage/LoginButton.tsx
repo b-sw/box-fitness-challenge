@@ -14,9 +14,15 @@ export const LoginButton = () => {
     const { loginMutation } = useAuthMutation({ onLoginError });
 
     return (
-        <Button isLoading={loginMutation.isLoading} onClick={() => googleLogin()} leftIcon={<FcGoogle />} size={'lg'}>
-            <Text fontSize={'md'} color={'gray.900'} fontWeight={'semibold'}>
-                Sign in
+        <Button
+            isLoading={loginMutation.isLoading}
+            onClick={() => googleLogin()}
+            leftIcon={<FcGoogle size="64px" />}
+            size={'lg'}
+            p="48px"
+        >
+            <Text fontSize={'4xl'} color={'customPurple.500'} fontWeight={'bold'}>
+                Sign in to submit km!
             </Text>
         </Button>
     );

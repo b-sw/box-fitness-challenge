@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import utc from 'dayjs/plugin/utc';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import './styles.css';
 
@@ -22,7 +22,7 @@ export const App = () => {
                 <ChakraProvider theme={theme}>
                     <QueryClientProvider client={queryClient}>
                         {/*<ReactQueryDevtools initialIsOpen={false} />*/}
-                        <Router basename="/">
+                        <Router basename={Path.LANDING_PAGE}>
                             <UnauthorizedHandler />
                             <Routes>
                                 <Route path={Path.LANDING_PAGE} element={<LandingPage />} />
