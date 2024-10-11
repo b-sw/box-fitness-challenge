@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import { App } from './app/app';
 
 // axios.defaults.baseURL = 'http://localhost:3333/';
-axios.defaults.baseURL = 'https://boxfc.bieda.it/';
+axios.defaults.baseURL = 'https://api.moveforukraine.com/';
 
 ReactDOM.render(
     <StrictMode>

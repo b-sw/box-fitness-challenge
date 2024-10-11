@@ -95,7 +95,7 @@ export const Hero = () => {
                 <Spacer />
 
                 <Flex justifyContent="center">
-                    <Flex h="" direction="column">
+                    <Flex h="" direction="column" textColor="gray.50">
                         <Text>Join our charity event to support Ukraine!</Text>
                         <Text>For every kilometer you walk, run, bike or</Text>
                         <Text>
@@ -116,7 +116,7 @@ export const Hero = () => {
 
                 <Spacer />
 
-                <Flex direction="column">
+                <Flex direction="column" textColor="gray.50">
                     <Text>As of October 23, we’ve moved for</Text>
                     <Text fontSize="48" as="b">
                         {totalKmCount} km
