@@ -46,7 +46,6 @@ export const IndividualStandingsTable = ({ users, usersActivities, handleActivit
     return (
         <TablePanel options={{ maxW: '600px' }}>
             <Flex
-                border={'1px solid red'}
                 w={'100%'}
                 direction={'column'}
                 shadow={'md'}

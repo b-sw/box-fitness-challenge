@@ -120,7 +120,7 @@ export const WinnersTable = () => {
     };
 
     return (
-        <Flex border={'1px dashed green'} w="800px" p={5}>
+        <Flex w="800px" p={5}>
             <Flex direction={'column'} alignItems={'center'}>
                 <Spacer />
 

@@ -30,11 +30,13 @@ export const TrainingsDashboard = () => {
         }
     };
 
+    const TAB_SWITCHER_HEIGHT_PX = 54;
+
     return (
         <Dashboard>
-            <Tabs isFitted variant="unstyled" p={5} h={'100%'}>
+            <Tabs isFitted variant="unstyled" h={'100%'}>
                 <ListingSwitcher activeListing={activeListing} switchListing={switchListing} />
-                <TabPanels h={'100%'}>
+                <TabPanels h={'calc(100% - ' + TAB_SWITCHER_HEIGHT_PX + 'px)'}>
                     <TabPanel h={'100%'}>
                         <TrainingsTable trainings={myTrainings} />
                     </TabPanel>
