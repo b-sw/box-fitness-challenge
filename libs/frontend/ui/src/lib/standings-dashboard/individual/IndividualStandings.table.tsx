@@ -26,13 +26,7 @@ export const IndividualStandingsTable = ({ users, usersActivities, handleActivit
             return <NoRecords />;
         }
 
-        // duplicate records 5x
-        const activities = Array.from({ length: 15 }, () => filteredActivities).reduce(
-            (acc, val) => acc.concat(val),
-            [],
-        );
-
-        return activities.map((activity, index) => (
+        return filteredActivities.map((activity, index) => (
             <UserActivityListItem
                 key={`user-activity-${index}`}
                 userActivity={activity}
