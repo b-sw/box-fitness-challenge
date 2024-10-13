@@ -1,5 +1,6 @@
 import { useKmQuery, useMobileQuery } from '@box-fc/frontend/query';
 import { Flex, Spacer, Text } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import { useCountUp } from 'use-count-up';
 import { LoginButton } from '../LoginButton';
 
@@ -128,7 +129,7 @@ export const Hero = () => {
                 <Spacer />
 
                 <Flex direction="column" textColor="gray.50">
-                    <Text>As of October 23, we’ve moved for</Text>
+                    <Text>As of {dayjs().format('MMMM D')}, we’ve moved for</Text>
                     <Text fontSize="48" as="b">
                         {totalKmCount} km
                     </Text>

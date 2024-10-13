@@ -8,6 +8,7 @@ export const colors = {
         500: '#0061d5',
     },
     customYellow: {
+        200: '#ffde59',
         500: '#ffde59',
     },
     customPurple: {

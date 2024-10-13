@@ -1,7 +1,7 @@
 import { Path } from '@box-fc/frontend/domain';
 import { useAuthMutation, useAuthQuery } from '@box-fc/frontend/query';
 import { useAuthStore } from '@box-fc/frontend/store';
-import { Avatar, Badge, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
+import { Avatar, Flex, IconButton, Spacer, Text } from '@chakra-ui/react';
 import { MdBarChart, MdLogout } from 'react-icons/all';
 import { FaDumbbell } from 'react-icons/fa';
 import { MdPeople } from 'react-icons/md';
@@ -12,24 +12,13 @@ export const Navbar = () => {
     const { isAdmin } = useAuthQuery();
     const { logout } = useAuthMutation({});
 
-    const newBadge = (
-        <Badge fontSize={'10'} textColor={'yellow.800'} backgroundColor={'yellow.50'} border={'1px'} borderRadius={15}>
-            <Text px={1}>New</Text>
-        </Badge>
-    );
-
     return (
         <Flex w={'full'} backgroundColor={'gray.50'} shadow={'md'} p={2} alignItems={'center'}>
-            <Text
-                mx={2}
-                fontSize={'3xl'}
-                color={'boxBlue.500'}
-                fontWeight={'bold'}
-                bgGradient={'linear(to-b, blue.500, yellow.500)'}
-                bgClip="text"
-            >
-                Move for Ukraine
-            </Text>
+            <Flex mx={2} fontSize={'3xl'} fontWeight={'bold'} gap={2}>
+                <Text color="customYellow.500">MOVE</Text>
+                <Text color="customBlue.500">FOR</Text>
+                <Text color="customBlue.500">UKRAINE</Text>
+            </Flex>
 
             <Spacer />
 

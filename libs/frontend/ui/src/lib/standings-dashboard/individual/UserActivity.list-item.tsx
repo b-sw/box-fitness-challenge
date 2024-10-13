@@ -34,18 +34,21 @@ export const UserActivityListItem = ({ userActivity, user, onClick, topScore }: 
                             w={'100%'}
                             h={'75%'}
                             rounded={'full'}
-                            bgColor={'gray.300'}
-                            colorScheme={'boxBlue'}
+                            borderRadius={'full'}
+                            bgColor={'white'}
+                            colorScheme={'customYellow'}
                             position={'absolute'}
                         ></Progress>
                         <Flex zIndex={999} w={'100%'}>
                             <Spacer />
                             <Text
                                 borderColor={'gray.900'}
-                                textShadow={'-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'}
-                                textColor={'gray.50'}
+                                // textShadow={'-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'}
+                                textColor={'gray.700'}
+                                as="b"
+                                fontSize={14}
                             >
-                                {userActivity.score}
+                                {userActivity.score} km
                             </Text>
                             <Spacer />
                         </Flex>

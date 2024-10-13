@@ -61,6 +61,7 @@ export const WinnersTable = () => {
                                 w={'100%'}
                                 h={'100%'}
                                 rounded={'full'}
+                                borderRadius={'full'}
                                 bgColor={'gray.300'}
                                 colorScheme={color}
                                 position={'absolute'}
@@ -70,7 +71,7 @@ export const WinnersTable = () => {
                             <Flex zIndex={999} w={'100%'}>
                                 <Spacer />
                                 <Text borderColor={'gray.900'} fontSize={'2xl'} textColor={'gray.700'} size={'48px'}>
-                                    {tbd ? 'TBD' : points}
+                                    {tbd ? 'TBD' : points} km
                                 </Text>
                                 <Spacer />
                             </Flex>
@@ -127,7 +128,7 @@ export const WinnersTable = () => {
                 <Flex direction={'column'} alignItems={'center'}>
                     <Spacer />
 
-                    <Flex w={'80%'} direction={'column'} gap={5} alignItems={'center'}>
+                    <Flex direction={'column'} gap={5} alignItems={'center'}>
                         <Flex>{avatar(runnerUp, PodiumPlace.Second, '#c0c0c0')}</Flex>
                         {individualScore(runnerUp?.score || 0, 'silver', !runnerUp)}
                     </Flex>
@@ -153,7 +154,7 @@ export const WinnersTable = () => {
                 <Flex direction={'column'} alignItems={'center'}>
                     <Spacer />
 
-                    <Flex w={'70%'} direction={'column'} gap={5} alignItems={'center'}>
+                    <Flex direction={'column'} gap={5} alignItems={'center'}>
                         <Flex>{avatar(thirdPlace, PodiumPlace.Third, '#cd7f32')}</Flex>
                         {individualScore(thirdPlace?.score || 0, 'bronze', !thirdPlace)}
                     </Flex>
