@@ -1,5 +1,4 @@
 import { Week } from '@box-fc/frontend/domain';
-import { Flex } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { useSetState } from '../hooks';
 import { getWeek } from '../utils/datetime/week';
@@ -25,14 +24,8 @@ export const StandingsDashboard = () => {
 
     return (
         <Dashboard>
-            <Flex direction={'column'} h={'100%'}>
-                <Flex h={'40%'} justifyContent={'center'}>
-                    <WinnersTable />
-                </Flex>
-                <Flex h={'60%'} justifyContent={'center'}>
-                    <IndividualStandingsTableWrapper week={week} />
-                </Flex>
-            </Flex>
+            <WinnersTable />
+            <IndividualStandingsTableWrapper week={week} />
         </Dashboard>
     );
 };

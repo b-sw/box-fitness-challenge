@@ -39,7 +39,7 @@ export const Dashboard = () => {
         <Page>
             {isMobile ? <MobileMenu /> : <Navbar />}
 
-            <Flex mt={['12vh', 0]} flexGrow={1}>
+            <Flex mt={['12vh', 0]} h="100%" w="100%" overflow={'hidden'}>
                 <Spacer />
                 {routes}
                 <Spacer />

@@ -26,7 +26,13 @@ export const IndividualStandingsTable = ({ users, usersActivities, handleActivit
             return <NoRecords />;
         }
 
-        return filteredActivities.map((activity, index) => (
+        // duplicate records 5x
+        const activities = Array.from({ length: 15 }, () => filteredActivities).reduce(
+            (acc, val) => acc.concat(val),
+            [],
+        );
+
+        return activities.map((activity, index) => (
             <UserActivityListItem
                 key={`user-activity-${index}`}
                 userActivity={activity}
@@ -38,8 +44,9 @@ export const IndividualStandingsTable = ({ users, usersActivities, handleActivit
     };
 
     return (
-        <TablePanel options={{ maxH: '55vh', maxW: '600px' }}>
+        <TablePanel options={{ maxW: '600px' }}>
             <Flex
+                border={'1px solid red'}
                 w={'100%'}
                 direction={'column'}
                 shadow={'md'}

@@ -32,13 +32,13 @@ export const TrainingsDashboard = () => {
 
     return (
         <Dashboard>
-            <Tabs isFitted variant="unstyled" p={5}>
+            <Tabs isFitted variant="unstyled" p={5} h={'100%'}>
                 <ListingSwitcher activeListing={activeListing} switchListing={switchListing} />
-                <TabPanels>
-                    <TabPanel>
+                <TabPanels h={'100%'}>
+                    <TabPanel h={'100%'}>
                         <TrainingsTable trainings={myTrainings} />
                     </TabPanel>
-                    <TabPanel>
+                    <TabPanel h={'100%'}>
                         <TrainingsTable trainings={trainingsQuery.data as Training[]} />
                     </TabPanel>
                 </TabPanels>

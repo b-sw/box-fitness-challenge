@@ -4,7 +4,6 @@ import { User, UserActivity } from '@box-fc/shared/types';
 import { Avatar, Flex, Progress, SkeletonCircle, Spacer, Text, Tooltip } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { getWeek } from '../utils/datetime/week';
-import { TablePanel } from '../utils/table-panel/TablePanel';
 
 type Props = {
     winners: [UserActivity, UserActivity, UserActivity];
@@ -121,49 +120,43 @@ export const WinnersTable = () => {
     };
 
     return (
-        <TablePanel>
-            <Spacer />
+        <Flex border={'1px dashed green'} w="800px" p={5}>
+            <Flex direction={'column'} alignItems={'center'}>
+                <Spacer />
 
-            <Flex w={'100%'} h={'100%'}>
-                <Flex direction={'column'} alignItems={'center'}>
-                    <Spacer />
-
-                    <Flex direction={'column'} gap={5} alignItems={'center'}>
-                        <Flex>{avatar(runnerUp, PodiumPlace.Second, '#c0c0c0')}</Flex>
-                        {individualScore(runnerUp?.score || 0, 'silver', !runnerUp)}
-                    </Flex>
-
-                    <Spacer />
+                <Flex direction={'column'} gap={5} alignItems={'center'}>
+                    <Flex>{avatar(runnerUp, PodiumPlace.Second, '#c0c0c0')}</Flex>
+                    {individualScore(runnerUp?.score || 0, 'silver', !runnerUp)}
                 </Flex>
 
                 <Spacer />
-
-                <Flex direction={'column'} alignItems={'center'}>
-                    <Spacer />
-
-                    <Flex direction={'column'} gap={5} alignItems={'center'}>
-                        <Flex>{avatar(winner, PodiumPlace.First, '#FFD700')}</Flex>
-                        {individualScore(winner?.score || 0, 'gold', !winner)}
-                    </Flex>
-
-                    <Spacer />
-                </Flex>
-
-                <Spacer />
-
-                <Flex direction={'column'} alignItems={'center'}>
-                    <Spacer />
-
-                    <Flex direction={'column'} gap={5} alignItems={'center'}>
-                        <Flex>{avatar(thirdPlace, PodiumPlace.Third, '#cd7f32')}</Flex>
-                        {individualScore(thirdPlace?.score || 0, 'bronze', !thirdPlace)}
-                    </Flex>
-
-                    <Spacer />
-                </Flex>
             </Flex>
 
             <Spacer />
-        </TablePanel>
+
+            <Flex direction={'column'} alignItems={'center'}>
+                <Spacer />
+
+                <Flex direction={'column'} gap={5} alignItems={'center'}>
+                    <Flex>{avatar(winner, PodiumPlace.First, '#FFD700')}</Flex>
+                    {individualScore(winner?.score || 0, 'gold', !winner)}
+                </Flex>
+
+                <Spacer />
+            </Flex>
+
+            <Spacer />
+
+            <Flex direction={'column'} alignItems={'center'}>
+                <Spacer />
+
+                <Flex direction={'column'} gap={5} alignItems={'center'}>
+                    <Flex>{avatar(thirdPlace, PodiumPlace.Third, '#cd7f32')}</Flex>
+                    {individualScore(thirdPlace?.score || 0, 'bronze', !thirdPlace)}
+                </Flex>
+
+                <Spacer />
+            </Flex>
+        </Flex>
     );
 };
