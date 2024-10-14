@@ -64,13 +64,13 @@ export class AuthService {
     }
 
     private _requireBoxEmail(email: string): void {
-        if (!email.endsWith('@box.com') && !this._isMeOrKuba(email) && email !== 'bartus.switalski@gmail.com') {
+        if (!email.endsWith('@box.com') && !this._isMeOrKuba(email)) {
             throw new BadRequestException(AuthService.USER_INVALID_MESSAGE);
         }
     }
 
     private _requireChallengeStarted(email: string): void {
-        const isChallengeStarted = dayjs().isBetween('2023-05-15', '2023-07-18');
+        const isChallengeStarted = dayjs().isBetween('2024-10-14', '2024-10-29');
 
         if (!isChallengeStarted && !this._isMeOrKuba(email)) {
             throw new BadRequestException(AuthService.CHALLENGE_NOT_STARTED_MESSAGE);
