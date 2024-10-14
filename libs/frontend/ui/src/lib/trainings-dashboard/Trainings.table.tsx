@@ -8,10 +8,11 @@ import { TrainingsTableRaw } from './Trainings.table.raw';
 
 type Props = {
     trainings: Training[];
+    canDelete?: boolean;
     hideCreate?: boolean;
 };
 
-export const TrainingsTable = ({ trainings, hideCreate }: Props) => {
+export const TrainingsTable = ({ trainings, hideCreate, canDelete }: Props) => {
     const { users } = useUsersQuery();
     const { isAdmin } = useAuthQuery();
 
@@ -33,7 +34,7 @@ export const TrainingsTable = ({ trainings, hideCreate }: Props) => {
             <TrainingsTableRaw
                 trainings={trainings}
                 users={users}
-                readonly={!isAdmin}
+                readonly={!canDelete && !isAdmin}
                 handleDelete={(activity: Training) => {
                     setSelectedActivity(activity);
                     onDeleteOpen();

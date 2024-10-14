@@ -38,7 +38,7 @@ export const TrainingsDashboard = () => {
                 <ListingSwitcher activeListing={activeListing} switchListing={switchListing} />
                 <TabPanels h={'calc(100% - ' + TAB_SWITCHER_HEIGHT_PX + 'px)'}>
                     <TabPanel h={'100%'}>
-                        <TrainingsTable trainings={myTrainings} />
+                        <TrainingsTable trainings={myTrainings} canDelete={true} />
                     </TabPanel>
                     <TabPanel h={'100%'}>
                         <TrainingsTable trainings={trainingsQuery.data as Training[]} />
