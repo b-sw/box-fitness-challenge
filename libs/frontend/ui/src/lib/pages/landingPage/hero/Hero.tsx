@@ -110,11 +110,9 @@ export const Hero = () => {
                     <Flex h="" direction="column" textColor="gray.50">
                         <Text>Join our charity event to support Ukraine!</Text>
                         <Text>For every kilometer you walk, run, bike or</Text>
+                        <Text>move, Box.org will be making a donation</Text>
                         <Text>
-                            move, Box.org will <b>donate $1</b> to help
-                        </Text>
-                        <Text>
-                            rebuild lives with{' '}
+                            to help rebuild lives with{' '}
                             <a href="https://superhumans.com/">
                                 <u>superhumans.com</u>
                             </a>
