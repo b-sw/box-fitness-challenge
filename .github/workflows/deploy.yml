@@ -1,45 +1,45 @@
-name: Deploy
-
-on:
-  push:
-    branches: 'main'
-
-jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:latest
-
-  update-VPS-container:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Update image inside VPS
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          USERNAME: ${{ secrets.VPS_USERNAME }}
-          PORT: ${{ secrets.VPS_PORT }}
-          KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
-          script: |
-            docker stop $(docker ps -a -q --filter ancestor=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }})
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}
-            docker run -e DB_HOST='${{ secrets.DB_HOST }}' -e DB_USERNAME='${{ secrets.DB_USERNAME }}' -e DB_PASSWORD='${{ secrets.DB_PASSWORD }}' -e DB_DATABASE='${{ secrets.DB_DATABASE }}' -e DB_PORT=${{ secrets.DB_PORT }} -e JWT_SECRET='${{ secrets.JWT_SECRET }}' -e DEV_AUTH_PASSWORD='${{ secrets.DEV_AUTH_PASSWORD }}' -d -p 80:3333 ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}
-            docker container prune --force
-            docker image prune --all --force
+#name: Deploy
+#
+#on:
+#  push:
+#    branches: 'main'
+#
+#jobs:
+#  build-and-push:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Set up QEMU
+#        uses: docker/setup-qemu-action@v2
+#
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v2
+#
+#      - name: Login to DockerHub
+#        uses: docker/login-action@v2
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#
+#      - name: Build and push
+#        uses: docker/build-push-action@v4
+#        with:
+#          push: true
+#          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:latest
+#
+#  update-VPS-container:
+#    needs: build-and-push
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Update image inside VPS
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.VPS_HOST }}
+#          USERNAME: ${{ secrets.VPS_USERNAME }}
+#          PORT: ${{ secrets.VPS_PORT }}
+#          KEY: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+#          script: |
+#            docker stop $(docker ps -a -q --filter ancestor=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }})
+#            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}
+#            docker run -e DB_HOST='${{ secrets.DB_HOST }}' -e DB_USERNAME='${{ secrets.DB_USERNAME }}' -e DB_PASSWORD='${{ secrets.DB_PASSWORD }}' -e DB_DATABASE='${{ secrets.DB_DATABASE }}' -e DB_PORT=${{ secrets.DB_PORT }} -e JWT_SECRET='${{ secrets.JWT_SECRET }}' -e DEV_AUTH_PASSWORD='${{ secrets.DEV_AUTH_PASSWORD }}' -d -p 80:3333 ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}
+#            docker container prune --force
+#            docker image prune --all --force
